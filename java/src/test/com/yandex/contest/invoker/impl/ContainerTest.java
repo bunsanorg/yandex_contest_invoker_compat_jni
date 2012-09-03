@@ -1,4 +1,4 @@
-package common.invocation.impl;
+package com.yandex.contest.invoker.impl;
 
 import org.junit.*;
 

@@ -1,7 +1,7 @@
-package common.invocation.impl.unistd;
+package com.yandex.contest.invoker.impl.unistd;
 
-import common.invocation.impl.InvokerFixture;
-import common.invocation.unistd.IMountEntry;
+import com.yandex.contest.invoker.impl.InvokerFixture;
+import com.yandex.contest.invoker.unistd.IMountEntry;
 import junit.framework.Assert;
 import org.junit.Test;
 
