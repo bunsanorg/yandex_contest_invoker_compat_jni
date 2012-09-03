@@ -1,7 +1,7 @@
-package common.invocation.impl;
+package com.yandex.contest.invoker.impl;
 
-import common.invocation.IProcessGroup;
-import common.invocation.process_group.IProcessGroupResult;
+import com.yandex.contest.invoker.IProcessGroup;
+import com.yandex.contest.invoker.process_group.IProcessGroupResult;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;

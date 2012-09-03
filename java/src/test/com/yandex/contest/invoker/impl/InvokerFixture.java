@@ -1,6 +1,6 @@
-package common.invocation.impl;
+package com.yandex.contest.invoker.impl;
 
-import common.invocation.ILog;
+import com.yandex.contest.invoker.ILog;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;

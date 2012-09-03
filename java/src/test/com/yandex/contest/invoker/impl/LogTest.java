@@ -1,4 +1,4 @@
-package common.invocation.impl;
+package com.yandex.contest.invoker.impl;
 
 import junit.framework.Assert;
 import org.junit.Test;

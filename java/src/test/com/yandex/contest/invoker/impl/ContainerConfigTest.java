@@ -1,15 +1,15 @@
-package common.invocation.impl;
+package com.yandex.contest.invoker.impl;
 
-import common.invocation.*;
-import common.invocation.IFile;
-import common.invocation.filesystem.*;
-import common.invocation.impl.unistd.*;
-import common.invocation.impl.unistd.access.*;
-import common.invocation.lxc.*;
-import common.invocation.process.*;
-import common.invocation.process_group.*;
-import common.invocation.unistd.*;
-import common.invocation.unistd.access.*;
+import com.yandex.contest.invoker.*;
+import com.yandex.contest.invoker.IFile;
+import com.yandex.contest.invoker.filesystem.*;
+import com.yandex.contest.invoker.impl.unistd.*;
+import com.yandex.contest.invoker.impl.unistd.access.*;
+import com.yandex.contest.invoker.lxc.*;
+import com.yandex.contest.invoker.process.*;
+import com.yandex.contest.invoker.process_group.*;
+import com.yandex.contest.invoker.unistd.*;
+import com.yandex.contest.invoker.unistd.access.*;
 import junit.framework.Assert;
 import org.junit.Test;
 

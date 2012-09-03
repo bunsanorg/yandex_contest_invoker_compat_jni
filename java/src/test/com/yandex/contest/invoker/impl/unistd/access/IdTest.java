@@ -1,7 +1,7 @@
-package common.invocation.impl.unistd.access;
+package com.yandex.contest.invoker.impl.unistd.access;
 
-import common.invocation.impl.InvokerFixture;
-import common.invocation.unistd.access.IId;
+import com.yandex.contest.invoker.impl.InvokerFixture;
+import com.yandex.contest.invoker.unistd.access.IId;
 import junit.framework.Assert;
 import org.junit.Test;
 
