@@ -1,12 +1,12 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IPipe;
-import yandex.contest.invoker.IProcess;
-import yandex.contest.invoker.IStream;
-import yandex.contest.invoker.impl.unistd.access.Id;
-import yandex.contest.invoker.jimpl.AbstractFDAlias;
-import yandex.contest.invoker.jimpl.File;
-import yandex.contest.invoker.process.IProcessResult;
+import com.yandex.contest.invoker.IPipe;
+import com.yandex.contest.invoker.IProcess;
+import com.yandex.contest.invoker.IStream;
+import com.yandex.contest.invoker.impl.unistd.access.Id;
+import com.yandex.contest.invoker.jimpl.AbstractFDAlias;
+import com.yandex.contest.invoker.jimpl.File;
+import com.yandex.contest.invoker.process.IProcessResult;
 import junit.framework.Assert;
 import org.junit.Test;
 

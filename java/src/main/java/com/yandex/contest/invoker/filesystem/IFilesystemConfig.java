@@ -1,4 +1,4 @@
-package yandex.contest.invoker.filesystem;
+package com.yandex.contest.invoker.filesystem;
 
 import java.util.List;
 

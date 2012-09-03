@@ -1,16 +1,16 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IContainerConfig;
-import yandex.contest.invoker.IControlProcessConfig;
-import yandex.contest.invoker.INonPipeStream;
-import yandex.contest.invoker.filesystem.*;
-import yandex.contest.invoker.impl.unistd.*;
-import yandex.contest.invoker.impl.unistd.access.*;
-import yandex.contest.invoker.lxc.*;
-import yandex.contest.invoker.process.*;
-import yandex.contest.invoker.process_group.*;
-import yandex.contest.invoker.unistd.*;
-import yandex.contest.invoker.unistd.access.*;
+import com.yandex.contest.invoker.IContainerConfig;
+import com.yandex.contest.invoker.IControlProcessConfig;
+import com.yandex.contest.invoker.INonPipeStream;
+import com.yandex.contest.invoker.filesystem.*;
+import com.yandex.contest.invoker.impl.unistd.*;
+import com.yandex.contest.invoker.impl.unistd.access.*;
+import com.yandex.contest.invoker.lxc.*;
+import com.yandex.contest.invoker.process.*;
+import com.yandex.contest.invoker.process_group.*;
+import com.yandex.contest.invoker.unistd.*;
+import com.yandex.contest.invoker.unistd.access.*;
 import junit.framework.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package yandex.contest.invoker.process_group;
+package com.yandex.contest.invoker.process_group;
 
 /**
  * User: sarum9in

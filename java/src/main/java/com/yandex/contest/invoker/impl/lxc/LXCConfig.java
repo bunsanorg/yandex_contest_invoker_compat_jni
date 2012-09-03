@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl.lxc;
+package com.yandex.contest.invoker.impl.lxc;
 
-import yandex.contest.invoker.lxc.ILXCConfig;
-import yandex.contest.invoker.lxc.IMountConfig;
+import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.IMountConfig;
 
 import java.util.Map;
 import java.util.Set;

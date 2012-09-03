@@ -1,11 +1,11 @@
-package yandex.contest.invoker.jimpl;
+package com.yandex.contest.invoker.jimpl;
 
-import yandex.contest.invoker.IFile;
-import yandex.contest.invoker.IProcess;
-import yandex.contest.invoker.IProcessGroup;
-import yandex.contest.invoker.IProcessSettings;
-import yandex.contest.invoker.process.IProcessResourceLimits;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.IFile;
+import com.yandex.contest.invoker.IProcess;
+import com.yandex.contest.invoker.IProcessGroup;
+import com.yandex.contest.invoker.IProcessSettings;
+import com.yandex.contest.invoker.process.IProcessResourceLimits;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 /**
  * User: sarum9in

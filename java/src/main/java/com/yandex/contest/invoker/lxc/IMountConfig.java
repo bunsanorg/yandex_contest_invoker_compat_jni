@@ -1,6 +1,6 @@
-package yandex.contest.invoker.lxc;
+package com.yandex.contest.invoker.lxc;
 
-import yandex.contest.invoker.unistd.IMountEntry;
+import com.yandex.contest.invoker.unistd.IMountEntry;
 
 import java.util.List;
 

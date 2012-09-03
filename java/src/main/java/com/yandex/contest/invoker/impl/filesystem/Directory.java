@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl.filesystem;
+package com.yandex.contest.invoker.impl.filesystem;
 
-import yandex.contest.invoker.filesystem.IDirectory;
+import com.yandex.contest.invoker.filesystem.IDirectory;
 
 /**
  * User: sarum9in

@@ -1,4 +1,4 @@
-package yandex.contest.invoker.filesystem;
+package com.yandex.contest.invoker.filesystem;
 
 /**
  * User: sarum9in
@@ -8,5 +8,5 @@ package yandex.contest.invoker.filesystem;
 public interface IFile extends ICreateFile {
     String getPath();
     int getMode();
-    yandex.contest.invoker.unistd.access.IId getOwnerId();
+    com.yandex.contest.invoker.unistd.access.IId getOwnerId();
 }

@@ -1,7 +1,7 @@
-package yandex.contest.invoker;
+package com.yandex.contest.invoker;
 
-import yandex.contest.invoker.process.IProcessResourceLimits;
-import yandex.contest.invoker.process.IProcessResult;
+import com.yandex.contest.invoker.process.IProcessResourceLimits;
+import com.yandex.contest.invoker.process.IProcessResult;
 
 import java.util.List;
 import java.util.Map;
@@ -54,8 +54,8 @@ public interface IProcess {
     IProcessResourceLimits getResourceLimits();
     void setResourceLimits(IProcessResourceLimits resourceLimits);
 
-    yandex.contest.invoker.unistd.access.IId getOwnerId();
-    void setOwnerId(yandex.contest.invoker.unistd.access.IId ownerId);
+    com.yandex.contest.invoker.unistd.access.IId getOwnerId();
+    void setOwnerId(com.yandex.contest.invoker.unistd.access.IId ownerId);
 
     /**
      * @return Process result previously set by associated process group.

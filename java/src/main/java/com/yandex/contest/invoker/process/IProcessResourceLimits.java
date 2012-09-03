@@ -1,4 +1,4 @@
-package yandex.contest.invoker.process;
+package com.yandex.contest.invoker.process;
 
 /**
  * User: sarum9in

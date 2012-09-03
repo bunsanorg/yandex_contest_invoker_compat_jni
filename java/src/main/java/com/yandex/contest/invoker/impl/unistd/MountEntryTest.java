@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl.unistd;
+package com.yandex.contest.invoker.impl.unistd;
 
-import yandex.contest.invoker.impl.InvokerFixture;
-import yandex.contest.invoker.unistd.IMountEntry;
+import com.yandex.contest.invoker.impl.InvokerFixture;
+import com.yandex.contest.invoker.unistd.IMountEntry;
 import junit.framework.Assert;
 import org.junit.Test;
 

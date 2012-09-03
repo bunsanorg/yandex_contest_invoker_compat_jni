@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IFile;
+import com.yandex.contest.invoker.IFile;
 
 /**
  * User: sarum9in

@@ -1,6 +1,6 @@
-package yandex.contest.invoker.process;
+package com.yandex.contest.invoker.process;
 
-import yandex.contest.invoker.Signal;
+import com.yandex.contest.invoker.Signal;
 
 /**
  * User: sarum9in

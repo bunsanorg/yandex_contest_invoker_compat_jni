@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl.filesystem;
+package com.yandex.contest.invoker.impl.filesystem;
 
-import yandex.contest.invoker.filesystem.IFile;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.filesystem.IFile;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 /**
  * User: sarum9in

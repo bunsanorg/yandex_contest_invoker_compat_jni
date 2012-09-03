@@ -1,9 +1,9 @@
-package yandex.contest.invoker.impl.process;
+package com.yandex.contest.invoker.impl.process;
 
-import yandex.contest.invoker.INonPipeStream;
-import yandex.contest.invoker.process.IProcessDefaultSettings;
-import yandex.contest.invoker.process.IProcessResourceLimits;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.INonPipeStream;
+import com.yandex.contest.invoker.process.IProcessDefaultSettings;
+import com.yandex.contest.invoker.process.IProcessResourceLimits;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 import java.util.Map;
 

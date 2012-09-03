@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IFDAlias;
-import yandex.contest.invoker.jimpl.AbstractFDAlias;
+import com.yandex.contest.invoker.IFDAlias;
+import com.yandex.contest.invoker.jimpl.AbstractFDAlias;
 
 /**
  * User: sarum9in

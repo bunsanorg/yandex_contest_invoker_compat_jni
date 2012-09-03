@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl.process;
+package com.yandex.contest.invoker.impl.process;
 
-import yandex.contest.invoker.process.IProcessResourceUsage;
+import com.yandex.contest.invoker.process.IProcessResourceUsage;
 
 /**
  * User: sarum9in
