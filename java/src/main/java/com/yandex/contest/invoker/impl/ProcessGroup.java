@@ -1,12 +1,12 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IPipe;
-import yandex.contest.invoker.IProcess;
-import yandex.contest.invoker.IProcessGroup;
-import yandex.contest.invoker.InvokerException;
-import yandex.contest.invoker.process.IProcessDefaultSettings;
-import yandex.contest.invoker.process_group.IProcessGroupResourceLimits;
-import yandex.contest.invoker.process_group.IProcessGroupResult;
+import com.yandex.contest.invoker.IPipe;
+import com.yandex.contest.invoker.IProcess;
+import com.yandex.contest.invoker.IProcessGroup;
+import com.yandex.contest.invoker.InvokerException;
+import com.yandex.contest.invoker.process.IProcessDefaultSettings;
+import com.yandex.contest.invoker.process_group.IProcessGroupResourceLimits;
+import com.yandex.contest.invoker.process_group.IProcessGroupResult;
 
 /**
  * User: sarum9in

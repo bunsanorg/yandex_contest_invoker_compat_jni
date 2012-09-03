@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl.unistd;
+package com.yandex.contest.invoker.impl.unistd;
 
-import yandex.contest.invoker.unistd.IMountEntry;
+import com.yandex.contest.invoker.unistd.IMountEntry;
 
 /**
  * User: sarum9in

@@ -1,8 +1,8 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.*;
-import yandex.contest.invoker.lxc.ILXCConfig;
-import yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
+import com.yandex.contest.invoker.*;
+import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
  * User: sarum9in

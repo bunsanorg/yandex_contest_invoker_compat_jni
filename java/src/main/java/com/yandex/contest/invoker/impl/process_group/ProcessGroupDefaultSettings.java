@@ -1,8 +1,8 @@
-package yandex.contest.invoker.impl.process_group;
+package com.yandex.contest.invoker.impl.process_group;
 
-import yandex.contest.invoker.process.IProcessDefaultSettings;
-import yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
-import yandex.contest.invoker.process_group.IProcessGroupResourceLimits;
+import com.yandex.contest.invoker.process.IProcessDefaultSettings;
+import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
+import com.yandex.contest.invoker.process_group.IProcessGroupResourceLimits;
 
 /**
  * User: sarum9in

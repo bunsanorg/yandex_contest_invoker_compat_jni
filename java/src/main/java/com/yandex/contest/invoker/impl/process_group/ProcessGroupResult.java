@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl.process_group;
+package com.yandex.contest.invoker.impl.process_group;
 
-import yandex.contest.invoker.process_group.*;
+import com.yandex.contest.invoker.process_group.*;
 
 /**
  * User: sarum9in

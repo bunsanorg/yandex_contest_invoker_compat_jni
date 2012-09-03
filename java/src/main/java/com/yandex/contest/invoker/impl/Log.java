@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.ILog;
+import com.yandex.contest.invoker.ILog;
 
 /**
  * User: sarum9in

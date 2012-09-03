@@ -1,6 +1,6 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IControlProcessConfig;
+import com.yandex.contest.invoker.IControlProcessConfig;
 
 /**
  * User: sarum9in

@@ -1,9 +1,9 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IFilesystem;
-import yandex.contest.invoker.InvokerException;
-import yandex.contest.invoker.unistd.IFileStatus;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.IFilesystem;
+import com.yandex.contest.invoker.InvokerException;
+import com.yandex.contest.invoker.unistd.IFileStatus;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 /**
  * User: sarum9in

@@ -1,6 +1,6 @@
-package yandex.contest.invoker.unistd;
+package com.yandex.contest.invoker.unistd;
 
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 /**
  * User: sarum9in

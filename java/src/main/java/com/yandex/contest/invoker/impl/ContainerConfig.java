@@ -1,10 +1,10 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IContainerConfig;
-import yandex.contest.invoker.IControlProcessConfig;
-import yandex.contest.invoker.filesystem.IFilesystemConfig;
-import yandex.contest.invoker.lxc.ILXCConfig;
-import yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
+import com.yandex.contest.invoker.IContainerConfig;
+import com.yandex.contest.invoker.IControlProcessConfig;
+import com.yandex.contest.invoker.filesystem.IFilesystemConfig;
+import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
  * User: sarum9in

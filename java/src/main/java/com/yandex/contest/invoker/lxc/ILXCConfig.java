@@ -1,4 +1,4 @@
-package yandex.contest.invoker.lxc;
+package com.yandex.contest.invoker.lxc;
 
 import java.util.Set;
 import java.util.Map;

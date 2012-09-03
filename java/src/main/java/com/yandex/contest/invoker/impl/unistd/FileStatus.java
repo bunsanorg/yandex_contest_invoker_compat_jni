@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl.unistd;
+package com.yandex.contest.invoker.impl.unistd;
 
-import yandex.contest.invoker.unistd.IFileStatus;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.unistd.IFileStatus;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 /**
  * User: sarum9in

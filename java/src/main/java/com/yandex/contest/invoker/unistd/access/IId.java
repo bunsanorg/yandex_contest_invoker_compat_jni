@@ -1,4 +1,4 @@
-package yandex.contest.invoker.unistd.access;
+package com.yandex.contest.invoker.unistd.access;
 
 /**
  * User: sarum9in

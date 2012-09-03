@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IPipe;
-import yandex.contest.invoker.IStream;
+import com.yandex.contest.invoker.IPipe;
+import com.yandex.contest.invoker.IStream;
 
 /**
  * User: sarum9in

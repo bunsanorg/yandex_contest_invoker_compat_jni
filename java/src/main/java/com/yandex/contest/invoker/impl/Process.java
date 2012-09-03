@@ -1,10 +1,10 @@
-package yandex.contest.invoker.impl;
+package com.yandex.contest.invoker.impl;
 
-import yandex.contest.invoker.IProcess;
-import yandex.contest.invoker.IStream;
-import yandex.contest.invoker.process.IProcessResourceLimits;
-import yandex.contest.invoker.process.IProcessResult;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.IProcess;
+import com.yandex.contest.invoker.IStream;
+import com.yandex.contest.invoker.process.IProcessResourceLimits;
+import com.yandex.contest.invoker.process.IProcessResult;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 import java.util.List;
 import java.util.Map;

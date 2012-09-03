@@ -1,7 +1,7 @@
-package yandex.contest.invoker.impl.filesystem;
+package com.yandex.contest.invoker.impl.filesystem;
 
-import yandex.contest.invoker.filesystem.ICreateFile;
-import yandex.contest.invoker.filesystem.IFilesystemConfig;
+import com.yandex.contest.invoker.filesystem.ICreateFile;
+import com.yandex.contest.invoker.filesystem.IFilesystemConfig;
 
 import java.util.List;
 

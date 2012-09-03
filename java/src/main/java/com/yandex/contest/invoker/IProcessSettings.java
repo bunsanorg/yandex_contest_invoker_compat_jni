@@ -1,7 +1,7 @@
-package yandex.contest.invoker;
+package com.yandex.contest.invoker;
 
-import yandex.contest.invoker.process.IProcessResourceLimits;
-import yandex.contest.invoker.unistd.access.IId;
+import com.yandex.contest.invoker.process.IProcessResourceLimits;
+import com.yandex.contest.invoker.unistd.access.IId;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package yandex.contest.invoker;
+package com.yandex.contest.invoker;
 
-import yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
+import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
  * User: sarum9in
