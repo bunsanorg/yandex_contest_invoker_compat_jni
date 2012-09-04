@@ -1,4 +1,4 @@
-#include "common_invocation_impl_filesystem_Device.h"
+#include "com_yandex_contest_invoker_impl_filesystem_Device.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp"
 

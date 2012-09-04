@@ -1,4 +1,4 @@
-#include "common_invocation_impl_lxc_MountConfig.h"
+#include "com_yandex_contest_invoker_impl_lxc_MountConfig.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp"
 

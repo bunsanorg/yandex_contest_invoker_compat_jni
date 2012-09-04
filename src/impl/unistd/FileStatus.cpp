@@ -1,4 +1,4 @@
-#include "common_invocation_impl_unistd_FileStatus.h"
+#include "com_yandex_contest_invoker_impl_unistd_FileStatus.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/FileStatus.hpp"
 

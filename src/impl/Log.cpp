@@ -4,7 +4,7 @@
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
-#include "common_invocation_impl_Log.h"
+#include "com_yandex_contest_invoker_impl_Log.h"
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl

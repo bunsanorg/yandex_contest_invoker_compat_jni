@@ -1,4 +1,4 @@
-#include "common_invocation_impl_process_group_ProcessGroupResourceLimits.h"
+#include "com_yandex_contest_invoker_impl_process_group_ProcessGroupResourceLimits.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp"
 

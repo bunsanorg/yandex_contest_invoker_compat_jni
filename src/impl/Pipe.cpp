@@ -1,4 +1,4 @@
-#include "common_invocation_impl_Pipe.h"
+#include "com_yandex_contest_invoker_impl_Pipe.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/Pipe.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/Stream.hpp"

@@ -1,4 +1,4 @@
-#include "common_invocation_impl_filesystem_RegularFile.h"
+#include "com_yandex_contest_invoker_impl_filesystem_RegularFile.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/RegularFile.hpp"
 
