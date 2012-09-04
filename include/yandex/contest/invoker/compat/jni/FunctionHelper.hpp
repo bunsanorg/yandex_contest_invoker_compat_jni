@@ -48,7 +48,7 @@
     /*here we map local exception classes to Java*/ \
     YANDEX_JNI_METHOD_MAP_ERROR(ENV, ::yandex::contest::invoker::ContainerIllegalStateError, \
         "java/lang/IllegalStateException") \
-    YANDEX_JNI_METHOD_MAP_ERROR(ENV, std::exception, "common/invocation/InvokerException")
+    YANDEX_JNI_METHOD_MAP_ERROR(ENV, std::exception, "com/yandex/contest/invoker/InvokerException")
 
 #define YANDEX_JNI_METHOD_END_RETURN(ENV, RETURN) \
     YANDEX_JNI_METHOD_END_VOID(ENV) \
