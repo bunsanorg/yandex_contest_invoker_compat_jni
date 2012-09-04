@@ -44,7 +44,7 @@ public class PackageInit {
 
     static {
         try {
-            System.loadLibrary("yandex_contest_invoker_jni");
+            System.loadLibrary("yandex_contest_invoker_compat_jni");
         } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
             throw e;
