@@ -1,4 +1,4 @@
-#include "common_invocation_impl_Stream.h"
+#include "com_yandex_contest_invoker_impl_Stream.h"
 
 #include "yandex/contest/invoker/Process.hpp"
 

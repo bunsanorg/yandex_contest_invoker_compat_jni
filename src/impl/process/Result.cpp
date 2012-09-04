@@ -1,4 +1,4 @@
-#include "common_invocation_impl_process_ProcessResult.h"
+#include "com_yandex_contest_invoker_impl_process_ProcessResult.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/process/Result.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/process/ResourceUsage.hpp"
