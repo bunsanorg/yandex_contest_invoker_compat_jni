@@ -12,7 +12,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         {
             const Context::Handle ctx = Context::getContext();
             ctx->throwNew("java/lang/NullPointerException",
-                          str(boost::format("At %1%:%1%.") % function % line).c_str());
+                          str(boost::format("At %1%:%2%.") % function % line).c_str());
         }
     }
 }}}}}}
