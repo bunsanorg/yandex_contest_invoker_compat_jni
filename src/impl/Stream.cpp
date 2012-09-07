@@ -9,6 +9,7 @@
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
 
 #include <boost/assert.hpp>
+#include <boost/format.hpp>
 #include <boost/variant/static_visitor.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
@@ -95,23 +96,17 @@ namespace
     {
         std::string operator()(const File &file) const
         {
-            std::ostringstream buf;
-            buf << "File: " << file.path << " " << file.accessMode;
-            return buf.str();
+            return str(boost::format("File: %1% %2%") % file.path % file.accessMode);
         }
 
         std::string operator()(const Pipe::End &pipeEnd) const
         {
-            std::ostringstream buf;
-            buf << "Pipe::End: " << pipeEnd.pipeId << " " << pipeEnd.end;
-            return buf.str();
+            return str(boost::format("Pipe::End: %1% %2%") % pipeEnd.pipeId % pipeEnd.end);
         }
 
         std::string operator()(const FDAlias &fdAlias) const
         {
-            std::ostringstream buf;
-            buf << "FDAlias: " << fdAlias.fd;
-            return buf.str();
+            return str(boost::format("FDAlias: %1%") % fdAlias.fd);
         }
     };
 }

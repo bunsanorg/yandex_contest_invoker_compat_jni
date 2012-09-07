@@ -1,7 +1,7 @@
 #include "yandex/contest/invoker/compat/jni/NotNull.hpp"
 #include "yandex/contest/invoker/compat/jni/Context.hpp"
 
-#include <sstream>
+#include <boost/format.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace detail
@@ -11,9 +11,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         if (!jobj)
         {
             const Context::Handle ctx = Context::getContext();
-            std::ostringstream buf;
-            buf << "At " << function << ":" << line << ".";
-            ctx->throwNew("java/lang/NullPointerException", buf.str().c_str());
+            ctx->throwNew("java/lang/NullPointerException",
+                          str(boost::format("At %1%:%1%.") % function % line).c_str());
         }
     }
 }}}}}}
