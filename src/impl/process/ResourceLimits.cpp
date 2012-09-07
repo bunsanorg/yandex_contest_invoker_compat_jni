@@ -63,14 +63,6 @@ jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_getMemo
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
 
-jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_getHardMemoryLimitBytes(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, resourceLimitsClass_, self)
-    return this_->hardMemoryLimitBytes;
-    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
-}
-
 jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_getOutputLimitBytes(
     JNIEnv *env, jobject self)
 {

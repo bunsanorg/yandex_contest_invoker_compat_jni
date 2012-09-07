@@ -23,9 +23,6 @@ public class ProcessResourceLimits implements IProcessResourceLimits {
     public native long getMemoryLimitBytes();
 
     @Override
-    public native long getHardMemoryLimitBytes();
-
-    @Override
     public native long getOutputLimitBytes();
 
     @Override
