@@ -8,7 +8,6 @@ package com.yandex.contest.invoker.process;
 public interface IProcessResourceLimits {
     long getTimeLimitMillis();
     long getMemoryLimitBytes();
-    long getHardMemoryLimitBytes();
     long getOutputLimitBytes();
     long getNumberOfProcesses();
 }

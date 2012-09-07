@@ -124,11 +124,6 @@ public class ContainerConfigTest extends InvokerFixture {
                     }
 
                     @Override
-                    public long getHardMemoryLimitBytes() {
-                        return 128 * 1024 * 1024;
-                    }
-
-                    @Override
                     public long getOutputLimitBytes() {
                         return 8 * 1024 * 1024;
                     }
