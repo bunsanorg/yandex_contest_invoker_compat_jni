@@ -230,6 +230,64 @@ public class ContainerConfigTest extends InvokerFixture {
             public List<ICreateFile> getCreateFiles() {
                 List<ICreateFile> createFiles = new ArrayList<ICreateFile>();
                 createFiles.add(getCreateCharDevice("/dev/null", 1, 3));
+                createFiles.add(new IRegularFile() {
+                    @Override
+                    public String getSource() {
+                        return null;
+                    }
+
+                    @Override
+                    public String getPath() {
+                        return "/some/path";
+                    }
+
+                    @Override
+                    public int getMode() {
+                        return 0644;
+                    }
+
+                    @Override
+                    public IId getOwnerId() {
+                        return new Id(1, 2);
+                    }
+                });
+                createFiles.add(new IDirectory() {
+                    @Override
+                    public String getPath() {
+                        return "/tmp";
+                    }
+
+                    @Override
+                    public int getMode() {
+                        return 01777;
+                    }
+
+                    @Override
+                    public IId getOwnerId() {
+                        return new Id(3, 4);
+                    }
+                });
+                createFiles.add(new ISymLink() {
+                    @Override
+                    public String getValue() {
+                        return "/usr/lib";
+                    }
+
+                    @Override
+                    public String getPath() {
+                        return "/lib";
+                    }
+
+                    @Override
+                    public int getMode() {
+                        return 0;
+                    }
+
+                    @Override
+                    public IId getOwnerId() {
+                        return new Id(5, 6);
+                    }
+                });
                 return createFiles;
             }
         };
