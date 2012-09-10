@@ -61,6 +61,7 @@
                             <mainClass>master.Main</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>yandex-contest-invoker</finalName>
                 </configuration>
             </plugin>
 
