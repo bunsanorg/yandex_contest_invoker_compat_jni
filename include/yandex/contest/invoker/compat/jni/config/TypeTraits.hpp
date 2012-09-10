@@ -218,6 +218,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             boost::mpl::string<'file', 'syst', 'em/I', 'SymL', 'ink'>> {};
 
     template <>
+    struct info<filesystem::FIFO>:
+        invoker_object_info<filesystem::FIFO,
+            boost::mpl::string<'file', 'syst', 'em/I', 'FIFO'>> {};
+
+    template <>
     struct info<process_group::DefaultSettings>:
         invoker_object_info<process_group::DefaultSettings,
             boost::mpl::string<'proc', 'ess_', 'grou', 'p/IP', 'roce', 'ssGr',

@@ -68,6 +68,7 @@ add_library(${PROJECT_NAME} SHARED
     src/impl/filesystem/Device.cpp
     src/impl/filesystem/RegularFile.cpp
     src/impl/filesystem/SymLink.cpp
+    src/impl/filesystem/FIFO.cpp
     src/impl/unistd/MountEntry.cpp
     src/impl/unistd/FileStatus.cpp
     src/impl/unistd/access/Id.cpp
