@@ -208,8 +208,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             boost::mpl::string<'file', 'syst', 'em/I', 'Devi', 'ce'>> {};
 
     template <>
-    struct info<filesystem::DeviceType>:
-        invoker_enum_info<filesystem::DeviceType,
+    struct info<filesystem::Device::Type>:
+        invoker_enum_info<filesystem::Device::Type,
             boost::mpl::string<'file', 'syst', 'em/I', 'Devi', 'ce$T', 'ype'>> {};
 
     template <>
