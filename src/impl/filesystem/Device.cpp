@@ -12,7 +12,7 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 namespace
 {
     CXXClass<filesystem::Device> deviceClass_;
-    GlobalEnumClass<filesystem::DeviceType> deviceTypeClass_;
+    GlobalEnumClass<filesystem::Device::Type> deviceTypeClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_filesystem_Device_classInit(JNIEnv *env, jclass deviceClass)
