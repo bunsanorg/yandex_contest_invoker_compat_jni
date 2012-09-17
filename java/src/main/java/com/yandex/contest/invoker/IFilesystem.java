@@ -18,6 +18,11 @@ public interface IFilesystem {
     String containerRoot();
 
     /**
+     * @return path in container converted to host path.
+     */
+    String keepInRoot(String path);
+
+    /**
      * Push local file into container.
      *
      * @param local path
