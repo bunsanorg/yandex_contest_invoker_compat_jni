@@ -84,4 +84,9 @@ public interface IProcess {
      * @return If descriptor has assigned stream.
      */
     boolean hasStream(int descriptor);
+
+    /**
+     * @return Process id (unique for current process group).
+     */
+    int id();
 }
