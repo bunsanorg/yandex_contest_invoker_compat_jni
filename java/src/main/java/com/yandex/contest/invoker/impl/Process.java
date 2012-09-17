@@ -84,6 +84,9 @@ public class Process implements IProcess, IHandle {
     public native boolean hasStream(int descriptor);
 
     @Override
+    public native int id();
+
+    @Override
     protected native void finalize();
 
     private long impl = 0;

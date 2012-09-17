@@ -232,3 +232,10 @@ jboolean Java_com_yandex_contest_invoker_impl_Process_hasStream(JNIEnv *env, job
     return this_->member().hasStream(fd);
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
+
+jint Java_com_yandex_contest_invoker_impl_Process_id(JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    return this_->member().id();
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
