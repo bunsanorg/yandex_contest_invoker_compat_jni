@@ -42,6 +42,14 @@ jstring Java_com_yandex_contest_invoker_impl_Filesystem_containerRoot(JNIEnv *en
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
+jstring Java_com_yandex_contest_invoker_impl_Filesystem_keepInRoot(
+    JNIEnv *env, jobject self, jstring path)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, filesystemClass_, self)
+    return newStringUTF(this_->keepInRoot(getStringUTF(path)).string()).release();
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
 void Java_com_yandex_contest_invoker_impl_Filesystem_push(
     JNIEnv *env, jobject self, jstring local, jstring remote, jobject ownerId, jint mode)
 {

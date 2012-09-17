@@ -17,6 +17,9 @@ public class Filesystem implements IFilesystem {
     public native String containerRoot();
 
     @Override
+    public native String keepInRoot(String path);
+
+    @Override
     public native void push(String local, String remote, IId ownerId, int mode) throws InvokerException;
 
     @Override
