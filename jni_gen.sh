@@ -30,4 +30,3 @@ $(getclassarray);
 const unsigned com_yandex_contest_invoker_impl_classNamesSize = $(getclasses | wc -l);
 
 EOF
-
