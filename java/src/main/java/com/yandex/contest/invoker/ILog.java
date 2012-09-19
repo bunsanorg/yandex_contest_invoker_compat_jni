@@ -7,6 +7,7 @@ package com.yandex.contest.invoker;
  */
 public interface ILog {
     enum Level {
+        TRACE,
         DEBUG,
         INFO,
         WARNING,
