@@ -12,6 +12,7 @@ public interface IProcessResult {
     enum CompletionStatus {
         OK,
         ABNORMAL_EXIT,
+        TERMINATED_BY_SYSTEM,
         MEMORY_LIMIT_EXCEEDED,
         TIME_LIMIT_EXCEEDED,
         OUTPUT_LIMIT_EXCEEDED,
