@@ -47,11 +47,11 @@ void Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_create(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_getTimeLimitMillis(
+jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceLimits_getUserTimeLimitMillis(
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, resourceLimitsClass_, self)
-    return this_->timeLimitMillis;
+    return std::chrono::duration_cast<std::chrono::milliseconds>(this_->userTimeLimit).count();
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
 

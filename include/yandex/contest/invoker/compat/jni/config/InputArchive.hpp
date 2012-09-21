@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <chrono>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -387,6 +388,13 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         {
             // FIXME boost::numeric_cast<>() for integral types
             obj = static_cast<T>(jobj_);
+        }
+
+        /// For std::chrono::duration.
+        template <typename Rep, typename Period>
+        void load(std::chrono::duration<Rep, Period> &obj)
+        {
+            obj = std::chrono::duration<Rep, Period>(jobj_);
         }
 
     private:

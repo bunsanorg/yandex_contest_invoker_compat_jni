@@ -114,7 +114,7 @@ public class ContainerConfigTest extends InvokerFixture {
             public IProcessResourceLimits getResourceLimits() {
                 return new IProcessResourceLimits() {
                     @Override
-                    public long getTimeLimitMillis() {
+                    public long getUserTimeLimitMillis() {
                         return 2 * 1000;
                     }
 

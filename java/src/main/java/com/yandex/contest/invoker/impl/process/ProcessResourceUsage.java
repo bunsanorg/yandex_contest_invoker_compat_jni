@@ -11,7 +11,13 @@ public class ProcessResourceUsage implements IProcessResourceUsage {
     private ProcessResourceUsage() {}
 
     @Override
-    public native long getTimeUsageMillis();
+    public native long getTimeUsageNanos();
+
+    @Override
+    public native long getUserTimeUsageMillis();
+
+    @Override
+    public native long getSystemTimeUsageMillis();
 
     @Override
     public native long getMemoryUsageBytes();

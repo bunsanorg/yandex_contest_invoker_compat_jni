@@ -36,11 +36,27 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}}
 
-jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceUsage_getTimeUsageMillis(
+jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceUsage_getTimeUsageNanos(
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, resourceUsageClass_, self)
-    return this_->timeUsageMillis;
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(this_->timeUsage).count();
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
+
+jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceUsage_getUserTimeUsageMillis(
+    JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, resourceUsageClass_, self)
+    return std::chrono::duration_cast<std::chrono::milliseconds>(this_->userTimeUsage).count();
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
+
+jlong Java_com_yandex_contest_invoker_impl_process_ProcessResourceUsage_getSystemTimeUsageMillis(
+    JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, resourceUsageClass_, self)
+    return std::chrono::duration_cast<std::chrono::milliseconds>(this_->systemTimeUsage).count();
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
 

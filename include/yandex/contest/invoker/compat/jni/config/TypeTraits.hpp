@@ -101,6 +101,10 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <>
     struct info<std::int32_t>: basic_primitive_info<std::int32_t, jint, &JNIEnv::CallIntMethod> {};
 
+    template <typename Rep, typename Period>
+    struct info<std::chrono::duration<Rep, Period>>:
+        basic_primitive_info<std::chrono::duration<Rep, Period>, jlong, &JNIEnv::CallLongMethod> {};
+
     /* Object mapping */
 
     template <typename CType, typename JClass, bool IsCamelCase=true>
