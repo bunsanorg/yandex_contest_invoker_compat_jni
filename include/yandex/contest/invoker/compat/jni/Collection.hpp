@@ -3,6 +3,8 @@
 #include "yandex/contest/invoker/compat/jni/Context.hpp"
 #include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
 
+#include <functional>
+
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {
     template <typename Iterable, typename ValueToJObject>
@@ -65,9 +67,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <typename Iterable, typename KeyToJObject, typename ValueToJObject>
     LocalRef<jobject> newHashMap(const Iterable &iterable,
-                             const KeyToJObject &keyToJObject,
-                             const ValueToJObject &valueToJObject)
+                                 const KeyToJObject &keyToJObject,
+                                 const ValueToJObject &valueToJObject)
     {
         return newMap("java/util/HashMap", iterable, keyToJObject, valueToJObject);
     }
+
+    void getIterable(jobject jobj, const std::function<void (jobject)> &cb);
 }}}}}

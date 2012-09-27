@@ -6,6 +6,7 @@
 #include "yandex/contest/invoker/compat/jni/Context.hpp"
 #include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
+#include "yandex/contest/invoker/compat/jni/Collection.hpp"
 #include "yandex/contest/invoker/compat/jni/NotNull.hpp"
 
 #include <type_traits>
@@ -195,17 +196,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename CallBack>
         void loadIterable(const CallBack &cb)
         {
-            jmethodID iteratorId = ctx->env()->GetMethodID(jclass_.get(), "iterator", "()Ljava/util/Iterator;");
-            LocalRef<jobject> iter(ctx->env()->CallObjectMethod(jobj_, iteratorId));
-            LocalRef<jclass> iterClass(ctx->env()->GetObjectClass(iter.get()));
-            jmethodID hasNextId = ctx->env()->GetMethodID(iterClass.get(), "hasNext", "()Z");
-            jmethodID nextId = ctx->env()->GetMethodID(iterClass.get(), "next", "()Ljava/lang/Object;");
-            while (ctx->env()->CallBooleanMethod(iter.get(), hasNextId))
-            {
-                LocalRef<jobject> jobj(ctx->env()->CallObjectMethod(iter.get(), nextId));
-                ctx->throwIfOccured();
-                cb(jobj.get());
-            }
+            getIterable(jobj_, cb);
         }
 
         /// For std::unordered_map.

@@ -38,7 +38,9 @@ add_library(${PROJECT_NAME} SHARED
     src/ContextThread.cpp
     src/String.cpp
     src/CXXClass.cpp
+    src/Collection.cpp
     src/NotNull.cpp
+
     src/impl/PackageInit.cpp
     src/impl/Container.cpp
     src/impl/Filesystem.cpp
