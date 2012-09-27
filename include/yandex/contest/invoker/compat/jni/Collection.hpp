@@ -74,4 +74,6 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 
     void getIterable(jobject jobj, const std::function<void (jobject)> &cb);
+
+    void getMap(jobject jobj, const std::function<void (jobject, jobject)> &cb);
 }}}}}

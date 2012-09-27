@@ -18,4 +18,23 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             cb(jobj.get());
         }
     }
+
+    void getMap(jobject jobj, const std::function<void (jobject, jobject)> &cb)
+    {
+        const Context::Handle ctx = Context::getContext();
+        LocalRef<jclass> clazz(ctx->env()->GetObjectClass(jobj));
+        jmethodID entrySetId = ctx->env()->GetMethodID(clazz.get(), "entrySet", "()Ljava/util/Set;");
+        LocalRef<jobject> entrySet(ctx->env()->CallObjectMethod(jobj, entrySetId));
+        LocalRef<jclass> mapEntryClass(ctx->env()->FindClass("java/util/Map$Entry"));
+        jmethodID getKeyId = ctx->env()->GetMethodID(mapEntryClass.get(), "getKey", "()Ljava/lang/Object;");
+        jmethodID getValueId = ctx->env()->GetMethodID(mapEntryClass.get(), "getValue", "()Ljava/lang/Object;");
+        ctx->throwIfOccured();
+        getIterable(entrySet.get(),
+            [&ctx, &cb, getKeyId, getValueId](jobject jobj)
+            {
+                LocalRef<jobject> jkey(ctx->env()->CallObjectMethod(jobj, getKeyId));
+                LocalRef<jobject> jvalue(ctx->env()->CallObjectMethod(jobj, getValueId));
+                cb(jkey.get(), jvalue.get());
+            });
+    }
 }}}}}

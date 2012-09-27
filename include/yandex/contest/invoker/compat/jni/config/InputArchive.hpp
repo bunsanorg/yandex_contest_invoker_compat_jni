@@ -203,23 +203,14 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename Key, typename Tp, typename Hash, typename Pred, typename Alloc>
         void load(std::unordered_map<Key, Tp, Hash, Pred, Alloc> &obj)
         {
-            jmethodID entrySetId = ctx->env()->GetMethodID(jclass_.get(), "entrySet", "()Ljava/util/Set;");
-            LocalRef<jobject> entrySet(ctx->env()->CallObjectMethod(jobj_, entrySetId));
-            LocalRef<jclass> mapEntryClass(ctx->env()->FindClass("java/util/Map$Entry"));
-            jmethodID getKeyId = ctx->env()->GetMethodID(mapEntryClass.get(), "getKey", "()Ljava/lang/Object;");
-            jmethodID getValueId = ctx->env()->GetMethodID(mapEntryClass.get(), "getValue", "()Ljava/lang/Object;");
-            ctx->throwIfOccured();
             obj.clear();
-            InputArchive<JType, ContextClass> ia(entrySet.get());
-            ia.loadIterable(
-                [this, &obj, getKeyId, getValueId](jobject jobj)
+            getMap(jobj_,
+                [this, &obj](jobject jkey, jobject jvalue)
                 {
-                    LocalRef<jobject> jkey(ctx->env()->CallObjectMethod(jobj, getKeyId));
                     Key key;
-                    InputArchive<jobject, ContextClass>::loadFromContext(key, jkey.get());
-                    LocalRef<jobject> jvalue(ctx->env()->CallObjectMethod(jobj, getValueId));
+                    InputArchive<jobject, ContextClass>::loadFromContext(key, jkey);
                     Tp value;
-                    InputArchive<jobject, ContextClass>::loadFromContext(value, jvalue.get());
+                    InputArchive<jobject, ContextClass>::loadFromContext(value, jvalue);
                     obj.emplace(key, value);
                 });
         }
