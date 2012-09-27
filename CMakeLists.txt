@@ -25,6 +25,7 @@ list(APPEND libraries
     yandex_contest_common
     yandex_contest_system
     yandex_contest_invoker
+    yandex_contest_invoker_flowctl_game
     yandex_contest_invoker_compat_common
 )
 
