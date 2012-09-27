@@ -6,6 +6,6 @@ package com.yandex.contest.invoker.flowctl.game;
  * Time: 19:48
  */
 public interface IResourceLimits {
-    long getRealTimeLimitsMillis();
+    long getRealTimeLimitMillis();
     long getUserTimeLimitMillis();
 }

@@ -99,7 +99,7 @@ public class ConfiguratorTest extends ProcessGroupFixture {
             public IResourceLimits getDefaultResourceLimits() {
                 return new IResourceLimits() {
                     @Override
-                    public long getRealTimeLimitsMillis() {
+                    public long getRealTimeLimitMillis() {
                         return 60 * 60 * 1000;
                     }
 
