@@ -19,10 +19,36 @@ public interface IConfig {
     Process getJudge();
     List<Process> getSolutions();
     Protocol getProtocol();
+
+    /**
+     * Location of killer's log.
+     */
     String getKillerLog();
+
+    /**
+     * Location of judge's log.
+     */
     String getJudgeLog();
+
+    /**
+     * Location of broker's log.
+     */
     String getBrokerLog();
+
+    /**
+     * Tokenizer library,
+     * e.g. "yandex_contest_invoker_flowctl_game_tokenizer_split_char",
+     * "/libtokenizer.so".
+     */
     String getTokenizer();
+
+    /**
+     * Default resource limits for iteration.
+     */
     IResourceLimits getDefaultResourceLimits();
+
+    /**
+     * Default tokenizer's argument for iteration.
+     */
     String getDefaultTokenizerArgument();
 }
