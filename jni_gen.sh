@@ -38,9 +38,10 @@ updateheaders()
     if [[ -f $builded ]]
     then
         echo -n "Previous generation was terminated, cleaning..."
-        rm "$include/"*
+        rm -r "$include"
         echo "OK"
     fi
+    mkdir -p "$include"
     echo "$(basename "$builded")" >"$builded"
     echo "$(basename "$list")" >>"$builded"
     local changed="0"
