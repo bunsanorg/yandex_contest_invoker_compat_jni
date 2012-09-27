@@ -73,6 +73,8 @@ add_library(${PROJECT_NAME} SHARED
     src/impl/unistd/MountEntry.cpp
     src/impl/unistd/FileStatus.cpp
     src/impl/unistd/access/Id.cpp
+
+    src/flowctl/game/impl/Configurator.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${libraries} ${JAVA_JVM_LIBRARY})
 
