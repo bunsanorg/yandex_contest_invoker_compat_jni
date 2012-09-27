@@ -37,7 +37,7 @@ updateheaders()
     local list="$include/com_yandex_contest_invoker_impl_PackageInitClasses.h"
     if [[ -f $builded ]]
     then
-        echo -n "Previous generation was terminated, cleaning..."
+        echo -n "Previous build was terminated, cleaning..."
         rm -r "$include"
         echo "OK"
     fi
