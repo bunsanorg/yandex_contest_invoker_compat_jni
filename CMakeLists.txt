@@ -64,6 +64,7 @@ add_library(${PROJECT_NAME} SHARED
     src/impl/process_group/DefaultSettings.cpp
     src/impl/lxc/Config.cpp
     src/impl/lxc/MountConfig.cpp
+    src/impl/lxc/RootfsConfig.cpp
     src/impl/filesystem/Config.cpp
     src/impl/filesystem/File.cpp
     src/impl/filesystem/Directory.cpp

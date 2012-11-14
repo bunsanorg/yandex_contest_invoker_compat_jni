@@ -2,6 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp"
+#include "yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp"
 
 #include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
@@ -46,10 +47,10 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 }}}}}}}}
 
 void Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_create(
-    JNIEnv *env, jobject self, jobject filesystemConfig)
+    JNIEnv *env, jobject self, jobject config)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
-    configClass_.copyToPointer(self, config::load<lxc::Config>(filesystemConfig));
+    configClass_.copyToPointer(self, config::load<lxc::Config>(config));
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
@@ -93,11 +94,42 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_tty(JNIEnv *env, jobj
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
+JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_devttydir(
+    JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
+    if (this_->devttydir)
+        return newStringUTF(this_->devttydir.get().string()).release();
+    else
+        return nullptr;
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
 jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_mount(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->mount)
         return impl::lxc::mount_config::create(this_->mount.get()).release();
+    else
+        return nullptr;
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_rootfs(JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
+    if (this_->rootfs)
+        return impl::lxc::rootfs_config::create(this_->rootfs.get()).release();
+    else
+        return nullptr;
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_pivotdir(JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
+    if (this_->pivotdir)
+        return newStringUTF(this_->pivotdir.get().string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)

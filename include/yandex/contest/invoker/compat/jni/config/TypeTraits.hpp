@@ -185,6 +185,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             boost::mpl::string<'lxc/', 'IMou', 'ntCo', 'nfig'>, false> {};
 
     template <>
+    struct info<system::lxc::RootfsConfig>:
+        invoker_object_info<system::lxc::RootfsConfig,
+            boost::mpl::string<'lxc/', 'IRoo', 'tfsC', 'onfi', 'g'>, false> {};
+
+    template <>
     struct info<filesystem::Config>:
         invoker_object_info<filesystem::Config,
             boost::mpl::string<'file', 'syst', 'em/I', 'File', 'syst', 'emCo', 'nfig'>> {};
