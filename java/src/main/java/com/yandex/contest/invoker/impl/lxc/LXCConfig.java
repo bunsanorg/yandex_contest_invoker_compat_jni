@@ -2,6 +2,7 @@ package com.yandex.contest.invoker.impl.lxc;
 
 import com.yandex.contest.invoker.lxc.ILXCConfig;
 import com.yandex.contest.invoker.lxc.IMountConfig;
+import com.yandex.contest.invoker.lxc.IRootfsConfig;
 
 import java.util.Map;
 import java.util.Set;
@@ -33,12 +34,16 @@ public class LXCConfig implements ILXCConfig {
     public native Integer tty();
 
     @Override
+    public native String devttydir();
+
+    @Override
     public native IMountConfig mount();
 
     @Override
-    public String rootfs() {
-        return null;
-    }
+    public native IRootfsConfig rootfs();
+
+    @Override
+    public native String pivotdir();
 
     @Override
     public native Map<String, String> cgroup();

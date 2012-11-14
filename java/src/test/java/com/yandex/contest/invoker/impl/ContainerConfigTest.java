@@ -87,13 +87,33 @@ public class ContainerConfigTest extends InvokerFixture {
             }
 
             @Override
+            public String devttydir() {
+                return "/dev/tty/dir";
+            }
+
+            @Override
             public IMountConfig mount() {
                 return getMountConfig();
             }
 
             @Override
-            public String rootfs() {
-                return null;
+            public IRootfsConfig rootfs() {
+                return new IRootfsConfig() {
+                    @Override
+                    public String fsname() {
+                        return "/fsname";
+                    }
+
+                    @Override
+                    public String mount() {
+                        return "/mount";
+                    }
+                };
+            }
+
+            @Override
+            public String pivotdir() {
+                return "/pivotdir";
             }
 
             @Override

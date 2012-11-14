@@ -38,6 +38,11 @@ public interface ILXCConfig {
     Integer tty();
 
     /**
+     * @return A directory under /dev under which to create the container console devices.
+     */
+    String devttydir();
+
+    /**
      * @return Mount settings.
      */
     IMountConfig mount();
@@ -46,7 +51,13 @@ public interface ILXCConfig {
      * Is not used.
      * @return
      */
-    String rootfs();
+    IRootfsConfig rootfs();
+
+    /**
+     * @return here to pivot the original root file system under lxc.rootfs,
+     * specified relatively to that.
+     */
+    String pivotdir();
 
     /**
      * @return The control group values to be set.
