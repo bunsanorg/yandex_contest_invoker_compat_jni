@@ -6,22 +6,17 @@ cmake_minimum_required(VERSION 2.8)
 
 include(YandexContestCommon)
 
-# BOOST
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-find_package(Boost COMPONENTS system filesystem serialization unit_test_framework program_options REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
-list(APPEND libraries ${Boost_LIBRARIES})
+bunsan_use_boost(system filesystem serialization unit_test_framework program_options)
 
 # JNI
 find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
+bunsan_use(${JAVA_JVM_LIBRARY})
 
 # JNI generated headers
 include_directories(jni_include)
 
-# yandex_contest_*
-list(APPEND libraries
+bunsan_use(
     yandex_contest_common
     yandex_contest_system
     yandex_contest_invoker
@@ -29,11 +24,7 @@ list(APPEND libraries
     yandex_contest_invoker_compat_common
 )
 
-# Local
-include_directories(include)
-
-# Targets
-add_library(${PROJECT_NAME} SHARED
+bunsan_add_shared_library(${PROJECT_NAME}
     src/Context.cpp
     src/ContextJVM.cpp
     src/ContextThread.cpp
@@ -78,13 +69,8 @@ add_library(${PROJECT_NAME} SHARED
 
     src/flowctl/game/impl/Configurator.cpp
 )
-target_link_libraries(${PROJECT_NAME} ${libraries} ${JAVA_JVM_LIBRARY})
 
-# Installation
-install(DIRECTORY include DESTINATION .)
-install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib)
+bunsan_install_headers()
+bunsan_install_targets(${PROJECT_NAME})
 
-yandex_contest_tests()
+bunsan_include_tests()
