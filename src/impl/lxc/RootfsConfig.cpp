@@ -48,7 +48,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_fsname(JNIEnv *env
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, rootfsConfigClass_, self)
     if (this_->fsname)
-        return newStringUTF(this_->fsname.get().string()).release();
+        return newStringUTF(this_->fsname->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)
@@ -58,7 +58,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_mount(JNIEnv *env,
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, rootfsConfigClass_, self)
     if (this_->mount)
-        return newStringUTF(this_->mount.get().string()).release();
+        return newStringUTF(this_->mount->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)

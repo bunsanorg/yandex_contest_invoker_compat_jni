@@ -78,7 +78,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_console(JNIEnv *env, 
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->console)
-        return newStringUTF(this_->console.get().string()).release();
+        return newStringUTF(this_->console->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)
@@ -99,7 +99,7 @@ JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_dev
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->devttydir)
-        return newStringUTF(this_->devttydir.get().string()).release();
+        return newStringUTF(this_->devttydir->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)
@@ -129,7 +129,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_pivotdir(JNIEnv *env,
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->pivotdir)
-        return newStringUTF(this_->pivotdir.get().string()).release();
+        return newStringUTF(this_->pivotdir->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)

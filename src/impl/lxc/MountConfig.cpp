@@ -52,7 +52,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_MountConfig_fstab(JNIEnv *env, 
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, mountConfigClass_, self)
     if (this_->fstab)
-        return newStringUTF(this_->fstab.get().string()).release();
+        return newStringUTF(this_->fstab->string()).release();
     else
         return nullptr;
     YANDEX_JNI_METHOD_END_OBJECT(env)
