@@ -2,7 +2,8 @@
 
 #include "yandex/contest/invoker/compat/jni/Context.hpp"
 
-#include <utility>
+#include "bunsan/forward_constructor.hpp"
+
 #include <memory>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
@@ -24,10 +25,10 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <typename T>
     class LocalRef<T *>: public std::unique_ptr<T, local_ref_detail::DeleteLocalRef>
     {
+    private:
+        typedef std::unique_ptr<T, local_ref_detail::DeleteLocalRef> Base;
+
     public:
-        template <typename ... Args>
-        explicit LocalRef(Args &&...args):
-            std::unique_ptr<
-                T, local_ref_detail::DeleteLocalRef>(std::forward<Args>(args)...) {}
+        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(LocalRef, Base)
     };
 }}}}}

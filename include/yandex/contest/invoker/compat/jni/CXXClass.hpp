@@ -3,10 +3,13 @@
 #include "yandex/contest/invoker/compat/jni/JClass.hpp"
 #include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
 
+#include "bunsan/forward_constructor.hpp"
+
 #include <utility>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {
+    // FIXME should be BaseCXXClass
     class BasicCXXClass: public GlobalJClass
     {
     public:
@@ -85,9 +88,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef T Type;
 
     public:
-        template <typename ... Args>
-        explicit CXXClass(Args &&...args):
-            BasicCXXClass(std::forward<Args>(args)...) {}
+        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(CXXClass, BasicCXXClass)
 
         CXXClass()=default;
 
