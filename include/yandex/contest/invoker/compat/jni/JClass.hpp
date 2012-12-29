@@ -4,6 +4,8 @@
 #include "yandex/contest/invoker/compat/jni/GlobalRef.hpp"
 #include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
 
+#include <utility>
+
 #include <boost/noncopyable.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
