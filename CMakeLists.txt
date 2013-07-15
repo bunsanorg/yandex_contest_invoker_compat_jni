@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.8)
 
 include(YandexContestCommon)
 
-bunsan_use_boost(system filesystem serialization unit_test_framework program_options)
+bunsan_use_boost(system filesystem serialization program_options)
 
 # JNI
 find_package(JNI REQUIRED)
