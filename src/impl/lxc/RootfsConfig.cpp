@@ -33,7 +33,10 @@ void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_finalize(
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace lxc{namespace rootfs_config
 {
-    LocalRef<jobject> create(const system::lxc::RootfsConfig &config);
+    LocalRef<jobject> create(const system::lxc::RootfsConfig &config)
+    {
+        return rootfsConfigClass_.setPointerCreate(config);
+    }
 }}}}}}}}
 
 void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_create(
