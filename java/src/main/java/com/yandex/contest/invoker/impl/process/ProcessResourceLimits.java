@@ -17,7 +17,13 @@ public class ProcessResourceLimits implements IProcessResourceLimits {
     private native void create(IProcessResourceLimits processResourceLimits);
 
     @Override
+    public native long getTimeLimitNanos();
+
+    @Override
     public native long getUserTimeLimitMillis();
+
+    @Override
+    public native long getSystemTimeLimitMillis();
 
     @Override
     public native long getMemoryLimitBytes();

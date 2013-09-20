@@ -14,7 +14,9 @@ public interface IProcessResult {
         ABNORMAL_EXIT,
         TERMINATED_BY_SYSTEM,
         MEMORY_LIMIT_EXCEEDED,
+        TIME_LIMIT_EXCEEDED,
         USER_TIME_LIMIT_EXCEEDED,
+        SYSTEM_TIME_LIMIT_EXCEEDED,
         OUTPUT_LIMIT_EXCEEDED,
         START_FAILED,
         STOPPED

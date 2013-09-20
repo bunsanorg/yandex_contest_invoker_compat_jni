@@ -6,7 +6,9 @@ package com.yandex.contest.invoker.process;
  * Time: 09:55
  */
 public interface IProcessResourceLimits {
+    long getTimeLimitNanos();
     long getUserTimeLimitMillis();
+    long getSystemTimeLimitMillis();
     long getMemoryLimitBytes();
     long getOutputLimitBytes();
     long getNumberOfProcesses();
