@@ -105,7 +105,6 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         {
             typedef traits::info<T> info;
             static_assert(info::is_defined, "Undefined info.");
-            typedef typename info::jtype jtype;
             std::string getSig = "()";
             if (!info::is_primitive)
                 getSig.push_back('L');

@@ -34,9 +34,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
                              const KeyToJObject &keyToJObject,
                              const ValueToJObject &valueToJObject)
     {
-        typedef typename Iterable::key_type Key;
         typedef typename Iterable::value_type Entry;
-        typedef typename Entry::second_type Value;
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> mapClass(ctx->env()->FindClass(clazz.c_str()));
         jmethodID ctorId = ctx->env()->GetMethodID(mapClass.get(), "<init>", "()V");
