@@ -2,8 +2,6 @@
 
 #include <yandex/contest/invoker/compat/jni/Context.hpp>
 
-#include <bunsan/forward_constructor.hpp>
-
 #include <memory>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
@@ -29,6 +27,6 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef std::unique_ptr<T, local_ref_detail::DeleteLocalRef> Base;
 
     public:
-        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(LocalRef, Base)
+        using Base::Base;
     };
 }}}}}

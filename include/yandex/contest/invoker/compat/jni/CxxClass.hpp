@@ -3,8 +3,6 @@
 #include <yandex/contest/invoker/compat/jni/JClass.hpp>
 #include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
 
-#include <bunsan/forward_constructor.hpp>
-
 #include <utility>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
@@ -88,7 +86,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef T Type;
 
     public:
-        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(CxxClass, BasicCxxClass)
+        using BasicCxxClass::BasicCxxClass;
 
         CxxClass()=default;
 
