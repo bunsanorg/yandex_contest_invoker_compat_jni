@@ -7,17 +7,16 @@
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {
-    // FIXME should be BaseCxxClass
-    class BasicCxxClass: public GlobalJClass
+    class BaseCxxClass: public GlobalJClass
     {
     public:
         template <typename ... Args>
-        explicit BasicCxxClass(Args &&...args)
+        explicit BaseCxxClass(Args &&...args)
         {
             assign(std::forward<Args>(args)...);
         }
 
-        BasicCxxClass()=default;
+        BaseCxxClass()=default;
 
         template <typename C, typename P>
         void assign(const C &clazz, const P &ptr)
@@ -80,13 +79,13 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     };
 
     template <typename T>
-    class CxxClass: public BasicCxxClass
+    class CxxClass: public BaseCxxClass
     {
     public:
         typedef T Type;
 
     public:
-        using BasicCxxClass::BasicCxxClass;
+        using BaseCxxClass::BaseCxxClass;
 
         CxxClass()=default;
 
