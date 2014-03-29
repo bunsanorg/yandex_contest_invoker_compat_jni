@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
 
@@ -11,7 +11,7 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 
 namespace
 {
-    CXXClass<filesystem::Device> deviceClass_;
+    CxxClass<filesystem::Device> deviceClass_;
     GlobalEnumClass<filesystem::Device::Type> deviceTypeClass_;
 }
 

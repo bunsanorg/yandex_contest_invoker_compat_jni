@@ -7,7 +7,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 
 #include "yandex/contest/invoker/compat/jni/config/load.hpp"
@@ -17,7 +17,7 @@ using yandex::contest::invoker::ProcessGroup;
 
 namespace
 {
-    CXXClass<ProcessGroup::DefaultSettings> defaultSettingsClass_;
+    CxxClass<ProcessGroup::DefaultSettings> defaultSettingsClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_classInit(

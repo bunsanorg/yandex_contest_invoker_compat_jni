@@ -4,7 +4,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
@@ -13,7 +13,7 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 
 namespace
 {
-    CXXClass<filesystem::File> fileClass_;
+    CxxClass<filesystem::File> fileClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_filesystem_File_classInit(JNIEnv *env, jclass fileClass)

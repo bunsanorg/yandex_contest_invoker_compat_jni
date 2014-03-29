@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 
 using namespace yandex::contest::invoker::compat::jni;
@@ -10,7 +10,7 @@ using yandex::contest::system::unistd::access::Id;
 
 namespace
 {
-    CXXClass<Id> idClass_;
+    CxxClass<Id> idClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_unistd_access_Id_classInit(JNIEnv *env, jclass idClass)

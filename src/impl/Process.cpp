@@ -8,7 +8,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/HandleHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Collection.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
@@ -27,10 +27,10 @@ namespace unistd = yandex::contest::system::unistd;
 
 namespace
 {
-    CXXClass<ProcessHandle> processClass_;
+    CxxClass<ProcessHandle> processClass_;
     GlobalJClass fileClass_;
     GlobalJClass fdAliasClass_;
-    CXXClass<Stream> implStreamClass_;
+    CxxClass<Stream> implStreamClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_Process_classInit(JNIEnv *env, jclass processClass)

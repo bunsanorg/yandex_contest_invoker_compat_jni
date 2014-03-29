@@ -8,7 +8,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/Collection.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
@@ -26,7 +26,7 @@ using yandex::contest::invoker::FdAlias;
 
 namespace
 {
-    CXXClass<Process::DefaultSettings> defaultSettingsClass_;
+    CxxClass<Process::DefaultSettings> defaultSettingsClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_classInit(

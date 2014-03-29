@@ -3,7 +3,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/process/Result.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/process/ResourceUsage.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
 
@@ -12,7 +12,7 @@ using yandex::contest::invoker::Process;
 
 namespace
 {
-    CXXClass<Process::Result> processResultClass_;
+    CxxClass<Process::Result> processResultClass_;
     GlobalEnumClass<Process::Result::CompletionStatus> completionStatusClass_;
     GlobalJClass integerClass_;
     jmethodID integerCtorId_;

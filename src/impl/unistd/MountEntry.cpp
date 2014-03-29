@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/MountEntry.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
@@ -11,7 +11,7 @@ using yandex::contest::system::unistd::MountEntry;
 
 namespace
 {
-    CXXClass<MountEntry> mountEntryClass_;
+    CxxClass<MountEntry> mountEntryClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_unistd_MountEntry_classInit(JNIEnv *env, jclass mountEntryClass)

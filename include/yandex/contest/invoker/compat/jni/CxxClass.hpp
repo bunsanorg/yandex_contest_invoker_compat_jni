@@ -9,23 +9,23 @@
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {
-    // FIXME should be BaseCXXClass
-    class BasicCXXClass: public GlobalJClass
+    // FIXME should be BaseCxxClass
+    class BasicCxxClass: public GlobalJClass
     {
     public:
         template <typename ... Args>
-        explicit BasicCXXClass(Args &&...args)
+        explicit BasicCxxClass(Args &&...args)
         {
             assign(std::forward<Args>(args)...);
         }
 
-        BasicCXXClass()=default;
+        BasicCxxClass()=default;
 
         template <typename C, typename P>
         void assign(const C &clazz, const P &ptr)
         {
             GlobalJClass::assign(clazz);
-            assignCXX(ptr);
+            assignCxx(ptr);
         }
 
     protected:
@@ -74,7 +74,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         }
 
     private:
-        void assignCXX(const char *const ptrName);
+        void assignCxx(const char *const ptrName);
 
     private:
         jmethodID defCtorId_;
@@ -82,15 +82,15 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     };
 
     template <typename T>
-    class CXXClass: public BasicCXXClass
+    class CxxClass: public BasicCxxClass
     {
     public:
         typedef T Type;
 
     public:
-        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(CXXClass, BasicCXXClass)
+        BUNSAN_INHERIT_EXPLICIT_CONSTRUCTOR(CxxClass, BasicCxxClass)
 
-        CXXClass()=default;
+        CxxClass()=default;
 
         void setPointer(jobject self, std::unique_ptr<T> &&ptr) const
         {

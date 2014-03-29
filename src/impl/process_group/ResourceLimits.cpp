@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 
 #include "yandex/contest/invoker/compat/jni/config/load.hpp"
@@ -12,7 +12,7 @@ using yandex::contest::invoker::ProcessGroup;
 
 namespace
 {
-    CXXClass<ProcessGroup::ResourceLimits> resourceLimitsClass_;
+    CxxClass<ProcessGroup::ResourceLimits> resourceLimitsClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupResourceLimits_classInit(

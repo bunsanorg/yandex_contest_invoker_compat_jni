@@ -4,7 +4,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 
 using namespace yandex::contest::invoker::compat::jni;
@@ -12,7 +12,7 @@ namespace unistd = yandex::contest::system::unistd;
 
 namespace
 {
-    CXXClass<unistd::FileStatus> fileStatusClass_;
+    CxxClass<unistd::FileStatus> fileStatusClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_unistd_FileStatus_classInit(

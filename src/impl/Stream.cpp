@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/Process.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 #include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
@@ -21,7 +21,7 @@ using yandex::contest::invoker::AccessMode;
 
 namespace
 {
-    CXXClass<Stream> streamClass_;
+    CxxClass<Stream> streamClass_;
     GlobalEnumClass<AccessMode> accessModeClass_;
 }
 

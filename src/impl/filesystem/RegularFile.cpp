@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/RegularFile.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
@@ -11,7 +11,7 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 
 namespace
 {
-    CXXClass<filesystem::RegularFile> regularFileClass_;
+    CxxClass<filesystem::RegularFile> regularFileClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_classInit(JNIEnv *env, jclass regularFileClass)

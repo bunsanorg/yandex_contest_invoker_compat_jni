@@ -6,7 +6,7 @@
 #include "yandex/contest/invoker/compat/ProcessGroupContext.hpp"
 #include "yandex/contest/invoker/compat/ProcessContext.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
@@ -27,9 +27,9 @@ using yandex::contest::invoker::flowctl::game::BrokerImpl;
 
 namespace
 {
-    CXXClass<ContainerContextPointer> containerClass_;
-    CXXClass<ProcessGroupHandle> processGroupClass_;
-    CXXClass<ProcessHandle> processClass_;
+    CxxClass<ContainerContextPointer> containerClass_;
+    CxxClass<ProcessGroupHandle> processGroupClass_;
+    CxxClass<ProcessHandle> processClass_;
     GlobalJClass configClass_;
     jmethodID getContainerId_, getProcessGroupId_, getBrokerId_,
               getKillerId_, getJudgeId_, getSolutionsId_;

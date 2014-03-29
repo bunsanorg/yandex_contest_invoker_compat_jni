@@ -9,7 +9,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/Process.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/Pipe.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/HandleHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
@@ -22,7 +22,7 @@ using yandex::contest::invoker::ProcessGroup;
 
 namespace
 {
-    CXXClass<ProcessGroupHandle> processGroupClass_;
+    CxxClass<ProcessGroupHandle> processGroupClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_ProcessGroup_classInit(JNIEnv *env, jclass processGroupClass)

@@ -4,7 +4,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Collection.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
@@ -18,7 +18,7 @@ namespace lxc = yandex::contest::system::lxc;
 
 namespace
 {
-    CXXClass<lxc::Config> configClass_;
+    CxxClass<lxc::Config> configClass_;
     GlobalEnumClass<lxc::Config::Arch> archEnumClass_;
 }
 

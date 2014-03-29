@@ -7,7 +7,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/Filesystem.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/ProcessGroup.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/HandleHelper.hpp"
 
 #include "yandex/contest/system/lxc/Config.hpp"
@@ -25,7 +25,7 @@ namespace lxc = yandex::contest::system::lxc;
 
 namespace
 {
-    CXXClass<ContainerContextPointer> containerClass_;
+    CxxClass<ContainerContextPointer> containerClass_;
     jfieldID filesystemId_;
 }
 

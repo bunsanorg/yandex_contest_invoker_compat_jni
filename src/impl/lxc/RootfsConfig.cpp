@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/String.hpp"
 
@@ -13,7 +13,7 @@ namespace lxc = yandex::contest::system::lxc;
 
 namespace
 {
-    CXXClass<lxc::RootfsConfig> rootfsConfigClass_;
+    CxxClass<lxc::RootfsConfig> rootfsConfigClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_classInit(

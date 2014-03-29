@@ -29,7 +29,7 @@ bunsan_add_shared_library(${PROJECT_NAME}
     src/ContextJVM.cpp
     src/ContextThread.cpp
     src/String.cpp
-    src/CXXClass.cpp
+    src/CxxClass.cpp
     src/Collection.cpp
     src/NotNull.cpp
 

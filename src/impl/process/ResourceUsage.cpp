@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/process/ResourceUsage.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 
 using namespace yandex::contest::invoker::compat::jni;
@@ -10,7 +10,7 @@ namespace process = yandex::contest::invoker::process;
 
 namespace
 {
-    CXXClass<process::ResourceUsage> resourceUsageClass_;
+    CxxClass<process::ResourceUsage> resourceUsageClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_process_ProcessResourceUsage_classInit(

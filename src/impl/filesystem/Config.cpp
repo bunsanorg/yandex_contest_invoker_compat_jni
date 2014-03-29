@@ -7,7 +7,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/SymLink.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/Fifo.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Collection.hpp"
 
@@ -20,7 +20,7 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 
 namespace
 {
-    CXXClass<filesystem::Config> configClass_;
+    CxxClass<filesystem::Config> configClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_classInit(

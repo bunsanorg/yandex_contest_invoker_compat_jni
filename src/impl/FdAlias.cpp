@@ -2,7 +2,7 @@
 
 #include "yandex/contest/invoker/compat/jni/impl/File.hpp"
 
-#include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
+#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
 
@@ -12,7 +12,7 @@ using yandex::contest::invoker::AccessMode;
 
 namespace
 {
-    CXXClass<FdAlias> fdAliasClass_;
+    CxxClass<FdAlias> fdAliasClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_FdAlias_classInit(JNIEnv *env, jclass fdAliasClass)
