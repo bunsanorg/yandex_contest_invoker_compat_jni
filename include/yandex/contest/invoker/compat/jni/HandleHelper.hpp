@@ -6,7 +6,7 @@
  * \brief Helper functions and defines for classes with handle field.
  */
 
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 
 #define YANDEX_JNI_METHOD_HANDLE_EXISTS(ENV, CLASS, SELF) \
     YANDEX_JNI_METHOD_BEGIN_THIS(ENV, CLASS, SELF) \

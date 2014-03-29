@@ -1,5 +1,5 @@
-#include "yandex/contest/invoker/compat/jni/String.hpp"
-#include "yandex/contest/invoker/compat/jni/Context.hpp"
+#include <yandex/contest/invoker/compat/jni/String.hpp>
+#include <yandex/contest/invoker/compat/jni/Context.hpp>
 
 #include <boost/noncopyable.hpp>
 

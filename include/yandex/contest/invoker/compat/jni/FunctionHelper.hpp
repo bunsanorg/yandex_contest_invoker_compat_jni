@@ -6,13 +6,13 @@
  * \brief Helper functions and defines for native methods implementation.
  */
 
-#include "yandex/contest/invoker/compat/jni/Error.hpp"
-#include "yandex/contest/invoker/compat/jni/Context.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/NotNull.hpp"
+#include <yandex/contest/invoker/compat/jni/Error.hpp>
+#include <yandex/contest/invoker/compat/jni/Context.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/NotNull.hpp>
 
-#include "yandex/contest/invoker/ContainerError.hpp"
+#include <yandex/contest/invoker/ContainerError.hpp>
 
 #include <memory>
 

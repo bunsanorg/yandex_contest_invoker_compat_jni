@@ -1,4 +1,4 @@
-#include "yandex/contest/invoker/compat/jni/Collection.hpp"
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {

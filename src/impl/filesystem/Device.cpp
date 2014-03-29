@@ -1,10 +1,10 @@
 #include "com_yandex_contest_invoker_impl_filesystem_Device.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 namespace filesystem = yandex::contest::invoker::filesystem;

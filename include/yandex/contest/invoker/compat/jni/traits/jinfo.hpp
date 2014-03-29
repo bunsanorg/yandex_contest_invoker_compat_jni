@@ -1,6 +1,6 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/mpl/string.hpp"
+#include <yandex/contest/invoker/compat/jni/mpl/string.hpp>
 
 #include <boost/mpl/char.hpp>
 #include <boost/mpl/push_front.hpp>

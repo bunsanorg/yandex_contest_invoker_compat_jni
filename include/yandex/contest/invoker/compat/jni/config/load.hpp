@@ -1,6 +1,6 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/config/InputArchive.hpp"
+#include <yandex/contest/invoker/compat/jni/config/InputArchive.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace config

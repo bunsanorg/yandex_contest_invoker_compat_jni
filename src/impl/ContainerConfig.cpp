@@ -1,20 +1,20 @@
 #include "com_yandex_contest_invoker_impl_ContainerConfig.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/ContainerConfig.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/ContainerConfig.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Config.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Config.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/process_group/DefaultSettings.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/process_group/DefaultSettings.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/ControlProcessConfig.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/ControlProcessConfig.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
 
-#include "yandex/contest/invoker/compat/jni/config/load.hpp"
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::ContainerConfig;

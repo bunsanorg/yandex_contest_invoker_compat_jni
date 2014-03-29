@@ -1,17 +1,17 @@
 #include "com_yandex_contest_invoker_impl_lxc_LxcConfig.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/Collection.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
-#include "yandex/contest/invoker/compat/jni/Primitive.hpp"
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
+#include <yandex/contest/invoker/compat/jni/Primitive.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
 
-#include "yandex/contest/invoker/compat/jni/config/load.hpp"
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 namespace lxc = yandex::contest::system::lxc;

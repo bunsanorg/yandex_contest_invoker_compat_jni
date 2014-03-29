@@ -1,7 +1,7 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/Context.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
+#include <yandex/contest/invoker/compat/jni/Context.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
 
 #include <functional>
 

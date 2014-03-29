@@ -1,17 +1,17 @@
 #include "com_yandex_contest_invoker_impl_filesystem_FilesystemConfig.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Config.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/RegularFile.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Directory.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/SymLink.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/Fifo.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Config.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/RegularFile.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Directory.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/SymLink.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/filesystem/Fifo.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/Collection.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
 
-#include "yandex/contest/invoker/compat/jni/config/load.hpp"
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 #include <boost/variant/static_visitor.hpp>
 

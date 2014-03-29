@@ -1,12 +1,12 @@
 #include "com_yandex_contest_invoker_impl_Stream.h"
 
-#include "yandex/contest/invoker/Process.hpp"
+#include <yandex/contest/invoker/Process.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
 
 #include <boost/assert.hpp>
 #include <boost/format.hpp>

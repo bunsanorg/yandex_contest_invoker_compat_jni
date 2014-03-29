@@ -1,13 +1,13 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/config/Error.hpp"
-#include "yandex/contest/invoker/compat/jni/config/TypeTraits.hpp"
+#include <yandex/contest/invoker/compat/jni/config/Error.hpp>
+#include <yandex/contest/invoker/compat/jni/config/TypeTraits.hpp>
 
-#include "yandex/contest/invoker/compat/jni/Context.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
-#include "yandex/contest/invoker/compat/jni/Collection.hpp"
-#include "yandex/contest/invoker/compat/jni/NotNull.hpp"
+#include <yandex/contest/invoker/compat/jni/Context.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
+#include <yandex/contest/invoker/compat/jni/NotNull.hpp>
 
 #include <type_traits>
 #include <locale>

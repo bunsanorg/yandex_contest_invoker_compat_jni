@@ -1,18 +1,18 @@
 #include "com_yandex_contest_invoker_flowctl_game_impl_Configurator.h"
 
-#include "yandex/contest/invoker/flowctl/game/Configurator.hpp"
+#include <yandex/contest/invoker/flowctl/game/Configurator.hpp>
 
-#include "yandex/contest/invoker/compat/ContainerContext.hpp"
-#include "yandex/contest/invoker/compat/ProcessGroupContext.hpp"
-#include "yandex/contest/invoker/compat/ProcessContext.hpp"
+#include <yandex/contest/invoker/compat/ContainerContext.hpp>
+#include <yandex/contest/invoker/compat/ProcessGroupContext.hpp>
+#include <yandex/contest/invoker/compat/ProcessContext.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
-#include "yandex/contest/invoker/compat/jni/Collection.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
 
-#include "yandex/contest/invoker/compat/jni/config/load.hpp"
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::ContainerPointer;

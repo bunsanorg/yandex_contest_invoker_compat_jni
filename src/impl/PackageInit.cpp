@@ -1,8 +1,8 @@
 #include "com_yandex_contest_invoker_impl_PackageInit.h"
 #include "com_yandex_contest_invoker_impl_PackageInitClasses.h"
 
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 

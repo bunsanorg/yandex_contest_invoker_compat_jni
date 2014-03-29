@@ -1,11 +1,11 @@
 #include "com_yandex_contest_invoker_impl_process_ProcessResult.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/process/Result.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/process/ResourceUsage.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/process/Result.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/process/ResourceUsage.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::Process;

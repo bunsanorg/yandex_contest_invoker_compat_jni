@@ -1,23 +1,23 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/mpl/string.hpp"
+#include <yandex/contest/invoker/compat/jni/mpl/string.hpp>
 
-#include "yandex/contest/invoker/compat/jni/traits/jinfo.hpp"
+#include <yandex/contest/invoker/compat/jni/traits/jinfo.hpp>
 
-#include "yandex/contest/invoker/Process.hpp"
-#include "yandex/contest/invoker/ContainerConfig.hpp"
+#include <yandex/contest/invoker/Process.hpp>
+#include <yandex/contest/invoker/ContainerConfig.hpp>
 
-#include "yandex/contest/invoker/process_group/DefaultSettings.hpp"
-#include "yandex/contest/invoker/process_group/ResourceLimits.hpp"
+#include <yandex/contest/invoker/process_group/DefaultSettings.hpp>
+#include <yandex/contest/invoker/process_group/ResourceLimits.hpp>
 
-#include "yandex/contest/invoker/process/ResourceLimits.hpp"
+#include <yandex/contest/invoker/process/ResourceLimits.hpp>
 
-#include "yandex/contest/system/unistd/MountEntry.hpp"
+#include <yandex/contest/system/unistd/MountEntry.hpp>
 
-#include "yandex/contest/system/unistd/access/Id.hpp"
+#include <yandex/contest/system/unistd/access/Id.hpp>
 
-#include "yandex/contest/invoker/flowctl/game/BrokerImpl.hpp"
-#include "yandex/contest/invoker/flowctl/game/Configurator.hpp"
+#include <yandex/contest/invoker/flowctl/game/BrokerImpl.hpp>
+#include <yandex/contest/invoker/flowctl/game/Configurator.hpp>
 
 #include <type_traits>
 #include <string>

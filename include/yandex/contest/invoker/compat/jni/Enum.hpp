@@ -1,8 +1,8 @@
 #pragma once
 
-#include "yandex/contest/invoker/compat/jni/JClass.hpp"
-#include "yandex/contest/invoker/compat/jni/LocalRef.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
+#include <yandex/contest/invoker/compat/jni/JClass.hpp>
+#include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
 
 #include <string>
 #include <utility>

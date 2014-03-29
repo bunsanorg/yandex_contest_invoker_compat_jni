@@ -1,16 +1,16 @@
 #include "com_yandex_contest_invoker_impl_process_group_ProcessGroupDefaultSettings.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/File.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/File.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/process_group/DefaultSettings.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/process_group/DefaultSettings.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp>
 
-#include "yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp"
+#include <yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp>
 
-#include "yandex/contest/invoker/compat/jni/CxxClass.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 
-#include "yandex/contest/invoker/compat/jni/config/load.hpp"
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::ProcessGroup;

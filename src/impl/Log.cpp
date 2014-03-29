@@ -1,8 +1,8 @@
-#include "yandex/contest/detail/ThrowingLog.hpp"
+#include <yandex/contest/detail/ThrowingLog.hpp>
 
-#include "yandex/contest/invoker/compat/jni/Enum.hpp"
-#include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
-#include "yandex/contest/invoker/compat/jni/String.hpp"
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
 
 #include "com_yandex_contest_invoker_impl_Log.h"
 
