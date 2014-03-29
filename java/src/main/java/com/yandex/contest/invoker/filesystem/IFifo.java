@@ -5,5 +5,5 @@ package com.yandex.contest.invoker.filesystem;
  * Date: 10.09.12
  * Time: 11:58
  */
-public interface IFIFO extends IFile {
+public interface IFifo extends IFile {
 }

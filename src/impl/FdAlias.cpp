@@ -1,4 +1,4 @@
-#include "com_yandex_contest_invoker_impl_FDAlias.h"
+#include "com_yandex_contest_invoker_impl_FdAlias.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/File.hpp"
 
@@ -7,22 +7,22 @@
 #include "yandex/contest/invoker/compat/jni/Enum.hpp"
 
 using namespace yandex::contest::invoker::compat::jni;
-using yandex::contest::invoker::FDAlias;
+using yandex::contest::invoker::FdAlias;
 using yandex::contest::invoker::AccessMode;
 
 namespace
 {
-    CXXClass<FDAlias> fdAliasClass_;
+    CXXClass<FdAlias> fdAliasClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_FDAlias_classInit(JNIEnv *env, jclass fdAliasClass)
+void Java_com_yandex_contest_invoker_impl_FdAlias_classInit(JNIEnv *env, jclass fdAliasClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     fdAliasClass_.assign(fdAliasClass, "impl");
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_FDAlias_finalize(JNIEnv *env, jobject self)
+void Java_com_yandex_contest_invoker_impl_FdAlias_finalize(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_FINALIZE(env, fdAliasClass_, self)
 }
@@ -30,13 +30,13 @@ void Java_com_yandex_contest_invoker_impl_FDAlias_finalize(JNIEnv *env, jobject 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace fd_alias
 {
-    LocalRef<jobject> create(const FDAlias &fdAlias)
+    LocalRef<jobject> create(const FdAlias &fdAlias)
     {
         return fdAliasClass_.setPointerCreate(fdAlias);
     }
 }}}}}}}
 
-jint Java_com_yandex_contest_invoker_impl_FDAlias_getFD(JNIEnv *env, jobject self)
+jint Java_com_yandex_contest_invoker_impl_FdAlias_getFd(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, fdAliasClass_, self)
     return this_->fd;

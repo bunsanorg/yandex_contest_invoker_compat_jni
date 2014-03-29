@@ -8,7 +8,7 @@ import java.util.Map;
  * Date: 03.08.12
  * Time: 23:19
  */
-public interface ILXCConfig {
+public interface ILxcConfig {
     enum Arch {
         x86,
         i686,
@@ -25,7 +25,7 @@ public interface ILXCConfig {
 
     // TODO: network (seems to be useless for now)
 
-    // TODO: pts (is not fully implemented by LXC, seems to be useless for now)
+    // TODO: pts (is not fully implemented by Lxc, seems to be useless for now)
 
     /**
      * @return Path to a file where the console output will be written.

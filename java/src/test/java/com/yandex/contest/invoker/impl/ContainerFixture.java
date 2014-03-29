@@ -2,7 +2,7 @@ package com.yandex.contest.invoker.impl;
 
 import com.yandex.contest.invoker.IContainer;
 import com.yandex.contest.invoker.IContainerConfig;
-import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.ILxcConfig;
 import com.yandex.contest.invoker.process.IProcessDefaultSettings;
 import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 import org.junit.After;
@@ -52,8 +52,8 @@ public class ContainerFixture extends InvokerFixture {
         return getProcessGroupDefaultSettings().getProcessDefaultSettings();
     }
 
-    public ILXCConfig getLXCConfig() {
+    public ILxcConfig getLxcConfig() {
         Assert.assertNotNull(containerConfig);
-        return containerConfig.getLXCConfig();
+        return containerConfig.getLxcConfig();
     }
 }

@@ -28,7 +28,7 @@ public class ContainerTest extends ContainerFixture {
 
     @Test
     public void create1() throws Exception {
-        Container cnt = new Container(getLXCConfig());
+        Container cnt = new Container(getLxcConfig());
         Assert.assertTrue(cnt.exists());
         cnt.destroy();
         Assert.assertFalse(cnt.exists());
@@ -36,7 +36,7 @@ public class ContainerTest extends ContainerFixture {
 
     @Test
     public void create2() throws Exception {
-        Container cnt = new Container(getContainerConfig(), getLXCConfig());
+        Container cnt = new Container(getContainerConfig(), getLxcConfig());
         Assert.assertTrue(cnt.exists());
         cnt.destroy();
         Assert.assertFalse(cnt.exists());

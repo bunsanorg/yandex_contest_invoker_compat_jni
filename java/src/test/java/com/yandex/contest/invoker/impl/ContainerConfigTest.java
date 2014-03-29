@@ -64,8 +64,8 @@ public class ContainerConfigTest extends InvokerFixture {
         };
     }
 
-    public static ILXCConfig getLXCConfig() {
-        return new ILXCConfig() {
+    public static ILxcConfig getLxcConfig() {
+        return new ILxcConfig() {
             @Override
             public Arch arch() {
                 return Arch.x86_64;
@@ -331,8 +331,8 @@ public class ContainerConfigTest extends InvokerFixture {
             }
 
             @Override
-            public ILXCConfig getLXCConfig() {
-                return ContainerConfigTest.getLXCConfig();
+            public ILxcConfig getLxcConfig() {
+                return ContainerConfigTest.getLxcConfig();
             }
 
             @Override

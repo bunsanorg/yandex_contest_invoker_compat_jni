@@ -74,8 +74,8 @@ void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-/// Signature: (Lcom/yandex/contest/invoker/lxc/ILXCConfig;)V
-void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_invoker_lxc_ILXCConfig_2(
+/// Signature: (Lcom/yandex/contest/invoker/lxc/ILxcConfig;)V
+void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_invoker_lxc_ILxcConfig_2(
     JNIEnv *env, jobject self, jobject lxcConfig)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
@@ -84,8 +84,8 @@ void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-/// Signature: (Lcom/yandex/contest/invoker/IContainerConfig;Lcom/yandex/contest/invoker/lxc/ILXCConfig;)V
-void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_invoker_IContainerConfig_2Lcom_yandex_contest_invoker_lxc_ILXCConfig_2(
+/// Signature: (Lcom/yandex/contest/invoker/IContainerConfig;Lcom/yandex/contest/invoker/lxc/ILxcConfig;)V
+void Java_com_yandex_contest_invoker_impl_Container_create__Lcom_yandex_contest_invoker_IContainerConfig_2Lcom_yandex_contest_invoker_lxc_ILxcConfig_2(
     JNIEnv *env, jobject self, jobject containerConfig, jobject lxcConfig)
 {
     YANDEX_JNI_METHOD_BEGIN(env)

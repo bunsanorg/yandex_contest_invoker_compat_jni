@@ -1,4 +1,4 @@
-#include "com_yandex_contest_invoker_impl_lxc_LXCConfig.h"
+#include "com_yandex_contest_invoker_impl_lxc_LxcConfig.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/lxc/Config.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp"
@@ -22,16 +22,16 @@ namespace
     GlobalEnumClass<lxc::Config::Arch> archEnumClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_classInit(
+void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_classInit(
     JNIEnv *env, jclass configClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     configClass_.assign(configClass, "impl");
-    archEnumClass_.assign("com/yandex/contest/invoker/lxc/ILXCConfig$Arch");
+    archEnumClass_.assign("com/yandex/contest/invoker/lxc/ILxcConfig$Arch");
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_finalize(
+void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_finalize(
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_FINALIZE(env, configClass_, self)
@@ -46,7 +46,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}}
 
-void Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_create(
+void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_create(
     JNIEnv *env, jobject self, jobject config)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
@@ -54,7 +54,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_create(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_arch(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_arch(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->arch)
@@ -64,7 +64,7 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_arch(JNIEnv *env, job
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_utsname(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_utsname(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->utsname)
@@ -74,7 +74,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_utsname(JNIEnv *env, 
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_console(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_console(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->console)
@@ -84,7 +84,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_console(JNIEnv *env, 
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_tty(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_tty(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->tty)
@@ -94,7 +94,7 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_tty(JNIEnv *env, jobj
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_devttydir(
+JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_devttydir(
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
@@ -105,7 +105,7 @@ JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_dev
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_mount(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_mount(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->mount)
@@ -115,7 +115,7 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_mount(JNIEnv *env, jo
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_rootfs(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_rootfs(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->rootfs)
@@ -125,7 +125,7 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_rootfs(JNIEnv *env, j
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_pivotdir(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_pivotdir(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->pivotdir)
@@ -135,7 +135,7 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_pivotdir(JNIEnv *env,
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_cgroup(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cgroup(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->cgroup)
@@ -145,7 +145,7 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_cgroup(JNIEnv *env, j
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LXCConfig_cap_1drop(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cap_1drop(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->cap_drop)

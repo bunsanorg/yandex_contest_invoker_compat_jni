@@ -1,7 +1,7 @@
 package com.yandex.contest.invoker.impl;
 
 import com.yandex.contest.invoker.*;
-import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.ILxcConfig;
 import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
@@ -20,13 +20,13 @@ public class Container implements IContainer, IHandle {
         createFilesystem();
     }
 
-    public Container(ILXCConfig lxcConfig) throws InvokerException {
+    public Container(ILxcConfig lxcConfig) throws InvokerException {
         create(lxcConfig);
         createFilesystem();
     }
 
     public Container(IContainerConfig containerConfig,
-                     ILXCConfig lxcConfig) throws InvokerException {
+                     ILxcConfig lxcConfig) throws InvokerException {
         create(containerConfig, lxcConfig);
         createFilesystem();
     }
@@ -39,10 +39,10 @@ public class Container implements IContainer, IHandle {
 
     private native void create(IContainerConfig containerConfig) throws InvokerException;
 
-    private native void create(ILXCConfig lxcConfig) throws InvokerException;
+    private native void create(ILxcConfig lxcConfig) throws InvokerException;
 
     private native void create(IContainerConfig containerConfig,
-                               ILXCConfig lxcConfig) throws InvokerException;
+                               ILxcConfig lxcConfig) throws InvokerException;
 
     private native void createFilesystem();
 

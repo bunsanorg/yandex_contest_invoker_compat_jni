@@ -1,6 +1,6 @@
 package com.yandex.contest.invoker.impl.lxc;
 
-import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.ILxcConfig;
 import com.yandex.contest.invoker.lxc.IMountConfig;
 import com.yandex.contest.invoker.lxc.IRootfsConfig;
 
@@ -12,14 +12,14 @@ import java.util.Set;
  * Date: 20.08.12
  * Time: 15:48
  */
-public class LXCConfig implements ILXCConfig {
-    private LXCConfig() {}
+public class LxcConfig implements ILxcConfig {
+    private LxcConfig() {}
 
-    public LXCConfig(ILXCConfig lxcConfig) {
+    public LxcConfig(ILxcConfig lxcConfig) {
         create(lxcConfig);
     }
 
-    private native void create(ILXCConfig lxcConfig);
+    private native void create(ILxcConfig lxcConfig);
 
     @Override
     public native Arch arch();

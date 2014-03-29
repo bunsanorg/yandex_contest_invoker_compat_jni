@@ -1,7 +1,7 @@
 #include "com_yandex_contest_invoker_impl_process_ProcessDefaultSettings.h"
 
 #include "yandex/contest/invoker/compat/jni/impl/File.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/FDAlias.hpp"
+#include "yandex/contest/invoker/compat/jni/impl/FdAlias.hpp"
 
 #include "yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/process/ResourceLimits.hpp"
@@ -22,7 +22,7 @@ using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::Process;
 using yandex::contest::invoker::NonPipeStream;
 using yandex::contest::invoker::File;
-using yandex::contest::invoker::FDAlias;
+using yandex::contest::invoker::FdAlias;
 
 namespace
 {
@@ -109,7 +109,7 @@ namespace
                 nonPipeStream_ = impl::file::create(file);
             }
 
-            void operator()(const FDAlias &fdAlias) const
+            void operator()(const FdAlias &fdAlias) const
             {
                 nonPipeStream_ = impl::fd_alias::create(fdAlias);
             }

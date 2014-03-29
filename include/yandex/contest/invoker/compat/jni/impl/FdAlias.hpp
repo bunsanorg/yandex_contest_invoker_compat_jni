@@ -7,5 +7,5 @@
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace fd_alias
 {
-    LocalRef<jobject> create(const FDAlias &fdAlias);
+    LocalRef<jobject> create(const FdAlias &fdAlias);
 }}}}}}}

@@ -5,6 +5,6 @@ package com.yandex.contest.invoker;
  * Date: 30.08.12
  * Time: 20:21
  */
-public interface IFDAlias extends IStream, INonPipeStream {
-    int getFD();
+public interface IFdAlias extends IStream, INonPipeStream {
+    int getFd();
 }

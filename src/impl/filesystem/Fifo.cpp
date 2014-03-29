@@ -1,6 +1,6 @@
-#include "com_yandex_contest_invoker_impl_filesystem_FIFO.h"
+#include "com_yandex_contest_invoker_impl_filesystem_Fifo.h"
 
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/FIFO.hpp"
+#include "yandex/contest/invoker/compat/jni/impl/filesystem/Fifo.hpp"
 
 #include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
@@ -11,10 +11,10 @@ namespace filesystem = yandex::contest::invoker::filesystem;
 
 namespace
 {
-    CXXClass<filesystem::FIFO> fifoClass_;
+    CXXClass<filesystem::Fifo> fifoClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_filesystem_FIFO_classInit(JNIEnv *env, jclass fifoClass)
+void Java_com_yandex_contest_invoker_impl_filesystem_Fifo_classInit(JNIEnv *env, jclass fifoClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     fifoClass_.assign(fifoClass, "impl");
@@ -24,7 +24,7 @@ void Java_com_yandex_contest_invoker_impl_filesystem_FIFO_classInit(JNIEnv *env,
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace filesystem{namespace fifo
 {
-    LocalRef<jobject> create(const invoker::filesystem::FIFO &fifo)
+    LocalRef<jobject> create(const invoker::filesystem::Fifo &fifo)
     {
         return fifoClass_.setPointerCreate(fifo);
     }

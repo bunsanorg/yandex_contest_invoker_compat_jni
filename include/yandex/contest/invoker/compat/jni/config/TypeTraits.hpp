@@ -172,12 +172,12 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <>
     struct info<system::lxc::Config>:
         invoker_object_info<system::lxc::Config,
-            boost::mpl::string<'lxc/', 'ILXC', 'Conf', 'ig'>, false> {};
+            boost::mpl::string<'lxc/', 'ILxc', 'Conf', 'ig'>, false> {};
 
     template <>
     struct info<system::lxc::Config::Arch>:
         invoker_enum_info<system::lxc::Config::Arch,
-            boost::mpl::string<'lxc/', 'ILXC', 'Conf', 'ig$A', 'rch'>> {};
+            boost::mpl::string<'lxc/', 'ILxc', 'Conf', 'ig$A', 'rch'>> {};
 
     template <>
     struct info<system::lxc::MountConfig>:
@@ -230,9 +230,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             boost::mpl::string<'file', 'syst', 'em/I', 'SymL', 'ink'>> {};
 
     template <>
-    struct info<filesystem::FIFO>:
-        invoker_object_info<filesystem::FIFO,
-            boost::mpl::string<'file', 'syst', 'em/I', 'FIFO'>> {};
+    struct info<filesystem::Fifo>:
+        invoker_object_info<filesystem::Fifo,
+            boost::mpl::string<'file', 'syst', 'em/I', 'Fifo'>> {};
 
     template <>
     struct info<process_group::DefaultSettings>:
@@ -272,9 +272,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             boost::mpl::string<'IFil', 'e'>> {};
 
     template <>
-    struct info<FDAlias>:
-        invoker_object_info<FDAlias,
-            boost::mpl::string<'IFDA', 'lias'>> {};
+    struct info<FdAlias>:
+        invoker_object_info<FdAlias,
+            boost::mpl::string<'IFdA', 'lias'>> {};
 
     template <>
     struct info<Stream>:
@@ -328,7 +328,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         static std::string convert(const std::string &name)
         {
             if (name == "lxc")
-                return "LXCConfig";
+                return "LxcConfig";
             else if (name != "processGroupDefaultSettings" &&
                      name != "processDefaultSettings" &&
                      name != "containersDir")
@@ -338,12 +338,12 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     };
 
     template <>
-    struct convert_get_name<FDAlias>
+    struct convert_get_name<FdAlias>
     {
         static std::string convert(const std::string &name)
         {
             if (name == "fd")
-                return "FD";
+                return "Fd";
             return convert_get_name<void>::convert(name);
         }
     };

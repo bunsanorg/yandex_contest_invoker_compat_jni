@@ -1,7 +1,7 @@
 package com.yandex.contest.invoker;
 
 import com.yandex.contest.invoker.filesystem.IFilesystemConfig;
-import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.ILxcConfig;
 import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
@@ -11,7 +11,7 @@ import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
  */
 public interface IContainerConfig {
     String getContainersDir();
-    ILXCConfig getLXCConfig();
+    ILxcConfig getLxcConfig();
     IProcessGroupDefaultSettings getProcessGroupDefaultSettings();
     IControlProcessConfig getControlProcessConfig();
     IFilesystemConfig getFilesystemConfig();

@@ -82,7 +82,7 @@ public interface IFileStatus {
      */
     int getType();
 
-    boolean isFIFO();
+    boolean isFifo();
 
     boolean isCharDevice();
 

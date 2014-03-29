@@ -121,10 +121,10 @@ jint Java_com_yandex_contest_invoker_impl_unistd_FileStatus_getType(JNIEnv *env,
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
 
-jboolean Java_com_yandex_contest_invoker_impl_unistd_FileStatus_isFIFO(JNIEnv *env, jobject self)
+jboolean Java_com_yandex_contest_invoker_impl_unistd_FileStatus_isFifo(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, fileStatusClass_, self)
-    return this_->isFIFO();
+    return this_->isFifo();
     YANDEX_JNI_METHOD_END_PRIMITIVE(env)
 }
 

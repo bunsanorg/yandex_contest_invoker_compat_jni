@@ -1,18 +1,18 @@
 package com.yandex.contest.invoker.impl;
 
-import com.yandex.contest.invoker.IFDAlias;
-import com.yandex.contest.invoker.jimpl.AbstractFDAlias;
+import com.yandex.contest.invoker.IFdAlias;
+import com.yandex.contest.invoker.jimpl.AbstractFdAlias;
 
 /**
  * User: sarum9in
  * Date: 30.08.12
  * Time: 20:22
  */
-public class FDAlias extends AbstractFDAlias implements IFDAlias {
-    private FDAlias() {}
+public class FdAlias extends AbstractFdAlias implements IFdAlias {
+    private FdAlias() {}
 
     @Override
-    public native int getFD();
+    public native int getFd();
 
     @Override
     protected native void finalize();

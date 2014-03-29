@@ -42,7 +42,7 @@ bunsan_add_shared_library(${PROJECT_NAME}
     src/impl/Pipe.cpp
     src/impl/Log.cpp
     src/impl/File.cpp
-    src/impl/FDAlias.cpp
+    src/impl/FdAlias.cpp
     src/impl/ContainerConfig.cpp
     src/impl/ControlProcessConfig.cpp
     src/impl/process/Result.cpp
@@ -62,7 +62,7 @@ bunsan_add_shared_library(${PROJECT_NAME}
     src/impl/filesystem/Device.cpp
     src/impl/filesystem/RegularFile.cpp
     src/impl/filesystem/SymLink.cpp
-    src/impl/filesystem/FIFO.cpp
+    src/impl/filesystem/Fifo.cpp
     src/impl/unistd/MountEntry.cpp
     src/impl/unistd/FileStatus.cpp
     src/impl/unistd/access/Id.cpp

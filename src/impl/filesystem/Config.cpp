@@ -5,7 +5,7 @@
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/Device.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/Directory.hpp"
 #include "yandex/contest/invoker/compat/jni/impl/filesystem/SymLink.hpp"
-#include "yandex/contest/invoker/compat/jni/impl/filesystem/FIFO.hpp"
+#include "yandex/contest/invoker/compat/jni/impl/filesystem/Fifo.hpp"
 
 #include "yandex/contest/invoker/compat/jni/CXXClass.hpp"
 #include "yandex/contest/invoker/compat/jni/FunctionHelper.hpp"
@@ -83,7 +83,7 @@ namespace
             createFile_ = impl::filesystem::sym_link::create(symLink);
         }
 
-        void operator()(const filesystem::FIFO &fifo) const
+        void operator()(const filesystem::Fifo &fifo) const
         {
             createFile_ = impl::filesystem::fifo::create(fifo);
         }

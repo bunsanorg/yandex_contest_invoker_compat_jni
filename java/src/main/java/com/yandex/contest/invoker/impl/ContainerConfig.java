@@ -3,7 +3,7 @@ package com.yandex.contest.invoker.impl;
 import com.yandex.contest.invoker.IContainerConfig;
 import com.yandex.contest.invoker.IControlProcessConfig;
 import com.yandex.contest.invoker.filesystem.IFilesystemConfig;
-import com.yandex.contest.invoker.lxc.ILXCConfig;
+import com.yandex.contest.invoker.lxc.ILxcConfig;
 import com.yandex.contest.invoker.process_group.IProcessGroupDefaultSettings;
 
 /**
@@ -24,7 +24,7 @@ public class ContainerConfig implements IContainerConfig {
     public native String getContainersDir();
 
     @Override
-    public native ILXCConfig getLXCConfig();
+    public native ILxcConfig getLxcConfig();
 
     @Override
     public native IProcessGroupDefaultSettings getProcessGroupDefaultSettings();

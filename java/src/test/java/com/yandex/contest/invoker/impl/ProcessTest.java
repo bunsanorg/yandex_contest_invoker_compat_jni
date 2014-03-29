@@ -4,7 +4,7 @@ import com.yandex.contest.invoker.IPipe;
 import com.yandex.contest.invoker.IProcess;
 import com.yandex.contest.invoker.IStream;
 import com.yandex.contest.invoker.impl.unistd.access.Id;
-import com.yandex.contest.invoker.jimpl.AbstractFDAlias;
+import com.yandex.contest.invoker.jimpl.AbstractFdAlias;
 import com.yandex.contest.invoker.jimpl.File;
 import com.yandex.contest.invoker.process.IProcessResult;
 import junit.framework.Assert;
@@ -118,15 +118,15 @@ public class ProcessTest extends ProcessGroupFixture {
         Assert.assertNotNull(p0.getStream(0));
         p0.closeStream(0);
         Assert.assertFalse(p0.hasStream(0));
-        // FDalias
+        // Fdalias
         IPipe pipe = getProcessGroup().createPipe();
         p0.setStream(1, pipe.getOutputStream());
         Assert.assertTrue(p0.hasStream(1));
         p1.setStream(0, pipe.getInputStream());
         Assert.assertTrue(p1.hasStream(0));
-        p0.setStream(2, new AbstractFDAlias() {
+        p0.setStream(2, new AbstractFdAlias() {
             @Override
-            public int getFD() {
+            public int getFd() {
                 return 1;
             }
         });

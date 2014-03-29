@@ -48,7 +48,7 @@ public class FileStatus implements IFileStatus {
     public native int getType();
 
     @Override
-    public native boolean isFIFO();
+    public native boolean isFifo();
 
     @Override
     public native boolean isCharDevice();

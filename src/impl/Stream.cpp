@@ -16,7 +16,7 @@ using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::Stream;
 using yandex::contest::invoker::File;
 using yandex::contest::invoker::Pipe;
-using yandex::contest::invoker::FDAlias;
+using yandex::contest::invoker::FdAlias;
 using yandex::contest::invoker::AccessMode;
 
 namespace
@@ -72,10 +72,10 @@ namespace
             }
         }
 
-        AccessMode operator()(const FDAlias &) const
+        AccessMode operator()(const FdAlias &) const
         {
             Context::getContext()->throwNew("java/lang/IllegalArgumentException",
-                                            "FDAlias does not support accessMode");
+                                            "FdAlias does not support accessMode");
             // suppress warning
             return AccessMode::READ_WRITE;
         }
@@ -104,9 +104,9 @@ namespace
             return str(boost::format("Pipe::End: %1% %2%") % pipeEnd.pipeId % pipeEnd.end);
         }
 
-        std::string operator()(const FDAlias &fdAlias) const
+        std::string operator()(const FdAlias &fdAlias) const
         {
-            return str(boost::format("FDAlias: %1%") % fdAlias.fd);
+            return str(boost::format("FdAlias: %1%") % fdAlias.fd);
         }
     };
 }

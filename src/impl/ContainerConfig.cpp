@@ -62,7 +62,7 @@ jstring Java_com_yandex_contest_invoker_impl_ContainerConfig_getContainersDir(
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ContainerConfig_getLXCConfig(
+jobject Java_com_yandex_contest_invoker_impl_ContainerConfig_getLxcConfig(
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, containerConfigClass_, self)

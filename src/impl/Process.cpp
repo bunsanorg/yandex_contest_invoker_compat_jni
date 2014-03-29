@@ -22,7 +22,7 @@ using yandex::contest::invoker::ProcessEnvironment;
 using yandex::contest::invoker::Process;
 using yandex::contest::invoker::Stream;
 using yandex::contest::invoker::File;
-using yandex::contest::invoker::FDAlias;
+using yandex::contest::invoker::FdAlias;
 namespace unistd = yandex::contest::system::unistd;
 
 namespace
@@ -38,7 +38,7 @@ void Java_com_yandex_contest_invoker_impl_Process_classInit(JNIEnv *env, jclass 
     YANDEX_JNI_METHOD_BEGIN(env)
     processClass_.assign(processClass, "impl");
     fileClass_.assign("com/yandex/contest/invoker/IFile");
-    fdAliasClass_.assign("com/yandex/contest/invoker/IFDAlias");
+    fdAliasClass_.assign("com/yandex/contest/invoker/IFdAlias");
     implStreamClass_.assign("com/yandex/contest/invoker/impl/Stream", "impl");
     YANDEX_JNI_METHOD_END_VOID(env)
 }
@@ -199,14 +199,14 @@ void Java_com_yandex_contest_invoker_impl_Process_setStream(
     }
     else if (fdAliasClass_.isInstance(stream))
     {
-        this_->member().setStream(fd, config::load<FDAlias>(stream));
+        this_->member().setStream(fd, config::load<FdAlias>(stream));
     }
     else
     {
         ctx->throwNew("java/lang/IllegalArgumentException",
                       "Unknown stream's class, must be one of "
                       "{\"com/yandex/contest/invoker/IFile\", "
-                      "\"com/yandex/contest/invoker/IFDAlias\", "
+                      "\"com/yandex/contest/invoker/IFdAlias\", "
                       "\"com/yandex/contest/invoker/impl/Stream\"}.");
     }
     YANDEX_JNI_METHOD_END_VOID(env)
