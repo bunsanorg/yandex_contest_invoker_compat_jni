@@ -32,12 +32,6 @@ public class ProcessGroup implements IProcessGroup, IHandle {
     public native IProcessGroupResult synchronizedCall() throws InvokerException;
 
     @Override
-    public native void freeze() throws InvokerException;
-
-    @Override
-    public native void unfreeze() throws InvokerException;
-
-    @Override
     public native IProcessGroupResult poll() throws InvokerException;
 
     @Override

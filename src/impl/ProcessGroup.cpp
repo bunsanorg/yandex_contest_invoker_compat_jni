@@ -77,20 +77,6 @@ jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_synchronizedCall(JNIEn
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_ProcessGroup_freeze(JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    this_->member().freeze();
-    YANDEX_JNI_METHOD_END_VOID(env)
-}
-
-void Java_com_yandex_contest_invoker_impl_ProcessGroup_unfreeze(JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    this_->member().unfreeze();
-    YANDEX_JNI_METHOD_END_VOID(env)
-}
-
 jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_poll(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)

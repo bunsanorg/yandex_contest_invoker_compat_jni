@@ -69,15 +69,4 @@ public class ProcessGroupTest extends ProcessGroupFixture {
         getProcessGroup().stop();
         verifySTOPPED();
     }
-
-    @Test
-    public void freezing() throws Exception {
-        IProcess p0 = getProcessGroup().createProcess("sleep");
-        p0.setArguments(Arrays.asList(new String[]{"sleep", "0.1"}));
-        getProcessGroup().start();
-        getProcessGroup().freeze();
-        getProcessGroup().unfreeze();
-        getProcessGroup().waitFor();
-        verifyOK();
-    }
 }

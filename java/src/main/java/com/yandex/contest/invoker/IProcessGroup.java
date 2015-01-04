@@ -34,19 +34,6 @@ public interface IProcessGroup {
     IProcessGroupResult synchronizedCall() throws InvokerException;
 
     /**
-     * Freeze all running processes, associated with process group.
-     * Processes will be blocked until they are explicitly thawed by the unfreeze().
-     * @see IProcessGroup#unfreeze()
-     */
-    void freeze() throws InvokerException;
-
-    /**
-     * Thaw all processes, associated with process group.
-     * @see IProcessGroup#freeze()
-     */
-    void unfreeze() throws InvokerException;
-
-    /**
      * Check if process group has terminated.
      * Set process group result if terminated.
      * @return Process group result if terminated,
