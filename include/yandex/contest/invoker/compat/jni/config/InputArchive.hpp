@@ -341,18 +341,24 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename Arg, typename ... Args>
         struct LoadVariant<Arg, Args...>:
             std::conditional<traits::info<Arg>::is_defined,
-                LoadVariantHasTraits<Arg, Args...>, LoadVariantNoTraits<Arg>>::type {};
+                LoadVariantHasTraits<Arg, Args...>,
+                LoadVariantNoTraits<Arg>
+            >::type {};
 
         /// There is no types left.
         template <>
         struct LoadVariant<void>
         {
             template <typename Archive, typename Variant>
-            static void load(jobject jobj, Archive &ar, Variant &obj)
+            static void load(jobject /*jobj*/, Archive &/*ar*/, Variant &/*obj*/)
             {
                 BOOST_THROW_EXCEPTION(VariantNoTypesLeftError());
             }
         };
+
+        /// For variadic boost::variant<>.
+        template <>
+        struct LoadVariant<>: LoadVariant<void> {};
     }
 
     template <typename JType, typename ContextClass>
