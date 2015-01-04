@@ -59,14 +59,20 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename T>
         static inline T *jlongToPtr(jlong ptrLong)
         {
-            static_assert(sizeof(ptrLong) >= sizeof(T *), "Insufficient integer size.");
+            static_assert(
+                sizeof(ptrLong) >= sizeof(T *),
+                "Insufficient integer size."
+            );
             return reinterpret_cast<T *>(ptrLong);
         }
 
         template <typename T>
         static inline jlong ptrToJlong(T *ptr)
         {
-            static_assert(sizeof(jlong) >= sizeof(T *), "Insufficient integer size.");
+            static_assert(
+                sizeof(jlong) >= sizeof(T *),
+                "Insufficient integer size."
+            );
             return reinterpret_cast<jlong>(ptr);
         }
 

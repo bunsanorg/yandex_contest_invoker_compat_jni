@@ -54,8 +54,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <bool IsObject, bool IsEnum, typename CType, typename JClass,
               typename JType, JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)>
-    constexpr JType (JNIEnv::*basic_info<IsObject, IsEnum, CType, JClass, JType, ENVGet>::envget)(
-        jobject, jmethodID, ...);
+    constexpr JType (
+        JNIEnv::*basic_info<
+            IsObject, IsEnum, CType, JClass, JType, ENVGet
+        >::envget
+    )(jobject, jmethodID, ...);
 
     template <typename CType>
     struct info
@@ -88,36 +91,52 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     /* Primitive mapping */
 
-    template <typename CType, typename JType, JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)>
+    template <
+        typename CType,
+        typename JType,
+        JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)
+    >
     struct basic_primitive_info:
         basic_info<false, false, CType, typename jinfo<JType>::jclass, JType, ENVGet> {};
 
     template <>
-    struct info<std::uint64_t>: basic_primitive_info<std::uint64_t, jlong, &JNIEnv::CallLongMethod> {};
+    struct info<std::uint64_t>:
+        basic_primitive_info<std::uint64_t, jlong, &JNIEnv::CallLongMethod> {};
 
     template <>
-    struct info<std::int64_t>: basic_primitive_info<std::int64_t, jlong, &JNIEnv::CallLongMethod> {};
+    struct info<std::int64_t>:
+        basic_primitive_info<std::int64_t, jlong, &JNIEnv::CallLongMethod> {};
 
     template <>
-    struct info<std::uint32_t>: basic_primitive_info<std::uint32_t, jint, &JNIEnv::CallIntMethod> {};
+    struct info<std::uint32_t>:
+        basic_primitive_info<std::uint32_t, jint, &JNIEnv::CallIntMethod> {};
 
     template <>
-    struct info<std::int32_t>: basic_primitive_info<std::int32_t, jint, &JNIEnv::CallIntMethod> {};
+    struct info<std::int32_t>:
+        basic_primitive_info<std::int32_t, jint, &JNIEnv::CallIntMethod> {};
 
     template <typename Rep, typename Period>
     struct info<std::chrono::duration<Rep, Period>>:
-        basic_primitive_info<std::chrono::duration<Rep, Period>, jlong, &JNIEnv::CallLongMethod> {};
+        basic_primitive_info<
+            std::chrono::duration<Rep, Period>,
+            jlong,
+            &JNIEnv::CallLongMethod
+        > {};
 
     /* Object mapping */
 
     template <typename CType, typename JClass, bool IsCamelCase=true>
-    struct basic_object_info: basic_info<true, false, CType, JClass, jobject, &JNIEnv::CallObjectMethod>
+    struct basic_object_info:
+        basic_info<true, false, CType, JClass, jobject, &JNIEnv::CallObjectMethod>
     {
         static constexpr bool isCamelCase = IsCamelCase;
     };
 
     template <typename CType>
-    struct string_info: basic_object_info<CType, boost::mpl::string<'java', '/lan', 'g/St', 'ring'>> {};
+    struct string_info: basic_object_info<
+        CType,
+        boost::mpl::string<'java', '/lan', 'g/St', 'ring'>
+    > {};
 
     template <>
     struct info<std::string>: string_info<std::string> {};
@@ -125,34 +144,48 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <>
     struct info<boost::filesystem::path>: string_info<boost::filesystem::path> {};
 
-    template <typename Key, typename Tp, typename Hash, typename Pred, typename Alloc>
+    template <typename Key, typename Tp, typename Hash,
+              typename Pred, typename Alloc>
     struct info<std::unordered_map<Key, Tp, Hash, Pred, Alloc>>:
-        basic_object_info<std::unordered_map<Key, Tp, Hash, Pred, Alloc>,
-                          boost::mpl::string<'java', '/uti', 'l/Ma', 'p'>> {};
+        basic_object_info<
+            std::unordered_map<Key, Tp, Hash, Pred, Alloc>,
+            boost::mpl::string<'java', '/uti', 'l/Ma', 'p'>
+        > {};
 
-    template <typename Value, typename Hash, typename Pred, typename Alloc>
+    template <typename Value, typename Hash,
+              typename Pred, typename Alloc>
     struct info<std::unordered_set<Value, Hash, Pred, Alloc>>:
         basic_object_info<std::unordered_set<Value, Hash, Pred, Alloc>,
                           boost::mpl::string<'java', '/uti', 'l/Se', 't'>> {};
 
     template <typename Tp, typename Alloc>
     struct info<std::vector<Tp, Alloc>>:
-        basic_object_info<std::vector<Tp, Alloc>,
-                          boost::mpl::string<'java', '/uti', 'l/Li', 'st'>> {};
+        basic_object_info<
+            std::vector<Tp, Alloc>,
+            boost::mpl::string<'java', '/uti', 'l/Li', 'st'>
+        > {};
 
     /* Invoker mapping */
 
     template <typename JClass>
     struct invoker_jclass
     {
-        typedef typename boost::mpl::insert_range<JClass,
+        typedef typename boost::mpl::insert_range<
+            JClass,
             typename boost::mpl::begin<JClass>::type,
-                boost::mpl::string<'com/', 'yand', 'ex/c', 'onte', 'st/i', 'nvok', 'er/'>>::type type;
+            boost::mpl::string<
+                'com/', 'yand', 'ex/c', 'onte',
+                'st/i', 'nvok', 'er/'>
+        >::type type;
     };
 
     template <typename CType, typename JClass, bool IsCamelCase=true>
     struct invoker_object_info:
-        basic_object_info<CType, typename invoker_jclass<JClass>::type, IsCamelCase> {};
+        basic_object_info<
+            CType,
+            typename invoker_jclass<JClass>::type,
+            IsCamelCase
+        > {};
 
     template <typename CType, typename JClass>
     struct invoker_enum_info:
@@ -191,8 +224,12 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <>
     struct info<filesystem::Config>:
-        invoker_object_info<filesystem::Config,
-            boost::mpl::string<'file', 'syst', 'em/I', 'File', 'syst', 'emCo', 'nfig'>> {};
+        invoker_object_info<
+            filesystem::Config,
+            boost::mpl::string<
+                'file', 'syst', 'em/I', 'File',
+                'syst', 'emCo', 'nfig'>
+        > {};
 
     template <>
     struct info<filesystem::CreateFile>:
@@ -242,19 +279,31 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <>
     struct info<process::DefaultSettings>:
-        invoker_object_info<process::DefaultSettings,
-            boost::mpl::string<'proc', 'ess/', 'IPro', 'cess', 'Defa', 'ultS', 'etti', 'ngs'>> {};
+        invoker_object_info<
+            process::DefaultSettings,
+            boost::mpl::string<
+                'proc', 'ess/', 'IPro', 'cess',
+                'Defa', 'ultS', 'etti', 'ngs'>
+        > {};
 
     template <>
     struct info<process_group::ResourceLimits>:
-        invoker_object_info<process_group::ResourceLimits,
-            boost::mpl::string<'proc', 'ess_', 'grou', 'p/IP', 'roce', 'ssGr',
-                               'oupR', 'esou', 'rceL', 'imit', 's'>> {};
+        invoker_object_info<
+            process_group::ResourceLimits,
+            boost::mpl::string<
+                'proc', 'ess_', 'grou', 'p/IP',
+                'roce', 'ssGr', 'oupR', 'esou',
+                'rceL', 'imit', 's'>
+        > {};
 
     template <>
     struct info<process::ResourceLimits>:
-        invoker_object_info<process::ResourceLimits,
-            boost::mpl::string<'proc', 'ess/', 'IPro', 'cess', 'Reso', 'urce', 'Limi', 'ts'>> {};
+        invoker_object_info<
+            process::ResourceLimits,
+            boost::mpl::string<
+                'proc', 'ess/', 'IPro', 'cess',
+                'Reso', 'urce', 'Limi', 'ts'>
+        > {};
 
     template <>
     struct info<system::unistd::MountEntry>:
@@ -303,8 +352,12 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <>
     struct info<flowctl::game::Broker::ResourceLimits>:
-        invoker_object_info<flowctl::game::Broker::ResourceLimits,
-            boost::mpl::string<'flow', 'ctl/', 'game', '/IRe', 'sour', 'ceLi', 'mits'>> {};
+        invoker_object_info<
+            flowctl::game::Broker::ResourceLimits,
+            boost::mpl::string<
+                'flow', 'ctl/', 'game', '/IRe',
+                'sour', 'ceLi', 'mits'>
+        > {};
 
     /* Convert get name */
 

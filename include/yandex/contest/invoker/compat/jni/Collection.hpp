@@ -14,10 +14,21 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     {
         typedef typename Iterable::value_type Value;
         const Context::Handle ctx = Context::getContext();
-        LocalRef<jclass> collectionClass(ctx->env()->FindClass(clazz.c_str()));
-        jmethodID ctorId = ctx->env()->GetMethodID(collectionClass.get(), "<init>", "()V");
-        jmethodID addId = ctx->env()->GetMethodID(collectionClass.get(), "add", "(Ljava/lang/Object;)Z");
-        LocalRef<jobject> collection(ctx->env()->NewObject(collectionClass.get(), ctorId));
+        LocalRef<jclass> collectionClass(
+            ctx->env()->FindClass(clazz.c_str())
+        );
+        const jmethodID ctorId = ctx->env()->GetMethodID(
+            collectionClass.get(),
+            "<init>", "()V"
+        );
+        const jmethodID addId = ctx->env()->GetMethodID(
+            collectionClass.get(),
+            "add",
+            "(Ljava/lang/Object;)Z"
+        );
+        LocalRef<jobject> collection(
+            ctx->env()->NewObject(collectionClass.get(), ctorId)
+        );
         for (const Value &value: iterable)
         {
             LocalRef<jobject> val(valueToJObject(value));
@@ -37,13 +48,21 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef typename Iterable::value_type Entry;
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> mapClass(ctx->env()->FindClass(clazz.c_str()));
-        jmethodID ctorId = ctx->env()->GetMethodID(mapClass.get(), "<init>", "()V");
-        jmethodID putId = ctx->env()->GetMethodID(
-            mapClass.get(), "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+        const jmethodID ctorId = ctx->env()->GetMethodID(
+            mapClass.get(),
+            "<init>",
+            "()V"
+        );
+        const jmethodID putId = ctx->env()->GetMethodID(
+            mapClass.get(),
+            "put",
+            "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"
+        );
         LocalRef<jobject> map(ctx->env()->NewObject(mapClass.get(), ctorId));
         for (const Entry &entry: iterable)
         {
-            LocalRef<jobject> key(keyToJObject(entry.first)), value(valueToJObject(entry.second));
+            LocalRef<jobject> key(keyToJObject(entry.first)),
+                              value(valueToJObject(entry.second));
             // we ignore previous value
             ctx->env()->CallObjectMethod(map.get(), putId, key.get(), value.get());
         }
@@ -52,13 +71,15 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 
     template <typename Iterable, typename ValueToJObject>
-    LocalRef<jobject> newArrayList(const Iterable &iterable, const ValueToJObject &valueToJObject)
+    LocalRef<jobject> newArrayList(const Iterable &iterable,
+                                   const ValueToJObject &valueToJObject)
     {
         return newCollection("java/util/ArrayList", iterable, valueToJObject);
     }
 
     template <typename Iterable, typename ValueToJObject>
-    LocalRef<jobject> newHashSet(const Iterable &iterable, const ValueToJObject &valueToJObject)
+    LocalRef<jobject> newHashSet(const Iterable &iterable,
+                                 const ValueToJObject &valueToJObject)
     {
         return newCollection("java/util/HashSet", iterable, valueToJObject);
     }

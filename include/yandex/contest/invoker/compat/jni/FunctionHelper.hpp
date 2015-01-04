@@ -25,7 +25,8 @@
             ::yandex::contest::invoker::compat::jni::Context::getContext(ENV);
 
 #define YANDEX_JNI_METHOD_BEGIN(ENV) \
-    YANDEX_JNI_METHOD_BEGIN_CONTEXT(ENV, YANDEX_JNI_METHOD_PRIVATE_CONTEXT_NAME)
+    YANDEX_JNI_METHOD_BEGIN_CONTEXT( \
+        ENV, YANDEX_JNI_METHOD_PRIVATE_CONTEXT_NAME)
 
 #define YANDEX_JNI_METHOD_BEGIN_CONTEXT_THIS(ENV, CTX, CLASS, SELF) \
     YANDEX_JNI_METHOD_BEGIN_CONTEXT(ENV, CTX) \
@@ -33,12 +34,14 @@
     const auto this_ = CLASS.getPointer(SELF);
 
 #define YANDEX_JNI_METHOD_BEGIN_THIS(ENV, CLASS, SELF) \
-    YANDEX_JNI_METHOD_BEGIN_CONTEXT_THIS(ENV, YANDEX_JNI_METHOD_PRIVATE_CONTEXT_NAME, CLASS, SELF)
+    YANDEX_JNI_METHOD_BEGIN_CONTEXT_THIS( \
+        ENV, YANDEX_JNI_METHOD_PRIVATE_CONTEXT_NAME, CLASS, SELF)
 
 #define YANDEX_JNI_METHOD_MAP_ERROR(ENV, ERROR, EXCEPTION) \
     catch (ERROR &e) \
     { \
-        ::yandex::contest::invoker::compat::jni::Context::throwNewFromEnv(ENV, EXCEPTION, e.what()); \
+        ::yandex::contest::invoker::compat::jni::Context::throwNewFromEnv( \
+            ENV, EXCEPTION, e.what()); \
     }
 
 #define YANDEX_JNI_METHOD_END_VOID(ENV) \
@@ -46,9 +49,14 @@
     catch (::yandex::contest::invoker::compat::jni::JavaError &e) \
     { /*does nothing, exception was already thrown*/ } \
     /*here we map local exception classes to Java*/ \
-    YANDEX_JNI_METHOD_MAP_ERROR(ENV, ::yandex::contest::invoker::ContainerIllegalStateError, \
+    YANDEX_JNI_METHOD_MAP_ERROR( \
+        ENV, \
+        ::yandex::contest::invoker::ContainerIllegalStateError, \
         "java/lang/IllegalStateException") \
-    YANDEX_JNI_METHOD_MAP_ERROR(ENV, std::exception, "com/yandex/contest/invoker/InvokerException")
+    YANDEX_JNI_METHOD_MAP_ERROR( \
+        ENV, \
+        std::exception, \
+        "com/yandex/contest/invoker/InvokerException")
 
 #define YANDEX_JNI_METHOD_END_RETURN(ENV, RETURN) \
     YANDEX_JNI_METHOD_END_VOID(ENV) \

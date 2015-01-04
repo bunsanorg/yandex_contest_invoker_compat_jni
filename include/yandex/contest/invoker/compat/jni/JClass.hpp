@@ -91,14 +91,20 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         /*template <typename T, typename ... Args>
         StaticField<T> getStaticField(Args &&...args)
         {
-            StaticField<T> field(class_.get(), getStaticFieldId(std::forward<Args>(args)...));
+            StaticField<T> field(
+                class_.get(),
+                getStaticFieldId(std::forward<Args>(args)...)
+            );
             return field;
         }
 
         template <typename T, typename ... Args>
         Field<T> getField(Args &&...args)
         {
-            Field<T> field(class_.get(), getFieldId(std::forward<Args>(args)...));
+            Field<T> field(
+                class_.get(),
+                getFieldId(std::forward<Args>(args)...)
+            );
             return field;
         }*/
 

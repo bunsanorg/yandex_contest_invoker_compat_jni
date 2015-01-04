@@ -18,13 +18,16 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         GlobalRef(): ref_(nullptr) {}
 
         explicit GlobalRef(T *obj):
-            ref_(static_cast<T *>(Context::getContext()->env()->NewGlobalRef(obj))) {}
+            ref_(static_cast<T *>(
+                Context::getContext()->env()->NewGlobalRef(obj)
+            )) {}
 
         ~GlobalRef()
         {
             if (ref_)
             {
-                const boost::optional<Context::Handle> ctx = Context::getContextOptional();
+                const boost::optional<Context::Handle> ctx =
+                    Context::getContextOptional();
                 if (ctx)
                     ctx.get()->envNoExcept()->DeleteGlobalRef(ref_);
             }

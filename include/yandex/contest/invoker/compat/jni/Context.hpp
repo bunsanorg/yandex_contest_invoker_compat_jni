@@ -41,7 +41,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             Handle handle;
             if (handle.count() == 1)
             {
-                std::unique_ptr<Context> ctx(new Context(std::forward<Args>(args)...));
+                std::unique_ptr<Context> ctx(
+                    new Context(std::forward<Args>(args)...)
+                );
                 handle.assign(std::move(ctx));
             }
             return handle;
@@ -92,7 +94,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
          */
         Context();
 
-        /// Context is created from C++ using specified JavaVM will be attached to current thread.
+        /// Context is created from C++ using specified JavaVM
+        /// will be attached to current thread.
         explicit Context(JavaVM *const jvm);
 
     private:

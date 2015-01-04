@@ -20,37 +20,41 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 
     template <typename ClassRef>
-    jmethodID BasicJClass<ClassRef>::getMethodId(const char *const name, const char *const sig)
+    jmethodID BasicJClass<ClassRef>::getMethodId(
+        const char *const name, const char *const sig)
     {
         const Context::Handle ctx = Context::getContext();
-        jmethodID mId = ctx->env()->GetMethodID(clazz(), name, sig);
+        const jmethodID mId = ctx->env()->GetMethodID(clazz(), name, sig);
         ctx->throwIfOccured();
         return mId;
     }
 
     template <typename ClassRef>
-    jmethodID BasicJClass<ClassRef>::getStaticMethodId(const char *const name, const char *const sig)
+    jmethodID BasicJClass<ClassRef>::getStaticMethodId(
+        const char *const name, const char *const sig)
     {
         const Context::Handle ctx = Context::getContext();
-        jmethodID mId = ctx->env()->GetStaticMethodID(clazz(), name, sig);
+        const jmethodID mId = ctx->env()->GetStaticMethodID(clazz(), name, sig);
         ctx->throwIfOccured();
         return mId;
     }
 
     template <typename ClassRef>
-    jfieldID BasicJClass<ClassRef>::getFieldId(const char *const name, const char *const sig)
+    jfieldID BasicJClass<ClassRef>::getFieldId(
+        const char *const name, const char *const sig)
     {
         const Context::Handle ctx = Context::getContext();
-        jfieldID fId = ctx->env()->GetFieldID(clazz(), name, sig);
+        const jfieldID fId = ctx->env()->GetFieldID(clazz(), name, sig);
         ctx->throwIfOccured();
         return fId;
     }
 
     template <typename ClassRef>
-    jfieldID BasicJClass<ClassRef>::getStaticFieldId(const char *const name, const char *const sig)
+    jfieldID BasicJClass<ClassRef>::getStaticFieldId(
+        const char *const name, const char *const sig)
     {
         const Context::Handle ctx = Context::getContext();
-        jfieldID fId = ctx->env()->GetStaticFieldID(clazz(), name, sig);
+        const jfieldID fId = ctx->env()->GetStaticFieldID(clazz(), name, sig);
         ctx->throwIfOccured();
         return fId;
     }

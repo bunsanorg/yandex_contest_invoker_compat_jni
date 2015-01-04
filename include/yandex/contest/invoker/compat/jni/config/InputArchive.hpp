@@ -26,11 +26,22 @@
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace config
 {
-    template <typename JType, typename ContextClass=struct NoContextType, typename Enable=void>
+    template <
+        typename JType,
+        typename ContextClass=struct NoContextType,
+        typename Enable=void
+    >
     class InputArchive;
 
     template <typename JType, typename ContextClass>
-    class InputArchive<JType, ContextClass, typename std::enable_if<traits::jinfo<JType>::is_object, void>::type>
+    class InputArchive<
+        JType,
+        ContextClass,
+        typename std::enable_if<
+            traits::jinfo<JType>::is_object,
+            void
+        >::type
+    >
     {
     public:
         typedef std::integral_constant<bool, true> is_loading;
@@ -69,9 +80,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             typedef traits::info<T> info;
             static_assert(info::is_defined, "Undefined info.");
             typedef typename info::jtype jtype;
-            jmethodID jget_ = ctx->env()->GetMethodID(jclass_.get(),
-                                                      jGetName(nvp.name()).c_str(),
-                                                      jGetSig<T>().c_str());
+            const jmethodID jget_ = ctx->env()->GetMethodID(
+                jclass_.get(),
+                jGetName(nvp.name()).c_str(),
+                jGetSig<T>().c_str()
+            );
             jtype jobj = (ctx->env()->*info::envget)(jobj_, jget_);
             if (info::is_primitive || (info::is_object && jobj))
                 InputArchive<jtype, ContextClass>::loadFromJObject(nvp.value(), jobj);
@@ -90,7 +103,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     private:
         static std::string jGetName(const char *const name)
         {
-            std::string getName = traits::convert_get_name<ContextClass>::convert(name);
+            std::string getName =
+                traits::convert_get_name<ContextClass>::convert(name);
             BOOST_ASSERT(!getName.empty());
             if (contextInfo::isCamelCase)
             {
@@ -127,16 +141,26 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         }
 
         /// For complex types.
-        template <typename T, typename std::enable_if<traits::info<T>::is_object && !traits::info<T>::is_enum, int>::type=0>
+        template <
+            typename T,
+            typename std::enable_if<
+                traits::info<T>::is_object && !traits::info<T>::is_enum,
+                int
+            >::type=0
+        >
         void load(T &obj)
         {
             InputArchive<JType, T> ia(jobj_);
             obj.serialize(ia, boost::serialization::version<T>::value);
-            //FIXME boost::serialization::serialize_adl(ia, obj, boost::serialization::version<T>::value);
+            //FIXME boost::serialization::serialize_adl(
+            //  ia, obj, boost::serialization::version<T>::value);
         }
 
         /// For primitive types.
-        template <typename T, typename std::enable_if<traits::info<T>::is_primitive, int>::type=0>
+        template <
+            typename T,
+            typename std::enable_if<traits::info<T>::is_primitive, int>::type=0
+        >
         void load(T &obj)
         {
             typedef traits::info<T> info;
@@ -149,19 +173,31 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             constexpr const char *jgetsig = boost::mpl::c_str<
                 typename traits::jinfo<jtype>::jgetsig>::value;
             LocalRef<jclass> jclass(ctx->env()->FindClass(jwrapperclass));
-            jmethodID jgetvalue = ctx->env()->GetMethodID(jclass.get(), jget, jgetsig);
+            const jmethodID jgetvalue =
+                ctx->env()->GetMethodID(jclass.get(), jget, jgetsig);
             obj = (ctx->env()->*info::envget)(jobj_, jgetvalue);
             ctx->throwIfOccured();
         }
 
         /// For enums.
-        template <typename T, typename std::enable_if<traits::info<T>::is_enum, int>::type=0>
+        template <
+            typename T,
+            typename std::enable_if<traits::info<T>::is_enum, int>::type=0
+        >
         void load(T &obj)
         {
             typedef traits::info<T> info;
             static_assert(info::is_enum, "Should be enum.");
-            jmethodID toStringId = ctx->env()->GetMethodID(jclass_.get(), "toString", "()Ljava/lang/String;");
-            LocalRef<jstring> str(static_cast<jstring>(ctx->env()->CallObjectMethod(jobj_, toStringId)));
+            const jmethodID toStringId = ctx->env()->GetMethodID(
+                jclass_.get(),
+                "toString",
+                "()Ljava/lang/String;"
+            );
+            LocalRef<jstring> str(
+                static_cast<jstring>(
+                    ctx->env()->CallObjectMethod(jobj_, toStringId)
+                )
+            );
             obj = boost::lexical_cast<T>(getStringUTF(str.get()));
         }
 
@@ -219,33 +255,32 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         void load(std::unordered_set<Value, Hash, Pred, Alloc> &obj)
         {
             obj.clear();
-            loadIterable(
-                // FIXME Why "this" is needed to be captured? See 51494 gcc bug.
-                [this, &obj](jobject jobj)
-                {
-                    Value value;
-                    InputArchive<jobject, ContextClass>::loadFromContext(value, jobj);
-                    obj.insert(value);
-                });
+            loadIterable([this, &obj](jobject jobj)
+            // FIXME Why "this" is needed to be captured? See 51494 gcc bug.
+            {
+                Value value;
+                InputArchive<jobject, ContextClass>::loadFromContext(value, jobj);
+                obj.insert(value);
+            });
         }
 
         /// For std::vector.
         template <typename Tp, typename Alloc>
         void load(std::vector<Tp, Alloc> &obj)
         {
-            jmethodID sizeId = ctx->env()->GetMethodID(jclass_.get(), "size", "()I");
-            jint size = ctx->env()->CallIntMethod(jobj_, sizeId);
+            const jmethodID sizeId =
+                ctx->env()->GetMethodID(jclass_.get(), "size", "()I");
+            const jint size = ctx->env()->CallIntMethod(jobj_, sizeId);
             ctx->throwIfOccured();
             obj.clear();
             obj.reserve(size);
-            loadIterable(
-                // FIXME Why "this" is needed to be captured? See 51494 gcc bug.
-                [this, &obj](jobject jobj)
-                {
-                    const std::size_t i = obj.size();
-                    obj.resize(i + 1);
-                    InputArchive<jobject, ContextClass>::loadFromContext(obj[i], jobj);
-                });
+            loadIterable([this, &obj](jobject jobj)
+            // FIXME Why "this" is needed to be captured? See 51494 gcc bug.
+            {
+                const std::size_t i = obj.size();
+                obj.resize(i + 1);
+                InputArchive<jobject, ContextClass>::loadFromContext(obj[i], jobj);
+            });
         }
 
         /// For boost::variant.
@@ -322,15 +357,30 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <typename JType, typename ContextClass>
     template <BOOST_VARIANT_ENUM_PARAMS(typename T)>
-    void InputArchive<JType, ContextClass, typename std::enable_if<traits::jinfo<JType>::is_object, void>::type>::
-        load(boost::variant<BOOST_VARIANT_ENUM_PARAMS(T)> &obj)
+    void InputArchive<
+        JType,
+        ContextClass,
+        typename std::enable_if<
+            traits::jinfo<JType>::is_object,
+            void
+        >::type
+    >::load(boost::variant<BOOST_VARIANT_ENUM_PARAMS(T)> &obj)
     {
-        typedef input_archive_detail::LoadVariant<BOOST_VARIANT_ENUM_PARAMS(T)> LoadVariant;
+        typedef input_archive_detail::LoadVariant<
+            BOOST_VARIANT_ENUM_PARAMS(T)
+        > LoadVariant;
         LoadVariant::load(jobj_, *this, obj);
     }
 
     template <typename JType, typename ContextClass>
-    class InputArchive<JType, ContextClass, typename std::enable_if<traits::jinfo<JType>::is_primitive, void>::type>
+    class InputArchive<
+        JType,
+        ContextClass,
+        typename std::enable_if<
+            traits::jinfo<JType>::is_primitive,
+            void
+        >::type
+    >
     {
     public:
         typedef std::integral_constant<bool, true> is_loading;

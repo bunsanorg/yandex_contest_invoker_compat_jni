@@ -9,7 +9,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     /// \note Sometimes it may be more convenient to wrap jobject argument.
     template <typename T>
-    inline T requireNotNullReturn(T jobj, const char *const function, const long line)
+    inline T requireNotNullReturn(
+        T jobj, const char *const function, const long line)
     {
         requireNotNull(jobj, function, line);
         return jobj;

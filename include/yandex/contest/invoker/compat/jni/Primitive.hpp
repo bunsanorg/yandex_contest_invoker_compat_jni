@@ -15,10 +15,16 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> clazz(
-            ctx->env()->FindClass(boost::mpl::c_str<typename jinfo::jwrapperclass>::value));
-        jmethodID valueOfId = ctx->env()->GetStaticMethodID(
-            clazz.get(), "valueOf", boost::mpl::c_str<typename jinfo::valueOfSig>::value);
-        LocalRef<jobject> wrapper(ctx->env()->CallStaticObjectMethod(clazz.get(), valueOfId, obj));
+            ctx->env()->FindClass(boost::mpl::c_str<typename jinfo::jwrapperclass>::value)
+        );
+        const jmethodID valueOfId = ctx->env()->GetStaticMethodID(
+            clazz.get(),
+            "valueOf",
+            boost::mpl::c_str<typename jinfo::valueOfSig>::value
+        );
+        LocalRef<jobject> wrapper(
+            ctx->env()->CallStaticObjectMethod(clazz.get(), valueOfId, obj)
+        );
         ctx->throwIfOccured();
         return wrapper;
     }

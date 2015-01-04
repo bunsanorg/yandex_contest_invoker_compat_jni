@@ -28,14 +28,21 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         {
             GlobalJClass::assign(className);
             valueOfId_ = this->getStaticMethodId(
-                "valueOf", ("(Ljava/lang/String;)L" + className + ";").c_str());
-            valuesId_ = this->getStaticMethodId("values", ("()[L" + className + ";").c_str());
+                "valueOf",
+                ("(Ljava/lang/String;)L" + className + ";").c_str()
+            );
+            valuesId_ = this->getStaticMethodId(
+                "values",
+                ("()[L" + className + ";").c_str()
+            );
         }
 
         LocalRef<jobject> newEnum(const T val) const
         {
             const Context::Handle ctx = Context::getContext();
-            LocalRef<jstring> str(newStringUTF(boost::lexical_cast<std::string>(val)));
+            LocalRef<jstring> str(
+                newStringUTF(boost::lexical_cast<std::string>(val))
+            );
             LocalRef<jobject> item(ctx->env()->CallStaticObjectMethod(
                 this->clazz(), valueOfId_, str.get()));
             ctx->throwIfOccured();
@@ -46,8 +53,11 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         {
             const Context::Handle ctx = Context::getContext();
             LocalRef<jobjectArray> values(static_cast<jobjectArray>(
-                ctx->env()->CallStaticObjectMethod(this->clazz(), valuesId_)));
-            LocalRef<jobject> item(ctx->env()->GetObjectArrayElement(values.get(), index));
+                ctx->env()->CallStaticObjectMethod(this->clazz(), valuesId_))
+            );
+            LocalRef<jobject> item(
+                ctx->env()->GetObjectArrayElement(values.get(), index)
+            );
             ctx->throwIfOccured();
             return item;
         }

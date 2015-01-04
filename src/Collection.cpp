@@ -6,14 +6,28 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     {
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> clazz(ctx->env()->GetObjectClass(jobj));
-        jmethodID iteratorId = ctx->env()->GetMethodID(clazz.get(), "iterator", "()Ljava/util/Iterator;");
+        const jmethodID iteratorId = ctx->env()->GetMethodID(
+            clazz.get(),
+            "iterator",
+            "()Ljava/util/Iterator;"
+        );
         LocalRef<jobject> iter(ctx->env()->CallObjectMethod(jobj, iteratorId));
         LocalRef<jclass> iterClass(ctx->env()->GetObjectClass(iter.get()));
-        jmethodID hasNextId = ctx->env()->GetMethodID(iterClass.get(), "hasNext", "()Z");
-        jmethodID nextId = ctx->env()->GetMethodID(iterClass.get(), "next", "()Ljava/lang/Object;");
+        const jmethodID hasNextId = ctx->env()->GetMethodID(
+            iterClass.get(),
+            "hasNext",
+            "()Z"
+        );
+        const jmethodID nextId = ctx->env()->GetMethodID(
+            iterClass.get(),
+            "next",
+            "()Ljava/lang/Object;"
+        );
         while (ctx->env()->CallBooleanMethod(iter.get(), hasNextId))
         {
-            LocalRef<jobject> jobj(ctx->env()->CallObjectMethod(iter.get(), nextId));
+            LocalRef<jobject> jobj(
+                ctx->env()->CallObjectMethod(iter.get(), nextId)
+            );
             ctx->throwIfOccured();
             cb(jobj.get());
         }
@@ -23,11 +37,23 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     {
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> clazz(ctx->env()->GetObjectClass(jobj));
-        jmethodID entrySetId = ctx->env()->GetMethodID(clazz.get(), "entrySet", "()Ljava/util/Set;");
+        const jmethodID entrySetId = ctx->env()->GetMethodID(
+            clazz.get(),
+            "entrySet",
+            "()Ljava/util/Set;"
+        );
         LocalRef<jobject> entrySet(ctx->env()->CallObjectMethod(jobj, entrySetId));
         LocalRef<jclass> mapEntryClass(ctx->env()->FindClass("java/util/Map$Entry"));
-        jmethodID getKeyId = ctx->env()->GetMethodID(mapEntryClass.get(), "getKey", "()Ljava/lang/Object;");
-        jmethodID getValueId = ctx->env()->GetMethodID(mapEntryClass.get(), "getValue", "()Ljava/lang/Object;");
+        const jmethodID getKeyId = ctx->env()->GetMethodID(
+            mapEntryClass.get(),
+            "getKey",
+            "()Ljava/lang/Object;"
+        );
+        const jmethodID getValueId = ctx->env()->GetMethodID(
+            mapEntryClass.get(),
+            "getValue",
+            "()Ljava/lang/Object;"
+        );
         ctx->throwIfOccured();
         getIterable(entrySet.get(),
             [&ctx, &cb, getKeyId, getValueId](jobject jobj)
