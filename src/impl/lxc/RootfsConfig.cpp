@@ -2,11 +2,10 @@
 
 #include <yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp>
 
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/String.hpp>
-
-#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 namespace lxc = yandex::contest::system::lxc;
@@ -47,7 +46,8 @@ void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_create(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_fsname(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_fsname(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, rootfsConfigClass_, self)
     if (this_->fsname)
@@ -57,7 +57,8 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_fsname(JNIEnv *env
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_mount(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_mount(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, rootfsConfigClass_, self)
     if (this_->mount)

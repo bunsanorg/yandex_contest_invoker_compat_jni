@@ -3,8 +3,8 @@
 #include <yandex/contest/invoker/compat/jni/impl/File.hpp>
 
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
-#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/Enum.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::FdAlias;
@@ -15,7 +15,8 @@ namespace
     CxxClass<FdAlias> fdAliasClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_FdAlias_classInit(JNIEnv *env, jclass fdAliasClass)
+void Java_com_yandex_contest_invoker_impl_FdAlias_classInit(
+    JNIEnv *env, jclass fdAliasClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     fdAliasClass_.assign(fdAliasClass, "impl");

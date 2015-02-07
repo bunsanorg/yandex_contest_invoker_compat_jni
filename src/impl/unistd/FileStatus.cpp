@@ -1,8 +1,7 @@
 #include "com_yandex_contest_invoker_impl_unistd_FileStatus.h"
 
-#include <yandex/contest/invoker/compat/jni/impl/unistd/FileStatus.hpp>
-
 #include <yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/unistd/FileStatus.hpp>
 
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>

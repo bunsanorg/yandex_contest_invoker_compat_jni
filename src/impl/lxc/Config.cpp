@@ -4,14 +4,13 @@
 #include <yandex/contest/invoker/compat/jni/impl/lxc/MountConfig.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/lxc/RootfsConfig.hpp>
 
-#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
-#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/Collection.hpp>
-#include <yandex/contest/invoker/compat/jni/String.hpp>
-#include <yandex/contest/invoker/compat/jni/Primitive.hpp>
-#include <yandex/contest/invoker/compat/jni/Enum.hpp>
-
 #include <yandex/contest/invoker/compat/jni/config/load.hpp>
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/Enum.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Primitive.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 namespace lxc = yandex::contest::system::lxc;
@@ -54,7 +53,8 @@ void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_create(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_arch(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_arch(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->arch)
@@ -64,7 +64,8 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_arch(JNIEnv *env, job
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_utsname(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_utsname(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->utsname)
@@ -74,7 +75,8 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_utsname(JNIEnv *env, 
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_console(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_console(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->console)
@@ -84,7 +86,8 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_console(JNIEnv *env, 
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_tty(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_tty(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->tty)
@@ -105,7 +108,8 @@ JNIEXPORT jstring JNICALL Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_dev
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_mount(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_mount(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->mount)
@@ -115,7 +119,8 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_mount(JNIEnv *env, jo
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_rootfs(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_rootfs(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->rootfs)
@@ -125,7 +130,8 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_rootfs(JNIEnv *env, j
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_pivotdir(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_pivotdir(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->pivotdir)
@@ -135,7 +141,8 @@ jstring Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_pivotdir(JNIEnv *env,
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cgroup(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cgroup(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->cgroup)
@@ -145,7 +152,8 @@ jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cgroup(JNIEnv *env, j
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cap_1drop(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_cap_1drop(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
     if (this_->cap_drop)

@@ -2,7 +2,6 @@
 
 #include <yandex/contest/invoker/compat/jni/Context.hpp>
 #include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
-
 #include <yandex/contest/invoker/compat/jni/traits/jinfo.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni

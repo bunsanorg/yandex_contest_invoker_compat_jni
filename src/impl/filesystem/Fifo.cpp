@@ -14,7 +14,8 @@ namespace
     CxxClass<filesystem::Fifo> fifoClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_filesystem_Fifo_classInit(JNIEnv *env, jclass fifoClass)
+void Java_com_yandex_contest_invoker_impl_filesystem_Fifo_classInit(
+    JNIEnv *env, jclass fifoClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     fifoClass_.assign(fifoClass, "impl");

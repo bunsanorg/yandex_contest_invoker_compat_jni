@@ -14,7 +14,8 @@ namespace
     CxxClass<filesystem::SymLink> symLinkClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_filesystem_SymLink_classInit(JNIEnv *env, jclass symLinkClass)
+void Java_com_yandex_contest_invoker_impl_filesystem_SymLink_classInit(
+    JNIEnv *env, jclass symLinkClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     symLinkClass_.assign(symLinkClass, "impl");
@@ -30,7 +31,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}}
 
-jstring Java_com_yandex_contest_invoker_impl_filesystem_SymLink_getValue(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_filesystem_SymLink_getValue(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, symLinkClass_, self)
     return newStringUTF(this_->value.string()).release();

@@ -2,19 +2,16 @@
 
 #include <yandex/contest/invoker/compat/jni/impl/File.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/FdAlias.hpp>
-
 #include <yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/process/ResourceLimits.hpp>
-
 #include <yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp>
 
-#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/Collection.hpp>
-#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
-#include <yandex/contest/invoker/compat/jni/String.hpp>
-#include <yandex/contest/invoker/compat/jni/Primitive.hpp>
-
 #include <yandex/contest/invoker/compat/jni/config/load.hpp>
+#include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
+#include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
+#include <yandex/contest/invoker/compat/jni/Primitive.hpp>
+#include <yandex/contest/invoker/compat/jni/String.hpp>
 
 #include <boost/variant/static_visitor.hpp>
 
@@ -127,6 +124,10 @@ jobject Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getD
     JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return newHashMap(this_->descriptors, newPrimitiveWrapper<jint>, nonPipeStreamCreate).release();
+    return newHashMap(
+        this_->descriptors,
+        newPrimitiveWrapper<jint>,
+        nonPipeStreamCreate
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }

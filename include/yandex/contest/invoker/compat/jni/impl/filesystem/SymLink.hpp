@@ -1,8 +1,8 @@
 #pragma once
 
-#include <yandex/contest/invoker/filesystem/SymLink.hpp>
-
 #include <yandex/contest/invoker/compat/jni/LocalRef.hpp>
+
+#include <yandex/contest/invoker/filesystem/SymLink.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace filesystem{namespace sym_link

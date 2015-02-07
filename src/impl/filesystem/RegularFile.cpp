@@ -14,7 +14,8 @@ namespace
     CxxClass<filesystem::RegularFile> regularFileClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_classInit(JNIEnv *env, jclass regularFileClass)
+void Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_classInit(
+    JNIEnv *env, jclass regularFileClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     regularFileClass_.assign(regularFileClass, "impl");
@@ -30,7 +31,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}}
 
-jstring Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_getSource(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_getSource(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, regularFileClass_, self)
     if (this_->source)

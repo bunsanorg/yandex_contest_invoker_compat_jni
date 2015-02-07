@@ -1,10 +1,10 @@
+#include "com_yandex_contest_invoker_impl_Log.h"
+
 #include <yandex/contest/detail/ThrowingLog.hpp>
 
 #include <yandex/contest/invoker/compat/jni/Enum.hpp>
 #include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/String.hpp>
-
-#include "com_yandex_contest_invoker_impl_Log.h"
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl

@@ -1,19 +1,16 @@
 #include "com_yandex_contest_invoker_impl_ProcessGroup.h"
 
-#include <yandex/contest/invoker/compat/jni/impl/process_group/Result.hpp>
-#include <yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp>
-
-#include <yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp>
-
-#include <yandex/contest/invoker/compat/jni/impl/ProcessGroup.hpp>
-#include <yandex/contest/invoker/compat/jni/impl/Process.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/Pipe.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/Process.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/process/DefaultSettings.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/process_group/ResourceLimits.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/process_group/Result.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/ProcessGroup.hpp>
 
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/HandleHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/String.hpp>
-
-#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::compat::ProcessGroupHandle;
@@ -25,14 +22,16 @@ namespace
     CxxClass<ProcessGroupHandle> processGroupClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_ProcessGroup_classInit(JNIEnv *env, jclass processGroupClass)
+void Java_com_yandex_contest_invoker_impl_ProcessGroup_classInit(
+    JNIEnv *env, jclass processGroupClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     processGroupClass_.assign(processGroupClass, "impl");
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_ProcessGroup_finalize(JNIEnv *env, jobject self)
+void Java_com_yandex_contest_invoker_impl_ProcessGroup_finalize(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_FINALIZE(env, processGroupClass_, self)
 }
@@ -70,10 +69,13 @@ void Java_com_yandex_contest_invoker_impl_ProcessGroup_stop(JNIEnv *env, jobject
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_synchronizedCall(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_synchronizedCall(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    return impl::process_group::result::create(this_->member().synchronizedCall()).release();
+    return impl::process_group::result::create(
+        this_->member().synchronizedCall()
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
@@ -89,14 +91,16 @@ jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_poll(JNIEnv *env, jobj
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_waitFor(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_waitFor(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
     return impl::process_group::result::create(this_->member().wait()).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getResult(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getResult(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
     return impl::process_group::result::create(this_->member().result()).release();
@@ -107,21 +111,27 @@ jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_createProcess(
     JNIEnv *env, jobject self, jstring executable)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    return impl::process::create(this_->context().createProcess(getStringUTF(executable))).release();
+    return impl::process::create(
+        this_->context().createProcess(getStringUTF(executable))
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_createPipe(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_createPipe(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
     return impl::pipe::create(this_->member().createPipe()).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getResourceLimits(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getResourceLimits(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    return impl::process_group::resource_limits::create(this_->member().resourceLimits()).release();
+    return impl::process_group::resource_limits::create(
+        this_->member().resourceLimits()
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
@@ -129,14 +139,18 @@ void Java_com_yandex_contest_invoker_impl_ProcessGroup_setResourceLimits(
     JNIEnv *env, jobject self, jobject resourceLimits)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    this_->member().setResourceLimits(config::load<ProcessGroup::ResourceLimits>(resourceLimits));
+    this_->member().setResourceLimits(
+        config::load<ProcessGroup::ResourceLimits>(resourceLimits)
+    );
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
 jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getProcessDefaultSettings(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
-    return impl::process::default_settings::create(this_->member().processDefaultSettings()).release();
+    return impl::process::default_settings::create(
+        this_->member().processDefaultSettings()
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 

@@ -13,7 +13,8 @@ namespace
     CxxClass<filesystem::Directory> directoryClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_filesystem_Directory_classInit(JNIEnv *env, jclass directoryClass)
+void Java_com_yandex_contest_invoker_impl_filesystem_Directory_classInit(
+    JNIEnv *env, jclass directoryClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     directoryClass_.assign(directoryClass, "impl");

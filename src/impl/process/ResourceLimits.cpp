@@ -2,10 +2,9 @@
 
 #include <yandex/contest/invoker/compat/jni/impl/process/ResourceLimits.hpp>
 
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
-
-#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::Process;

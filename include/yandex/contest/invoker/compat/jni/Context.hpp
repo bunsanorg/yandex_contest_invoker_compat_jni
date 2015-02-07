@@ -1,12 +1,12 @@
 #pragma once
 
-#include <utility>
-#include <memory>
+#include <jni.h>
 
 #include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 
-#include <jni.h>
+#include <memory>
+#include <utility>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {

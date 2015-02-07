@@ -2,12 +2,12 @@
 
 #include <yandex/contest/invoker/compat/jni/mpl/string.hpp>
 
-#include <boost/mpl/char.hpp>
-#include <boost/mpl/push_front.hpp>
-#include <boost/mpl/push_back.hpp>
-#include <boost/mpl/insert_range.hpp>
-
 #include <jni.h>
+
+#include <boost/mpl/char.hpp>
+#include <boost/mpl/insert_range.hpp>
+#include <boost/mpl/push_back.hpp>
+#include <boost/mpl/push_front.hpp>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace traits

@@ -1,19 +1,16 @@
 #include "com_yandex_contest_invoker_impl_Process.h"
 
 #include <yandex/contest/invoker/compat/jni/impl/Process.hpp>
-#include <yandex/contest/invoker/compat/jni/impl/Stream.hpp>
-
-#include <yandex/contest/invoker/compat/jni/impl/process/Result.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/process/ResourceLimits.hpp>
-
+#include <yandex/contest/invoker/compat/jni/impl/process/Result.hpp>
+#include <yandex/contest/invoker/compat/jni/impl/Stream.hpp>
 #include <yandex/contest/invoker/compat/jni/impl/unistd/access/Id.hpp>
 
+#include <yandex/contest/invoker/compat/jni/Collection.hpp>
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/HandleHelper.hpp>
-#include <yandex/contest/invoker/compat/jni/Collection.hpp>
 #include <yandex/contest/invoker/compat/jni/String.hpp>
-
-#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::compat::ProcessHandle;
@@ -33,7 +30,8 @@ namespace
     CxxClass<Stream> implStreamClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_Process_classInit(JNIEnv *env, jclass processClass)
+void Java_com_yandex_contest_invoker_impl_Process_classInit(
+    JNIEnv *env, jclass processClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     processClass_.assign(processClass, "impl");
@@ -57,24 +55,28 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}
 
-void Java_com_yandex_contest_invoker_impl_Process_destroy(JNIEnv *env, jobject self)
+void Java_com_yandex_contest_invoker_impl_Process_destroy(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_HANDLE_DESTROY(env, processClass_, self);
 }
 
-jboolean Java_com_yandex_contest_invoker_impl_Process_exists(JNIEnv *env, jobject self)
+jboolean Java_com_yandex_contest_invoker_impl_Process_exists(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_HANDLE_EXISTS(env, processClass_, self);
 }
 
-jstring Java_com_yandex_contest_invoker_impl_Process_getExecutable(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_Process_getExecutable(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return newStringUTF(this_->member().executable().string()).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jboolean Java_com_yandex_contest_invoker_impl_Process_groupWaitsForTermination(JNIEnv *env, jobject self)
+jboolean Java_com_yandex_contest_invoker_impl_Process_groupWaitsForTermination(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return this_->member().groupWaitsForTermination();
@@ -89,7 +91,8 @@ void Java_com_yandex_contest_invoker_impl_Process_setGroupWaitsForTermination(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jboolean Java_com_yandex_contest_invoker_impl_Process_terminateGroupOnCrash(JNIEnv *env, jobject self)
+jboolean Java_com_yandex_contest_invoker_impl_Process_terminateGroupOnCrash(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return this_->member().terminateGroupOnCrash();
@@ -104,7 +107,8 @@ void Java_com_yandex_contest_invoker_impl_Process_setTerminateGroupOnCrash(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_Process_getArguments(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_Process_getArguments(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return newArrayList(this_->member().arguments(), newStringUTF).release();
@@ -119,7 +123,8 @@ void Java_com_yandex_contest_invoker_impl_Process_setArguments(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_Process_getCurrentPath(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_Process_getCurrentPath(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return newStringUTF(this_->member().currentPath().string()).release();
@@ -134,10 +139,15 @@ void Java_com_yandex_contest_invoker_impl_Process_setCurrentPath(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_Process_getEnvironment__(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_Process_getEnvironment__(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
-    return newHashMap(this_->member().environment(), newStringUTF, newStringUTF).release();
+    return newHashMap(
+        this_->member().environment(),
+        newStringUTF,
+        newStringUTF
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
@@ -173,10 +183,13 @@ void Java_com_yandex_contest_invoker_impl_Process_unsetEnvironment(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_Process_getResourceLimits(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_Process_getResourceLimits(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
-    return impl::process::resource_limits::create(this_->member().resourceLimits()).release();
+    return impl::process::resource_limits::create(
+        this_->member().resourceLimits()
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
@@ -184,7 +197,9 @@ void Java_com_yandex_contest_invoker_impl_Process_setResourceLimits(
     JNIEnv *env, jobject self, jobject resourceLimits)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
-    this_->member().setResourceLimits(config::load<Process::ResourceLimits>(resourceLimits));
+    this_->member().setResourceLimits(
+        config::load<Process::ResourceLimits>(resourceLimits)
+    );
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
@@ -195,7 +210,8 @@ jobject Java_com_yandex_contest_invoker_impl_Process_getOwnerId(JNIEnv *env, job
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_Process_setOwnerId(JNIEnv *env, jobject self, jobject ownerId)
+void Java_com_yandex_contest_invoker_impl_Process_setOwnerId(
+    JNIEnv *env, jobject self, jobject ownerId)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     this_->member().setOwnerId(config::load<unistd::access::Id>(ownerId));
@@ -236,21 +252,24 @@ void Java_com_yandex_contest_invoker_impl_Process_setStream(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_Process_getStream(JNIEnv *env, jobject self, jint fd)
+jobject Java_com_yandex_contest_invoker_impl_Process_getStream(
+    JNIEnv *env, jobject self, jint fd)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return impl::stream::create(this_->member().stream(fd)).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_Process_closeStream(JNIEnv *env, jobject self, jint fd)
+void Java_com_yandex_contest_invoker_impl_Process_closeStream(
+    JNIEnv *env, jobject self, jint fd)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     this_->member().closeStream(fd);
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jboolean Java_com_yandex_contest_invoker_impl_Process_hasStream(JNIEnv *env, jobject self, jint fd)
+jboolean Java_com_yandex_contest_invoker_impl_Process_hasStream(
+    JNIEnv *env, jobject self, jint fd)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return this_->member().hasStream(fd);

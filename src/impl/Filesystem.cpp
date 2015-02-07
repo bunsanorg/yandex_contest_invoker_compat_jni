@@ -1,14 +1,12 @@
 #include "com_yandex_contest_invoker_impl_Filesystem.h"
 
 #include <yandex/contest/invoker/compat/jni/impl/Filesystem.hpp>
-
 #include <yandex/contest/invoker/compat/jni/impl/unistd/FileStatus.hpp>
 
+#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 #include <yandex/contest/invoker/compat/jni/CxxClass.hpp>
 #include <yandex/contest/invoker/compat/jni/FunctionHelper.hpp>
 #include <yandex/contest/invoker/compat/jni/String.hpp>
-
-#include <yandex/contest/invoker/compat/jni/config/load.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::Filesystem;
@@ -19,7 +17,8 @@ namespace
     CxxClass<Filesystem> filesystemClass_;
 }
 
-void Java_com_yandex_contest_invoker_impl_Filesystem_classInit(JNIEnv *env, jclass filesystemClass)
+void Java_com_yandex_contest_invoker_impl_Filesystem_classInit(
+    JNIEnv *env, jclass filesystemClass)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
     filesystemClass_.assign(filesystemClass, "impl");
@@ -35,7 +34,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     }
 }}}}}}}
 
-jstring Java_com_yandex_contest_invoker_impl_Filesystem_containerRoot(JNIEnv *env, jobject self)
+jstring Java_com_yandex_contest_invoker_impl_Filesystem_containerRoot(
+    JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, filesystemClass_, self)
     return newStringUTF(this_->containerRoot().string()).release();
@@ -72,7 +72,9 @@ jobject Java_com_yandex_contest_invoker_impl_Filesystem_getFileStatus(
     JNIEnv *env, jobject self, jstring remote)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, filesystemClass_, self)
-    return impl::unistd::file_status::create(this_->fileStatus(getStringUTF(remote))).release();
+    return impl::unistd::file_status::create(
+        this_->fileStatus(getStringUTF(remote))
+    ).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
@@ -80,7 +82,9 @@ void Java_com_yandex_contest_invoker_impl_Filesystem_setOwnerId(
     JNIEnv *env, jobject self, jstring remote, jobject ownerId)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, filesystemClass_, self)
-    this_->setOwnerId(getStringUTF(remote), config::load<unistd::access::Id>(ownerId));
+    this_->setOwnerId(
+        getStringUTF(remote), config::load<unistd::access::Id>(ownerId)
+    );
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 

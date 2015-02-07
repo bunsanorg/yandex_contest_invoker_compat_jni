@@ -2,9 +2,9 @@
 
 #include <yandex/contest/invoker/compat/jni/Context.hpp>
 
-#include <utility>
-
 #include <boost/swap.hpp>
+
+#include <utility>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
 {
