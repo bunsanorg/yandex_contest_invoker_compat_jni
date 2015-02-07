@@ -16,9 +16,6 @@
 
 #include <yandex/contest/system/unistd/access/Id.hpp>
 
-#include <yandex/contest/invoker/flowctl/game/BrokerImpl.hpp>
-#include <yandex/contest/invoker/flowctl/game/Configurator.hpp>
-
 #include <type_traits>
 #include <string>
 #include <vector>
@@ -339,25 +336,6 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct info<AccessMode>:
         invoker_enum_info<AccessMode,
             boost::mpl::string<'IStr', 'eam$', 'Acce', 'ssMo', 'de'>> {};
-
-    template <>
-    struct info<flowctl::game::BrokerImpl::Options::Protocol>:
-        invoker_enum_info<flowctl::game::BrokerImpl::Options::Protocol,
-            boost::mpl::string<'flow', 'ctl/', 'game', '/Pro', 'toco', 'l'>> {};
-
-    template <>
-    struct info<flowctl::game::Configurator>:
-        invoker_object_info<flowctl::game::Configurator,
-            boost::mpl::string<'flow', 'ctl/', 'game', '/ICo', 'nfig'>> {};
-
-    template <>
-    struct info<flowctl::game::Broker::ResourceLimits>:
-        invoker_object_info<
-            flowctl::game::Broker::ResourceLimits,
-            boost::mpl::string<
-                'flow', 'ctl/', 'game', '/IRe',
-                'sour', 'ceLi', 'mits'>
-        > {};
 
     /* Convert get name */
 

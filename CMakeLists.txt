@@ -20,7 +20,6 @@ bunsan_use(
     yandex_contest_common
     yandex_contest_system
     yandex_contest_invoker
-    yandex_contest_invoker_flowctl_game
     yandex_contest_invoker_compat_common
 )
 
@@ -66,8 +65,6 @@ bunsan_add_shared_library(${PROJECT_NAME}
     src/impl/unistd/MountEntry.cpp
     src/impl/unistd/FileStatus.cpp
     src/impl/unistd/access/Id.cpp
-
-    src/flowctl/game/impl/Configurator.cpp
 )
 
 bunsan_install_headers()

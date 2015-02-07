@@ -9,7 +9,7 @@ include="$root/jni_include"
 
 getclasses()
 (
-    cd "$java" && find com/yandex/contest/invoker/{,flowctl/game/}impl -type f -name '*.java' | \
+    cd "$java" && find com/yandex/contest/invoker/impl -type f -name '*.java' | \
         sed -r 's|\.java$||' | tr '/' '.' | \
         fgrep -v 'com.yandex.contest.invoker.impl.IHandle'
 )
