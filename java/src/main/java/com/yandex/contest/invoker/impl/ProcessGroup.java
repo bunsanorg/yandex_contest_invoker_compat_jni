@@ -1,9 +1,12 @@
 package com.yandex.contest.invoker.impl;
 
+import com.yandex.contest.invoker.INotificationStream;
+import com.yandex.contest.invoker.InvokerException;
 import com.yandex.contest.invoker.IPipe;
 import com.yandex.contest.invoker.IProcess;
 import com.yandex.contest.invoker.IProcessGroup;
-import com.yandex.contest.invoker.InvokerException;
+import com.yandex.contest.invoker.IStream;
+import com.yandex.contest.invoker.NotificationStreamProtocol;
 import com.yandex.contest.invoker.process.IProcessDefaultSettings;
 import com.yandex.contest.invoker.process_group.IProcessGroupResourceLimits;
 import com.yandex.contest.invoker.process_group.IProcessGroupResult;
@@ -51,6 +54,37 @@ public class ProcessGroup implements IProcessGroup, IHandle {
 
     @Override
     public native void setResourceLimits(IProcessGroupResourceLimits resourceLimits);
+
+    @Override
+    public native INotificationStream getNotifier(long notifierId);
+
+    @Override
+    public native void setNotifier(long notifierId,
+                                   INotificationStream notificationStream);
+
+    @Override
+    public native void setNotifier(long notifierId,
+                                   IStream pipeEnd,
+                                   NotificationStreamProtocol protocol);
+
+    @Override
+    public native void setNotifier(long notifierId, IStream pipeEnd);
+
+    @Override
+    public native long addNotifier(INotificationStream notificationStream);
+
+    @Override
+    public native long addNotifier(IStream pipeEnd,
+                                   NotificationStreamProtocol protocol);
+
+    @Override
+    public native long addNotifier(IStream pipeEnd);
+
+    @Override
+    public native IStream addNotifier(NotificationStreamProtocol protocol);
+
+    @Override
+    public native IStream addNotifier();
 
     @Override
     public native IProcessDefaultSettings getProcessDefaultSettings();

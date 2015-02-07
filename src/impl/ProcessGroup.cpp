@@ -145,6 +145,78 @@ void Java_com_yandex_contest_invoker_impl_ProcessGroup_setResourceLimits(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getNotifier(
+    JNIEnv *env, jobject self, jlong notifierId)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO return ;
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_ProcessGroup_setNotifier__JLcom_yandex_contest_invoker_INotificationStream_2(
+    JNIEnv *env, jobject self, jlong notifierId, jobject notificationStream)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_ProcessGroup_setNotifier__JLcom_yandex_contest_invoker_IStream_2Lcom_yandex_contest_invoker_NotificationStreamProtocol_2(
+    JNIEnv *env, jobject self, jlong notifierId, jobject pipeEnd, jobject protocol)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_ProcessGroup_setNotifier__JLcom_yandex_contest_invoker_IStream_2(
+    JNIEnv *env, jobject self, jlong notifierId, jobject pipeEnd)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
+jlong Java_com_yandex_contest_invoker_impl_ProcessGroup_addNotifier__Lcom_yandex_contest_invoker_INotificationStream_2(
+    JNIEnv *env, jobject self, jobject notificationStream)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
+
+jlong Java_com_yandex_contest_invoker_impl_ProcessGroup_addNotifier__Lcom_yandex_contest_invoker_IStream_2Lcom_yandex_contest_invoker_NotificationStreamProtocol_2(
+    JNIEnv *env, jobject self, jobject pipeEnd, jobject protocol)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
+
+jlong Java_com_yandex_contest_invoker_impl_ProcessGroup_addNotifier__Lcom_yandex_contest_invoker_IStream_2(
+    JNIEnv *env, jobject self, jobject pipeEnd)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_PRIMITIVE(env)
+}
+
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_addNotifier__Lcom_yandex_contest_invoker_NotificationStreamProtocol_2(
+    JNIEnv *env, jobject self, jobject protocol)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_addNotifier__(
+    JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)
+    // TODO
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
 jobject Java_com_yandex_contest_invoker_impl_ProcessGroup_getProcessDefaultSettings(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processGroupClass_, self)

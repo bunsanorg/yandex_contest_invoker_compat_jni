@@ -218,6 +218,21 @@ void Java_com_yandex_contest_invoker_impl_Process_setOwnerId(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
+jstring Java_com_yandex_contest_invoker_impl_Process_getName(
+    JNIEnv *env, jobject self)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    return newStringUTF(this_->member().name()).release();
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_Process_setName(JNIEnv *env, jobject self, jstring name)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    this_->member().setName(getStringUTF(name));
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
 jobject Java_com_yandex_contest_invoker_impl_Process_getResult(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)

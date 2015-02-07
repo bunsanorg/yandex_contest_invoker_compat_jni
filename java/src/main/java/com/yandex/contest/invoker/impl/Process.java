@@ -78,6 +78,12 @@ public class Process implements IProcess, IHandle {
     public native void setOwnerId(IId ownerId);
 
     @Override
+    public native String getName();
+
+    @Override
+    public native void setName(String name);
+
+    @Override
     public native IProcessResult getResult();
 
     @Override

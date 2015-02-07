@@ -72,6 +72,26 @@ public interface IProcessGroup {
     IProcessGroupResourceLimits getResourceLimits();
     void setResourceLimits(IProcessGroupResourceLimits resourceLimits);
 
+    /**
+     * Process with other pipe end will receive
+     * notifications that can be accessed by Notifier.
+     *
+     * @throws ProcessGroupNotifierIllegalSinkError
+     * if notificationStream.pipeEnd.end != WRITE
+     */
+    INotificationStream getNotifier(long notifierId);
+
+    void setNotifier(long notifierId, INotificationStream notificationStream);
+    void setNotifier(long notifierId, IStream pipeEnd,
+                     NotificationStreamProtocol protocol);
+    void setNotifier(long notifierId, IStream pipeEnd);
+
+    long addNotifier(INotificationStream notificationStream);
+    long addNotifier(IStream pipeEnd, NotificationStreamProtocol protocol);
+    long addNotifier(IStream pipeEnd);
+    IStream addNotifier(NotificationStreamProtocol protocol);
+    IStream addNotifier();
+
     IProcessDefaultSettings getProcessDefaultSettings();
     void setProcessDefaultSettings(IProcessDefaultSettings processDefaultSettings);
 }

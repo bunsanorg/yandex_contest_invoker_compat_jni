@@ -1,7 +1,12 @@
 package com.yandex.contest.invoker.impl;
 
+import com.yandex.contest.invoker.impl.NotificationStream;
+import com.yandex.contest.invoker.INotificationStream;
 import com.yandex.contest.invoker.IPipe;
 import com.yandex.contest.invoker.IProcess;
+import com.yandex.contest.invoker.IProcessGroup;
+import com.yandex.contest.invoker.IStream;
+import com.yandex.contest.invoker.NotificationStreamProtocol;
 import com.yandex.contest.invoker.process.IProcessResult;
 import com.yandex.contest.invoker.process_group.IProcessGroupResult;
 import junit.framework.Assert;
@@ -36,6 +41,48 @@ public class ProcessGroupTest extends ProcessGroupFixture {
         Assert.assertEquals(pr.getExitStatus().intValue(), 0);
         Assert.assertNull(pr.getTermSig());
         Assert.assertNotNull(pr.getResourceUsage());
+    }
+
+    @Test
+    public void notification() throws Exception {
+        IProcessGroup pg = getProcessGroup();
+        IProcess p0 = pg.createProcess("true");
+
+        INotificationStream notificationStream0 = pg.getNotifier(0);
+        IStream pipeEnd0 = pg.addNotifier();
+        pg.setNotifier(0, pipeEnd0);
+        Assert.assertEquals(pg.getNotifier(0).getProtocol(),
+                            NotificationStreamProtocol.NATIVE);
+        pg.setNotifier(0, pipeEnd0, NotificationStreamProtocol.NATIVE);
+        Assert.assertEquals(pg.getNotifier(0).getProtocol(),
+                            NotificationStreamProtocol.NATIVE);
+        pg.setNotifier(0, notificationStream0);
+        Assert.assertEquals(pg.getNotifier(0).getProtocol(),
+                            NotificationStreamProtocol.NATIVE);
+
+        IStream pipeEnd1 = pg.addNotifier(NotificationStreamProtocol.PLAIN_TEXT);
+        pg.setNotifier(1, pipeEnd1, NotificationStreamProtocol.PLAIN_TEXT);
+        Assert.assertEquals(pg.getNotifier(1).getProtocol(),
+                            NotificationStreamProtocol.PLAIN_TEXT);
+
+        IPipe pipe2 = pg.createPipe();
+        Assert.assertEquals(pg.addNotifier(pipe2.getInputStream()), 2);
+        Assert.assertEquals(pg.getNotifier(2).getProtocol(),
+                            NotificationStreamProtocol.NATIVE);
+
+        IPipe pipe3 = pg.createPipe();
+        Assert.assertEquals(pg.addNotifier(pipe3.getInputStream(),
+                                           NotificationStreamProtocol.PLAIN_TEXT), 3);
+        Assert.assertEquals(pg.getNotifier(2).getProtocol(),
+                            NotificationStreamProtocol.PLAIN_TEXT);
+
+        IPipe pipe4 = pg.createPipe();
+        INotificationStream notificationStream4 =
+            new NotificationStream(pipe4.getInputStream(),
+                                   NotificationStreamProtocol.PLAIN_TEXT);
+        Assert.assertEquals(pg.addNotifier(notificationStream4), 4);
+        Assert.assertEquals(pg.getNotifier(4).getProtocol(),
+                            NotificationStreamProtocol.PLAIN_TEXT);
     }
 
     @Test

@@ -62,6 +62,12 @@ public interface IProcess {
     void setOwnerId(com.yandex.contest.invoker.unistd.access.IId ownerId);
 
     /**
+     * Name is used in Notifier's events.
+     */
+    String getName();
+    void setName(String name);
+
+    /**
      * @return Process result previously set by associated process group.
      * @throws IllegalStateException if associated process group has not set result.
      */

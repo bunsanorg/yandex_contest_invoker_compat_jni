@@ -50,6 +50,13 @@ public class ProcessTest extends ProcessGroupFixture {
     }
 
     @Test
+    public void name() throws Exception {
+        IProcess p0 = getProcessGroup().createProcess("true");
+        p0.setName("process_name");
+        Assert.assertEquals(p0.getName(), "process_name");
+    }
+
+    @Test
     public void processSetArguments() throws Exception {
         IProcess p0 = getProcessGroup().createProcess("sh");
         List<String> arguments = Arrays.asList("sh", "-ec", "exit 10");
