@@ -134,18 +134,42 @@ void Java_com_yandex_contest_invoker_impl_Process_setCurrentPath(
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_Process_getEnvironment(JNIEnv *env, jobject self)
+jobject Java_com_yandex_contest_invoker_impl_Process_getEnvironment__(JNIEnv *env, jobject self)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     return newHashMap(this_->member().environment(), newStringUTF, newStringUTF).release();
     YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-void Java_com_yandex_contest_invoker_impl_Process_setEnvironment(
+void Java_com_yandex_contest_invoker_impl_Process_setEnvironment__Ljava_util_Map_2(
     JNIEnv *env, jobject self, jobject environment)
 {
     YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
     this_->member().setEnvironment(config::load<ProcessEnvironment>(environment));
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
+jstring Java_com_yandex_contest_invoker_impl_Process_getEnvironment__Ljava_lang_String_2(
+    JNIEnv *env, jobject self, jstring key)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    return newStringUTF(this_->member().environment(getStringUTF(key))).release();
+    YANDEX_JNI_METHOD_END_OBJECT(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_Process_setEnvironment__Ljava_lang_String_2Ljava_lang_String_2(
+    JNIEnv *env, jobject self, jstring key, jstring value)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    this_->member().setEnvironment(getStringUTF(key), getStringUTF(value));
+    YANDEX_JNI_METHOD_END_VOID(env)
+}
+
+void Java_com_yandex_contest_invoker_impl_Process_unsetEnvironment(
+    JNIEnv *env, jobject self, jstring key)
+{
+    YANDEX_JNI_METHOD_BEGIN_THIS(env, processClass_, self)
+    this_->member().unsetEnvironment(getStringUTF(key));
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 

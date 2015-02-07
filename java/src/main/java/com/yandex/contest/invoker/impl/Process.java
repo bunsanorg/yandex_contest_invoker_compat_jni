@@ -57,6 +57,15 @@ public class Process implements IProcess, IHandle {
     public native void setEnvironment(Map<String, String> environment);
 
     @Override
+    public native String getEnvironment(String key);
+
+    @Override
+    public native void setEnvironment(String key, String value);
+
+    @Override
+    public native void unsetEnvironment(String key);
+
+    @Override
     public native IProcessResourceLimits getResourceLimits();
 
     @Override

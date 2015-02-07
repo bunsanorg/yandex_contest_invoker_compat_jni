@@ -51,6 +51,10 @@ public interface IProcess {
     Map<String, String> getEnvironment();
     void setEnvironment(Map<String, String> environment);
 
+    String getEnvironment(String key);
+    void setEnvironment(String key, String value);
+    void unsetEnvironment(String key);
+
     IProcessResourceLimits getResourceLimits();
     void setResourceLimits(IProcessResourceLimits resourceLimits);
 
