@@ -73,6 +73,5 @@ public interface IProcessGroup {
     void setResourceLimits(IProcessGroupResourceLimits resourceLimits);
 
     IProcessDefaultSettings getProcessDefaultSettings();
-
     void setProcessDefaultSettings(IProcessDefaultSettings processDefaultSettings);
 }
