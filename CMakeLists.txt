@@ -2,26 +2,9 @@ project(yandex_contest_invoker_compat_jni)
 
 include(${CMAKE_SOURCE_DIR}/system-config.cmake OPTIONAL)
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
-include(BunsanCommon)
-
-bunsan_use_boost(system filesystem serialization program_options)
-
-# JNI
-find_package(JNI REQUIRED)
-include_directories(${JNI_INCLUDE_DIRS})
-bunsan_use(${JAVA_JVM_LIBRARY})
-
-# JNI generated headers
-include_directories(jni_include)
-
-bunsan_use(
-    yandex_contest_common
-    yandex_contest_system
-    yandex_contest_invoker
-    yandex_contest_invoker_compat_common
-)
+find_package(BunsanCMake CONFIG REQUIRED)
 
 bunsan_add_shared_library(${PROJECT_NAME}
     src/Context.cpp
@@ -66,8 +49,16 @@ bunsan_add_shared_library(${PROJECT_NAME}
     src/impl/unistd/FileStatus.cpp
     src/impl/unistd/access/Id.cpp
 )
+target_include_directories(${PROJECT_NAME} PRIVATE jni_include)
+bunsan_use_bunsan_package(${PROJECT_NAME} yandex_contest_invoker_compat_common
+    yandex_contest_invoker_compat_common
+)
+find_package(JNI REQUIRED)
+target_include_directories(${PROJECT_NAME} PUBLIC ${JNI_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${JAVA_JVM_LIBRARY})
 
 bunsan_install_headers()
 bunsan_install_targets(${PROJECT_NAME})
+bunsan_install_project()
 
 bunsan_include_tests()
