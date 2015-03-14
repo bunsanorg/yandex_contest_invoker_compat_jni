@@ -11,7 +11,8 @@ public interface ILog {
         DEBUG,
         INFO,
         WARNING,
-        ERROR
+        ERROR,
+        FATAL
     }
 
     void append(Level level, String position, String message);
