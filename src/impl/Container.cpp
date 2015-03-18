@@ -10,8 +10,8 @@
 
 #include <yandex/contest/invoker/compat/ContainerContext.hpp>
 
+#include <yandex/contest/StreamLog.hpp>
 #include <yandex/contest/system/lxc/Config.hpp>
-#include <yandex/contest/detail/LogHelper.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::compat::ContainerContext;
