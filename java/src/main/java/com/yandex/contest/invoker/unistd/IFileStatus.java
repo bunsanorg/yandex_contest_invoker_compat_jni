@@ -71,14 +71,14 @@ public interface IFileStatus {
     /**
      * File access mode.
      *
-     * @return mode & O_ACCMODE
+     * @return mode &amp; O_ACCMODE
      */
     int getAccmode();
 
     /**
      * File type.
      *
-     * @return mode & S_IFMT
+     * @return mode &amp; S_IFMT
      */
     int getType();
 
