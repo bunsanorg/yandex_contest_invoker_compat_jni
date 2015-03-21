@@ -79,6 +79,34 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             return obj;
         }
 
+        template <typename ... Args>
+        LocalRef<jobject> callStaticObjectMethod(jmethodID method, Args &&...args) const
+        {
+            const Context::Handle ctx = Context::getContext();
+            LocalRef<jobject> obj(ctx->env()->CallStaticObjectMethod(
+                clazz(), method, std::forward<Args>(args)...));
+            return obj;
+        }
+
+#define YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(RETURN, TYPE) \
+        template <typename ... Args> \
+        RETURN callStatic##TYPE##Method(jmethodID method, Args &&...args) const \
+        { \
+            const Context::Handle ctx = Context::getContext(); \
+            return ctx->env()->CallStatic##TYPE##Method( \
+                clazz(), method, std::forward<Args>(args)...); \
+        }
+
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jboolean, Boolean)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jbyte, Byte)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jchar, Char)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jshort, Short)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jint, Int)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jlong, Long)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jfloat, Float)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jdouble, Double)
+        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(void, Void)
+
     public:
         jmethodID getMethodId(const char *const name, const char *const sig);
 
