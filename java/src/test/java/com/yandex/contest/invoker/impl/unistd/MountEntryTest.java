@@ -2,7 +2,7 @@ package com.yandex.contest.invoker.impl.unistd;
 
 import com.yandex.contest.invoker.impl.InvokerFixture;
 import com.yandex.contest.invoker.unistd.IMountEntry;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;

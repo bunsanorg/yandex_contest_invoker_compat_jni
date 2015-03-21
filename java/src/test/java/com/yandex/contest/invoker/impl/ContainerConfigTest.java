@@ -10,7 +10,7 @@ import com.yandex.contest.invoker.process.*;
 import com.yandex.contest.invoker.process_group.*;
 import com.yandex.contest.invoker.unistd.*;
 import com.yandex.contest.invoker.unistd.access.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Method;

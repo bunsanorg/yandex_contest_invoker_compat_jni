@@ -7,7 +7,7 @@ import com.yandex.contest.invoker.impl.unistd.access.Id;
 import com.yandex.contest.invoker.jimpl.AbstractFdAlias;
 import com.yandex.contest.invoker.jimpl.File;
 import com.yandex.contest.invoker.process.IProcessResult;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
