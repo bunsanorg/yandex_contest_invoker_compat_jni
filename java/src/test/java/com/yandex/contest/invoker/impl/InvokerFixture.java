@@ -5,6 +5,9 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * User: sarum9in
  * Date: 15.08.12
@@ -18,8 +21,8 @@ public class InvokerFixture {
         PackageInit.init();
         Log.registerInstance(new ILog() {
             @Override
-            public void append(ILog.Level level, String position, String message) {
-                System.out.println("[" + level + "] at [" + position + "] " + message);
+            public void append(LocalDateTime timestamp, ILog.Level level, String position, String message) {
+                System.out.println("[" + timestamp.toString() + " <" + level + "> " + position + "] " + message);
             }
         });
         inited = true;

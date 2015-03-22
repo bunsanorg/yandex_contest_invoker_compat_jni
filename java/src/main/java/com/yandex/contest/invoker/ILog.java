@@ -1,5 +1,7 @@
 package com.yandex.contest.invoker;
 
+import java.time.LocalDateTime;
+
 /**
  * User: sarum9in
  * Date: 03.07.12
@@ -15,5 +17,5 @@ public interface ILog {
         FATAL
     }
 
-    void append(Level level, String position, String message);
+    void append(LocalDateTime timestamp, Level level, String position, String message);
 }
