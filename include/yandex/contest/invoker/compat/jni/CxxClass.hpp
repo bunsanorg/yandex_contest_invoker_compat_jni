@@ -57,7 +57,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     private:
         template <typename T>
-        static inline T *jlongToPtr(jlong ptrLong)
+        static T *jlongToPtr(jlong ptrLong)
         {
             static_assert(
                 sizeof(ptrLong) >= sizeof(T *),
@@ -67,7 +67,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         }
 
         template <typename T>
-        static inline jlong ptrToJlong(T *ptr)
+        static jlong ptrToJlong(T *ptr)
         {
             static_assert(
                 sizeof(jlong) >= sizeof(T *),

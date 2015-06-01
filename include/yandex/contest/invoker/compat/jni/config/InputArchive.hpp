@@ -47,7 +47,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef std::integral_constant<bool, true> is_loading;
         typedef std::integral_constant<bool, false> is_saving;
 
-        inline unsigned int get_library_version() { return 0; }
+        unsigned int get_library_version() { return 0; }
 
     public:
         typedef traits::info<ContextClass> contextInfo;
@@ -392,7 +392,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         typedef std::integral_constant<bool, true> is_loading;
         typedef std::integral_constant<bool, false> is_saving;
 
-        inline unsigned int get_library_version() { return 0; }
+        unsigned int get_library_version() { return 0; }
 
     public:
         explicit InputArchive(const JType &jobj):
