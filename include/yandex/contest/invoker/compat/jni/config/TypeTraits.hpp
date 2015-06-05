@@ -1,6 +1,5 @@
 #pragma once
 
-#include <yandex/contest/invoker/compat/jni/mpl/string.hpp>
 #include <yandex/contest/invoker/compat/jni/traits/jinfo.hpp>
 
 #include <yandex/contest/invoker/ContainerConfig.hpp>
@@ -31,7 +30,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     /* Info */
 
-    template <bool IsObject, bool IsEnum, typename CType, typename JClass,
+    template <bool IsObject, bool IsEnum, typename CType,
               typename JType, JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)>
     struct basic_info
     {
@@ -40,16 +39,15 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         static constexpr bool is_object = IsObject;
         static constexpr bool is_enum = IsEnum;
         using ctype = CType;
-        using jclass = JClass;
         using jtype = JType;
         static constexpr jtype (JNIEnv::*envget)(jobject, jmethodID, ...) = ENVGet;
     };
 
-    template <bool IsObject, bool IsEnum, typename CType, typename JClass,
+    template <bool IsObject, bool IsEnum, typename CType,
               typename JType, JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)>
     constexpr JType (
         JNIEnv::*basic_info<
-            IsObject, IsEnum, CType, JClass, JType, ENVGet
+            IsObject, IsEnum, CType, JType, ENVGet
         >::envget
     )(jobject, jmethodID, ...);
 
@@ -67,17 +65,28 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     template <typename T>
     struct optional_info<T, typename std::enable_if<!info<T>::is_primitive, void>::type>:
-        basic_info<
-            info<T>::is_object, info<T>::is_enum,
-                boost::optional<T>, typename info<T>::jclass,
-                    typename info<T>::jtype, &JNIEnv::CallObjectMethod> {};
+        basic_info<info<T>::is_object,
+                   info<T>::is_enum,
+                   boost::optional<T>,
+                   typename info<T>::jtype,
+                   &JNIEnv::CallObjectMethod>
+    {
+        static std::string jclass() { return info<T>::jclass(); }
+    };
 
     template <typename T>
     struct optional_info<T, typename std::enable_if<info<T>::is_primitive, void>::type>:
-        basic_info<true, info<T>::is_enum,
-            boost::optional<T>,
-                typename jinfo<typename info<T>::jtype>::jwrapperclass,
-                    jobject, &JNIEnv::CallObjectMethod> {};
+        basic_info<true,
+                   info<T>::is_enum,
+                   boost::optional<T>,
+                   jobject,
+                   &JNIEnv::CallObjectMethod>
+    {
+        static std::string jclass()
+        {
+            return jinfo<typename info<T>::jtype>::jwrapperclass();
+        }
+    };
 
     template <typename T>
     struct info<boost::optional<T>>: optional_info<T> {};
@@ -90,7 +99,10 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         JType (JNIEnv::*ENVGet)(jobject, jmethodID, ...)
     >
     struct basic_primitive_info:
-        basic_info<false, false, CType, typename jinfo<JType>::jclass, JType, ENVGet> {};
+        basic_info<false, false, CType, JType, ENVGet>
+    {
+        static std::string jclass() { return jinfo<JType>::jclass(); }
+    };
 
     template <>
     struct info<std::uint64_t>:
@@ -118,18 +130,18 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
 
     /* Object mapping */
 
-    template <typename CType, typename JClass, bool IsCamelCase=true>
+    template <typename CType, bool IsCamelCase=true>
     struct basic_object_info:
-        basic_info<true, false, CType, JClass, jobject, &JNIEnv::CallObjectMethod>
+        basic_info<true, false, CType, jobject, &JNIEnv::CallObjectMethod>
     {
         static constexpr bool isCamelCase = IsCamelCase;
     };
 
     template <typename CType>
-    struct string_info: basic_object_info<
-        CType,
-        boost::mpl::string<'java', '/lan', 'g/St', 'ring'>
-    > {};
+    struct string_info: basic_object_info<CType>
+    {
+        static std::string jclass() { return "java/lang/String"; }
+    };
 
     template <>
     struct info<std::string>: string_info<std::string> {};
@@ -141,197 +153,251 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
               typename Pred, typename Alloc>
     struct info<std::unordered_map<Key, Tp, Hash, Pred, Alloc>>:
         basic_object_info<
-            std::unordered_map<Key, Tp, Hash, Pred, Alloc>,
-            boost::mpl::string<'java', '/uti', 'l/Ma', 'p'>
-        > {};
+            std::unordered_map<Key, Tp, Hash, Pred, Alloc>
+        >
+    {
+        static std::string jclass() { return "java/util/Map"; }
+    };
 
     template <typename Value, typename Hash,
               typename Pred, typename Alloc>
     struct info<std::unordered_set<Value, Hash, Pred, Alloc>>:
-        basic_object_info<std::unordered_set<Value, Hash, Pred, Alloc>,
-                          boost::mpl::string<'java', '/uti', 'l/Se', 't'>> {};
+        basic_object_info<std::unordered_set<Value, Hash, Pred, Alloc>>
+    {
+        static std::string jclass() { return "java/util/Set"; }
+    };
 
     template <typename Tp, typename Alloc>
     struct info<std::vector<Tp, Alloc>>:
-        basic_object_info<
-            std::vector<Tp, Alloc>,
-            boost::mpl::string<'java', '/uti', 'l/Li', 'st'>
-        > {};
+        basic_object_info<std::vector<Tp, Alloc>>
+    {
+        static std::string jclass() { return "java/util/List"; }
+    };
 
     /* Invoker mapping */
 
-    template <typename JClass>
-    struct invoker_jclass
+    template <typename CType, typename JInfo, bool IsCamelCase=true>
+    struct invoker_object_info: basic_object_info<CType, IsCamelCase>
     {
-        using type = typename boost::mpl::insert_range<
-            JClass,
-            typename boost::mpl::begin<JClass>::type,
-            boost::mpl::string<
-                'com/', 'yand', 'ex/c', 'onte',
-                'st/i', 'nvok', 'er/'>
-        >::type;
+        static std::string jclass()
+        {
+            return "com/yandex/contest/invoker/" + JInfo::jclassbase();
+        }
     };
 
-    template <typename CType, typename JClass, bool IsCamelCase=true>
-    struct invoker_object_info:
-        basic_object_info<
-            CType,
-            typename invoker_jclass<JClass>::type,
-            IsCamelCase
-        > {};
-
-    template <typename CType, typename JClass>
+    template <typename CType, typename JInfo>
     struct invoker_enum_info:
-        basic_info<true, true, CType, typename invoker_jclass<JClass>::type,
-            jobject, &JNIEnv::CallObjectMethod> {};
+        basic_info<true, true, CType, jobject, &JNIEnv::CallObjectMethod>
+    {
+        static std::string jclass()
+        {
+            return "com/yandex/contest/invoker/" + JInfo::jclassbase();
+        }
+    };
 
     template <>
     struct info<ContainerConfig>:
         invoker_object_info<ContainerConfig,
-            boost::mpl::string<'ICon', 'tain', 'erCo', 'nfig'>> {};
+                            info<ContainerConfig>>
+    {
+        static std::string jclassbase() { return "IContainerConfig"; }
+    };
 
     template <>
     struct info<ControlProcessConfig>:
         invoker_object_info<ControlProcessConfig,
-            boost::mpl::string<'ICon', 'trol', 'Proc', 'essC', 'onfi', 'g'>> {};
+                            info<ControlProcessConfig>>
+    {
+        static std::string jclassbase() { return "IControlProcessConfig"; }
+    };
 
     template <>
     struct info<system::lxc::Config>:
         invoker_object_info<system::lxc::Config,
-            boost::mpl::string<'lxc/', 'ILxc', 'Conf', 'ig'>, false> {};
+                            info<system::lxc::Config>,
+                            false>
+    {
+        static std::string jclassbase() { return "lxc/ILxcConfig"; }
+    };
 
     template <>
     struct info<system::lxc::Config::Arch>:
         invoker_enum_info<system::lxc::Config::Arch,
-            boost::mpl::string<'lxc/', 'ILxc', 'Conf', 'ig$A', 'rch'>> {};
+                          info<system::lxc::Config::Arch>>
+    {
+        static std::string jclassbase() { return "lxc/ILxcConfig$Arch"; }
+    };
 
     template <>
     struct info<system::lxc::MountConfig>:
         invoker_object_info<system::lxc::MountConfig,
-            boost::mpl::string<'lxc/', 'IMou', 'ntCo', 'nfig'>, false> {};
+                            info<system::lxc::MountConfig>>
+    {
+        static std::string jclassbase() { return "lxc/IMountConfig"; }
+    };
 
     template <>
     struct info<system::lxc::RootfsConfig>:
         invoker_object_info<system::lxc::RootfsConfig,
-            boost::mpl::string<'lxc/', 'IRoo', 'tfsC', 'onfi', 'g'>, false> {};
+                            info<system::lxc::RootfsConfig>,
+                            false>
+    {
+        static std::string jclassbase() { return "lxc/IRootfsConfig"; }
+    };
 
     template <>
     struct info<filesystem::Config>:
-        invoker_object_info<
-            filesystem::Config,
-            boost::mpl::string<
-                'file', 'syst', 'em/I', 'File',
-                'syst', 'emCo', 'nfig'>
-        > {};
+        invoker_object_info<filesystem::Config,
+                            info<filesystem::Config>>
+    {
+        static std::string jclassbase() { return "filesystem/IFilesystemConfig"; }
+    };
 
     template <>
     struct info<filesystem::CreateFile>:
         invoker_object_info<filesystem::CreateFile,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Crea', 'teFi', 'le'>> {};
+                            info<filesystem::CreateFile>>
+    {
+        static std::string jclassbase() { return "filesystem/ICreateFile"; }
+    };
 
     template <>
     struct info<filesystem::File>:
         invoker_object_info<filesystem::File,
-            boost::mpl::string<'file', 'syst', 'em/I', 'File'>> {};
+                            info<filesystem::File>>
+    {
+        static std::string jclassbase() { return "filesystem/IFile"; }
+    };
 
     template <>
     struct info<filesystem::RegularFile>:
         invoker_object_info<filesystem::RegularFile,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Regu', 'larF', 'ile'>> {};
+                            info<filesystem::RegularFile>>
+    {
+        static std::string jclassbase() { return "filesystem/IRegularFile"; }
+    };
 
     template <>
     struct info<filesystem::Directory>:
         invoker_object_info<filesystem::Directory,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Dire', 'ctor', 'y'>> {};
+                            info<filesystem::Directory>>
+    {
+        static std::string jclassbase() { return "filesystem/IDirectory"; }
+    };
 
     template <>
     struct info<filesystem::Device>:
         invoker_object_info<filesystem::Device,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Devi', 'ce'>> {};
+                            info<filesystem::Device>>
+    {
+        static std::string jclassbase() { return "filesystem/IDevice"; }
+    };
 
     template <>
     struct info<filesystem::Device::Type>:
         invoker_enum_info<filesystem::Device::Type,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Devi', 'ce$T', 'ype'>> {};
+                          info<filesystem::Device::Type>>
+    {
+        static std::string jclassbase() { return "filesystem/IDevice$Type"; }
+    };
 
     template <>
     struct info<filesystem::SymLink>:
         invoker_object_info<filesystem::SymLink,
-            boost::mpl::string<'file', 'syst', 'em/I', 'SymL', 'ink'>> {};
+                            info<filesystem::SymLink>>
+    {
+        static std::string jclassbase() { return "filesystem/ISymLink"; }
+    };
 
     template <>
     struct info<filesystem::Fifo>:
         invoker_object_info<filesystem::Fifo,
-            boost::mpl::string<'file', 'syst', 'em/I', 'Fifo'>> {};
+                            info<filesystem::Fifo>>
+    {
+        static std::string jclassbase() { return "filesystem/IFifo"; }
+    };
 
     template <>
     struct info<process_group::DefaultSettings>:
         invoker_object_info<process_group::DefaultSettings,
-            boost::mpl::string<'proc', 'ess_', 'grou', 'p/IP', 'roce', 'ssGr',
-                               'oupD', 'efau', 'ltSe', 'ttin', 'gs'>> {};
+                            info<process_group::DefaultSettings>>
+    {
+        static std::string jclassbase() { return "process_group/"
+                                                 "IProcessGroupDefaultSettings"; }
+    };
 
     template <>
     struct info<process::DefaultSettings>:
-        invoker_object_info<
-            process::DefaultSettings,
-            boost::mpl::string<
-                'proc', 'ess/', 'IPro', 'cess',
-                'Defa', 'ultS', 'etti', 'ngs'>
-        > {};
+        invoker_object_info<process::DefaultSettings,
+                            info<process::DefaultSettings>>
+    {
+        static std::string jclassbase() { return "process/IProcessDefaultSettings"; }
+    };
 
     template <>
     struct info<process_group::ResourceLimits>:
-        invoker_object_info<
-            process_group::ResourceLimits,
-            boost::mpl::string<
-                'proc', 'ess_', 'grou', 'p/IP',
-                'roce', 'ssGr', 'oupR', 'esou',
-                'rceL', 'imit', 's'>
-        > {};
+        invoker_object_info<process_group::ResourceLimits,
+                            info<process_group::ResourceLimits>>
+    {
+        static std::string jclassbase() { return "process_group/"
+                                                 "IProcessGroupResourceLimits"; }
+    };
 
     template <>
     struct info<process::ResourceLimits>:
-        invoker_object_info<
-            process::ResourceLimits,
-            boost::mpl::string<
-                'proc', 'ess/', 'IPro', 'cess',
-                'Reso', 'urce', 'Limi', 'ts'>
-        > {};
+        invoker_object_info<process::ResourceLimits,
+                            info<process::ResourceLimits>>
+    {
+        static std::string jclassbase() { return "process/IProcessResourceLimits"; }
+    };
 
     template <>
     struct info<system::unistd::MountEntry>:
         invoker_object_info<system::unistd::MountEntry,
-            boost::mpl::string<'unis', 'td/I', 'Moun', 'tEnt', 'ry'>, false> {};
+                            info<system::unistd::MountEntry>,
+                            false>
+    {
+        static std::string jclassbase() { return "unistd/IMountEntry"; }
+    };
 
     template <>
     struct info<system::unistd::access::Id>:
         invoker_object_info<system::unistd::access::Id,
-            boost::mpl::string<'unis', 'td/a', 'cces', 's/II', 'd'>> {};
+                            info<system::unistd::access::Id>>
+    {
+        static std::string jclassbase() { return "unistd/access/IId"; }
+    };
 
     template <>
-    struct info<File>:
-        invoker_object_info<File,
-            boost::mpl::string<'IFil', 'e'>> {};
+    struct info<File>: invoker_object_info<File, info<File>>
+    {
+        static std::string jclassbase() { return "IFile"; }
+    };
 
     template <>
-    struct info<FdAlias>:
-        invoker_object_info<FdAlias,
-            boost::mpl::string<'IFdA', 'lias'>> {};
+    struct info<FdAlias>: invoker_object_info<FdAlias, info<FdAlias>>
+    {
+        static std::string jclassbase() { return "IFdAlias"; }
+    };
 
     template <>
-    struct info<Stream>:
-        invoker_object_info<Stream,
-            boost::mpl::string<'IStr', 'eam'>> {};
+    struct info<Stream>: invoker_object_info<Stream, info<Stream>>
+    {
+        static std::string jclassbase() { return "IStream"; }
+    };
 
     template <>
     struct info<NonPipeStream>:
-        invoker_object_info<NonPipeStream,
-            boost::mpl::string<'INon', 'Pipe', 'Stre', 'am'>> {};
+        invoker_object_info<NonPipeStream, info<NonPipeStream>>
+    {
+        static std::string jclassbase() { return "INonPipeStream"; }
+    };
 
     template <>
-    struct info<AccessMode>:
-        invoker_enum_info<AccessMode,
-            boost::mpl::string<'IStr', 'eam$', 'Acce', 'ssMo', 'de'>> {};
+    struct info<AccessMode>: invoker_enum_info<AccessMode, info<AccessMode>>
+    {
+        static std::string jclassbase() { return "IStream$AccessMode"; }
+    };
 
     /* Convert get name */
 

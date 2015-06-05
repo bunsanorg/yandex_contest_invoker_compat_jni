@@ -122,7 +122,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             std::string getSig = "()";
             if (!info::is_primitive)
                 getSig.push_back('L');
-            getSig.append(boost::mpl::c_str<typename info::jclass>::value);
+            getSig.append(info::jclass());
             if (!info::is_primitive)
                 getSig.push_back(';');
             return getSig;
@@ -166,15 +166,14 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             using info = traits::info<T>;
             static_assert(info::is_primitive, "Should be primitive.");
             using jtype = typename info::jtype;
-            constexpr const char *jwrapperclass = boost::mpl::c_str<
-                typename traits::jinfo<jtype>::jwrapperclass>::value;
-            constexpr const char *jget = boost::mpl::c_str<
-                typename traits::jinfo<jtype>::jget>::value;
-            constexpr const char *jgetsig = boost::mpl::c_str<
-                typename traits::jinfo<jtype>::jgetsig>::value;
-            LocalRef<jclass> jclass(ctx->env()->FindClass(jwrapperclass));
-            const jmethodID jgetvalue =
-                ctx->env()->GetMethodID(jclass.get(), jget, jgetsig);
+            using jinfo = typename traits::jinfo<jtype>;
+            const std::string jwrapperclass = jinfo::jwrapperclass();
+            const std::string jget = jinfo::jget();
+            const std::string jgetsig = jinfo::jgetsig();
+            LocalRef<jclass> jclass(ctx->env()->FindClass(jwrapperclass.c_str()));
+            const jmethodID jgetvalue = ctx->env()->GetMethodID(jclass.get(),
+                                                                jget.c_str(),
+                                                                jgetsig.c_str());
             obj = (ctx->env()->*info::envget)(jobj_, jgetvalue);
             ctx->throwIfOccured();
         }
@@ -310,8 +309,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
             static void load(jobject jobj, Archive &ar, Variant &obj)
             {
                 const Context::Handle ctx = Context::getContext();
-                LocalRef<jclass> clazz(ctx->env()->FindClass(
-                    boost::mpl::c_str<typename info::jclass>::value));
+                LocalRef<jclass> clazz(ctx->env()->FindClass(info::jclass().c_str()));
                 if (ctx->env()->IsInstanceOf(jobj, clazz.get()))
                 {
                     Arg arg;
