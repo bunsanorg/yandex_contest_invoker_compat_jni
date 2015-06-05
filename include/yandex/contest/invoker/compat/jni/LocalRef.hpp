@@ -24,7 +24,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     class LocalRef<T *>: public std::unique_ptr<T, local_ref_detail::DeleteLocalRef>
     {
     private:
-        typedef std::unique_ptr<T, local_ref_detail::DeleteLocalRef> Base;
+        using Base = std::unique_ptr<T, local_ref_detail::DeleteLocalRef>;
 
     public:
         using Base::Base;

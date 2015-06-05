@@ -44,13 +44,13 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     >
     {
     public:
-        typedef std::integral_constant<bool, true> is_loading;
-        typedef std::integral_constant<bool, false> is_saving;
+        using is_loading = std::integral_constant<bool, true>;
+        using is_saving = std::integral_constant<bool, false>;
 
         unsigned int get_library_version() { return 0; }
 
     public:
-        typedef traits::info<ContextClass> contextInfo;
+        using contextInfo = traits::info<ContextClass>;
 
     public:
         explicit InputArchive(const JType &jobj):
@@ -77,9 +77,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename T>
         InputArchive &operator>>(const boost::serialization::nvp<T> &nvp)
         {
-            typedef traits::info<T> info;
+            using info = traits::info<T>;
             static_assert(info::is_defined, "Undefined info.");
-            typedef typename info::jtype jtype;
+            using jtype = typename info::jtype;
             const jmethodID jget_ = ctx->env()->GetMethodID(
                 jclass_.get(),
                 jGetName(nvp.name()).c_str(),
@@ -117,7 +117,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename T>
         static std::string jGetSig()
         {
-            typedef traits::info<T> info;
+            using info = traits::info<T>;
             static_assert(info::is_defined, "Undefined info.");
             std::string getSig = "()";
             if (!info::is_primitive)
@@ -163,9 +163,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         >
         void load(T &obj)
         {
-            typedef traits::info<T> info;
+            using info = traits::info<T>;
             static_assert(info::is_primitive, "Should be primitive.");
-            typedef typename info::jtype jtype;
+            using jtype = typename info::jtype;
             constexpr const char *jwrapperclass = boost::mpl::c_str<
                 typename traits::jinfo<jtype>::jwrapperclass>::value;
             constexpr const char *jget = boost::mpl::c_str<
@@ -186,7 +186,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         >
         void load(T &obj)
         {
-            typedef traits::info<T> info;
+            using info = traits::info<T>;
             static_assert(info::is_enum, "Should be enum.");
             const jmethodID toStringId = ctx->env()->GetMethodID(
                 jclass_.get(),
@@ -303,7 +303,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         template <typename Arg, typename ... Args>
         struct LoadVariantHasTraits
         {
-            typedef traits::info<Arg> info;
+            using info = traits::info<Arg>;
             static_assert(info::is_defined, "Invalid info.");
 
             template <typename Archive, typename Variant>
@@ -372,9 +372,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         >::type
     >::load(boost::variant<BOOST_VARIANT_ENUM_PARAMS(T)> &obj)
     {
-        typedef input_archive_detail::LoadVariant<
+        using LoadVariant = input_archive_detail::LoadVariant<
             BOOST_VARIANT_ENUM_PARAMS(T)
-        > LoadVariant;
+        >;
         LoadVariant::load(jobj_, *this, obj);
     }
 
@@ -389,8 +389,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     >
     {
     public:
-        typedef std::integral_constant<bool, true> is_loading;
-        typedef std::integral_constant<bool, false> is_saving;
+        using is_loading = std::integral_constant<bool, true>;
+        using is_saving = std::integral_constant<bool, false>;
 
         unsigned int get_library_version() { return 0; }
 

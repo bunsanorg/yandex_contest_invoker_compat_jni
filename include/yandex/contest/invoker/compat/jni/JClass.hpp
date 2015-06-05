@@ -143,8 +143,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         ClassRef class_;
     };
 
-    typedef BasicJClass<GlobalRef<jclass>> GlobalJClass;
-    typedef BasicJClass<LocalRef<jclass>> LocalJClass;
+    using GlobalJClass = BasicJClass<GlobalRef<jclass>>;
+    using LocalJClass = BasicJClass<LocalRef<jclass>>;
 }}}}}
 
 #include "JClass.tcc"

@@ -73,7 +73,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         jmethodID appendId_;
     };
 
-    typedef std::shared_ptr<JavaLog> JavaLogPointer;
+    using JavaLogPointer = std::shared_ptr<JavaLog>;
 
     GlobalEnumClass<Log::Level> JavaLog::logLevelClass_;
     GlobalJClass JavaLog::localDateTimeClass_;

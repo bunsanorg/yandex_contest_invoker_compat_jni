@@ -12,7 +12,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
                                     const Iterable &iterable,
                                     const ValueToJObject &valueToJObject)
     {
-        typedef typename Iterable::value_type Value;
+        using Value = typename Iterable::value_type;
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> collectionClass(
             ctx->env()->FindClass(clazz.c_str())
@@ -45,7 +45,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
                              const KeyToJObject &keyToJObject,
                              const ValueToJObject &valueToJObject)
     {
-        typedef typename Iterable::value_type Entry;
+        using Entry = typename Iterable::value_type;
         const Context::Handle ctx = Context::getContext();
         LocalRef<jclass> mapClass(ctx->env()->FindClass(clazz.c_str()));
         const jmethodID ctorId = ctx->env()->GetMethodID(

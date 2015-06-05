@@ -88,7 +88,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     class CxxClass: public BaseCxxClass
     {
     public:
-        typedef T Type;
+        using Type = T;
 
     public:
         using BaseCxxClass::BaseCxxClass;

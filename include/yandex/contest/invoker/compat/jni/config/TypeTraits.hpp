@@ -39,9 +39,9 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         static constexpr bool is_primitive = !IsObject && !IsEnum;
         static constexpr bool is_object = IsObject;
         static constexpr bool is_enum = IsEnum;
-        typedef CType ctype;
-        typedef JClass jclass;
-        typedef JType jtype;
+        using ctype = CType;
+        using jclass = JClass;
+        using jtype = JType;
         static constexpr jtype (JNIEnv::*envget)(jobject, jmethodID, ...) = ENVGet;
     };
 
@@ -163,13 +163,13 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <typename JClass>
     struct invoker_jclass
     {
-        typedef typename boost::mpl::insert_range<
+        using type = typename boost::mpl::insert_range<
             JClass,
             typename boost::mpl::begin<JClass>::type,
             boost::mpl::string<
                 'com/', 'yand', 'ex/c', 'onte',
                 'st/i', 'nvok', 'er/'>
-        >::type type;
+        >::type;
     };
 
     template <typename CType, typename JClass, bool IsCamelCase=true>

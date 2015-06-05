@@ -9,7 +9,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <typename T>
     LocalRef<jobject> newPrimitiveWrapper(const T obj)
     {
-        typedef traits::jinfo<T> jinfo;
+        using jinfo = traits::jinfo<T>;
         static_assert(jinfo::is_primitive, "Should be primitive.");
 
         const Context::Handle ctx = Context::getContext();
