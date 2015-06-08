@@ -231,7 +231,8 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     template <>
     struct info<system::lxc::MountConfig>:
         invoker_object_info<system::lxc::MountConfig,
-                            info<system::lxc::MountConfig>>
+                            info<system::lxc::MountConfig>,
+                            false>
     {
         static std::string jclassbase() { return "lxc/IMountConfig"; }
     };
