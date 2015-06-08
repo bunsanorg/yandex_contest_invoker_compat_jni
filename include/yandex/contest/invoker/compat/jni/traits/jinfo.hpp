@@ -2,11 +2,6 @@
 
 #include <jni.h>
 
-#include <boost/mpl/char.hpp>
-#include <boost/mpl/insert_range.hpp>
-#include <boost/mpl/push_back.hpp>
-#include <boost/mpl/push_front.hpp>
-
 #include <string>
 
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
@@ -21,7 +16,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
         using jtype = JType;
         static std::string jwrapperclass()
         {
-            return "java/lang/" + JInfo::jwrapperclass();
+            return "java/lang/" + JInfo::jwrapperclassbase();
         }
         static std::string jgetsig()
         {
@@ -44,7 +39,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jbyte>: basic_primitive_jinfo<jbyte, jinfo<jbyte>>
     {
         static std::string jclass() { return "B"; }
-        static std::string jwrapperclass() { return "Byte"; }
+        static std::string jwrapperclassbase() { return "Byte"; }
         static std::string jget() { return "byteValue"; }
     };
 
@@ -52,7 +47,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jchar>: basic_primitive_jinfo<jchar, jinfo<jchar>>
     {
         static std::string jclass() { return "C"; }
-        static std::string jwrapperclass() { return "Character"; }
+        static std::string jwrapperclassbase() { return "Character"; }
         static std::string jget() { return "charValue"; }
     };
 
@@ -60,7 +55,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jdouble>: basic_primitive_jinfo<jdouble, jinfo<jdouble>>
     {
         static std::string jclass() { return "D"; }
-        static std::string jwrapperclass() { return "Double"; }
+        static std::string jwrapperclassbase() { return "Double"; }
         static std::string jget() { return "doubleValue"; }
     };
 
@@ -68,7 +63,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jfloat>: basic_primitive_jinfo<jfloat, jinfo<jfloat>>
     {
         static std::string jclass() { return "F"; }
-        static std::string jwrapperclass() { return "Float"; }
+        static std::string jwrapperclassbase() { return "Float"; }
         static std::string jget() { return "floatValue"; }
     };
 
@@ -76,7 +71,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jint>: basic_primitive_jinfo<jint, jinfo<jint>>
     {
         static std::string jclass() { return "I"; }
-        static std::string jwrapperclass() { return "Integer"; }
+        static std::string jwrapperclassbase() { return "Integer"; }
         static std::string jget() { return "intValue"; }
     };
 
@@ -84,7 +79,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jlong>: basic_primitive_jinfo<jlong, jinfo<jlong>>
     {
         static std::string jclass() { return "J"; }
-        static std::string jwrapperclass() { return "Long"; }
+        static std::string jwrapperclassbase() { return "Long"; }
         static std::string jget() { return "longValue"; }
     };
 
@@ -92,7 +87,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jshort>: basic_primitive_jinfo<jshort, jinfo<jshort>>
     {
         static std::string jclass() { return "S"; }
-        static std::string jwrapperclass() { return "Short"; }
+        static std::string jwrapperclassbase() { return "Short"; }
         static std::string jget() { return "shortValue"; }
     };
 
@@ -100,7 +95,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<void>: basic_primitive_jinfo<void, jinfo<void>>
     {
         static std::string jclass() { return "V"; }
-        static std::string jwrapperclass() { return "Void"; }
+        static std::string jwrapperclassbase() { return "Void"; }
         static std::string jget() { return "NO"; }
     };
 
@@ -108,7 +103,7 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     struct jinfo<jboolean>: basic_primitive_jinfo<jboolean, jinfo<jboolean>>
     {
         static std::string jclass() { return "Z"; }
-        static std::string jwrapperclass() { return "Boolean"; }
+        static std::string jwrapperclassbase() { return "Boolean"; }
         static std::string jget() { return "booleanValue"; }
     };
 }}}}}}
