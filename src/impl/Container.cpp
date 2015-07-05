@@ -10,15 +10,15 @@
 
 #include <yandex/contest/invoker/compat/ContainerContext.hpp>
 
+#include <yandex/contest/invoker/lxc/Config.hpp>
 #include <yandex/contest/StreamLog.hpp>
-#include <yandex/contest/system/lxc/Config.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::compat::ContainerContext;
 using yandex::contest::invoker::compat::ContainerContextPointer;
 using yandex::contest::invoker::ContainerConfig;
 using yandex::contest::invoker::ProcessGroup;
-namespace lxc = yandex::contest::system::lxc;
+namespace lxc = yandex::contest::invoker::lxc;
 
 namespace
 {

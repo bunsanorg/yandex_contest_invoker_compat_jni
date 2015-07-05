@@ -212,35 +212,35 @@ namespace yandex{namespace contest{namespace invoker{namespace compat{namespace 
     };
 
     template <>
-    struct info<system::lxc::Config>:
-        invoker_object_info<system::lxc::Config,
-                            info<system::lxc::Config>,
+    struct info<invoker::lxc::Config>:
+        invoker_object_info<invoker::lxc::Config,
+                            info<invoker::lxc::Config>,
                             false>
     {
         static std::string jclassbase() { return "lxc/ILxcConfig"; }
     };
 
     template <>
-    struct info<system::lxc::Config::Arch>:
-        invoker_enum_info<system::lxc::Config::Arch,
-                          info<system::lxc::Config::Arch>>
+    struct info<invoker::lxc::Config::Arch>:
+        invoker_enum_info<invoker::lxc::Config::Arch,
+                          info<invoker::lxc::Config::Arch>>
     {
         static std::string jclassbase() { return "lxc/ILxcConfig$Arch"; }
     };
 
     template <>
-    struct info<system::lxc::MountConfig>:
-        invoker_object_info<system::lxc::MountConfig,
-                            info<system::lxc::MountConfig>,
+    struct info<invoker::lxc::MountConfig>:
+        invoker_object_info<invoker::lxc::MountConfig,
+                            info<invoker::lxc::MountConfig>,
                             false>
     {
         static std::string jclassbase() { return "lxc/IMountConfig"; }
     };
 
     template <>
-    struct info<system::lxc::RootfsConfig>:
-        invoker_object_info<system::lxc::RootfsConfig,
-                            info<system::lxc::RootfsConfig>,
+    struct info<invoker::lxc::RootfsConfig>:
+        invoker_object_info<invoker::lxc::RootfsConfig,
+                            info<invoker::lxc::RootfsConfig>,
                             false>
     {
         static std::string jclassbase() { return "lxc/IRootfsConfig"; }

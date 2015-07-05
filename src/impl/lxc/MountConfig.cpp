@@ -10,11 +10,11 @@
 #include <yandex/contest/invoker/compat/jni/String.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
-namespace lxc = yandex::contest::system::lxc;
+namespace invoker = yandex::contest::invoker;
 
 namespace
 {
-    CxxClass<lxc::MountConfig> mountConfigClass_;
+    CxxClass<invoker::lxc::MountConfig> mountConfigClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_lxc_MountConfig_classInit(
@@ -34,7 +34,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_MountConfig_finalize(
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace lxc{namespace mount_config
 {
-    LocalRef<jobject> create(const system::lxc::MountConfig &config)
+    LocalRef<jobject> create(const invoker::lxc::MountConfig &config)
     {
         return mountConfigClass_.setPointerCreate(config);
     }
@@ -46,7 +46,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_MountConfig_create(
     YANDEX_JNI_METHOD_BEGIN(env)
     mountConfigClass_.copyToPointer(
         self,
-        config::load<lxc::MountConfig>(mountConfig)
+        config::load<invoker::lxc::MountConfig>(mountConfig)
     );
     YANDEX_JNI_METHOD_END_VOID(env)
 }

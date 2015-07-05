@@ -13,12 +13,12 @@
 #include <yandex/contest/invoker/compat/jni/String.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
-namespace lxc = yandex::contest::system::lxc;
+namespace invoker = yandex::contest::invoker;
 
 namespace
 {
-    CxxClass<lxc::Config> configClass_;
-    GlobalEnumClass<lxc::Config::Arch> archEnumClass_;
+    CxxClass<invoker::lxc::Config> configClass_;
+    GlobalEnumClass<invoker::lxc::Config::Arch> archEnumClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_classInit(
@@ -39,7 +39,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_finalize(
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace lxc{namespace config
 {
-    LocalRef<jobject> create(const system::lxc::Config &config)
+    LocalRef<jobject> create(const invoker::lxc::Config &config)
     {
         return configClass_.setPointerCreate(config);
     }
@@ -49,7 +49,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_LxcConfig_create(
     JNIEnv *env, jobject self, jobject config)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
-    configClass_.copyToPointer(self, config::load<lxc::Config>(config));
+    configClass_.copyToPointer(self, config::load<invoker::lxc::Config>(config));
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 

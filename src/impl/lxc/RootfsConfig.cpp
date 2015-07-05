@@ -8,11 +8,11 @@
 #include <yandex/contest/invoker/compat/jni/String.hpp>
 
 using namespace yandex::contest::invoker::compat::jni;
-namespace lxc = yandex::contest::system::lxc;
+namespace invoker = yandex::contest::invoker;
 
 namespace
 {
-    CxxClass<lxc::RootfsConfig> rootfsConfigClass_;
+    CxxClass<invoker::lxc::RootfsConfig> rootfsConfigClass_;
 }
 
 void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_classInit(
@@ -32,7 +32,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_finalize(
 namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
     namespace impl{namespace lxc{namespace rootfs_config
 {
-    LocalRef<jobject> create(const system::lxc::RootfsConfig &config)
+    LocalRef<jobject> create(const invoker::lxc::RootfsConfig &config)
     {
         return rootfsConfigClass_.setPointerCreate(config);
     }
@@ -42,7 +42,7 @@ void Java_com_yandex_contest_invoker_impl_lxc_RootfsConfig_create(
     JNIEnv *env, jobject self, jobject config)
 {
     YANDEX_JNI_METHOD_BEGIN(env)
-    rootfsConfigClass_.copyToPointer(self, config::load<lxc::RootfsConfig>(config));
+    rootfsConfigClass_.copyToPointer(self, config::load<invoker::lxc::RootfsConfig>(config));
     YANDEX_JNI_METHOD_END_VOID(env)
 }
 
