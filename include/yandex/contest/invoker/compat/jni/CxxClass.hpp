@@ -5,154 +5,127 @@
 
 #include <utility>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    class BaseCxxClass: public GlobalJClass
-    {
-    public:
-        template <typename ... Args>
-        explicit BaseCxxClass(Args &&...args)
-        {
-            assign(std::forward<Args>(args)...);
-        }
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-        BaseCxxClass()=default;
+class BaseCxxClass : public GlobalJClass {
+ public:
+  template <typename... Args>
+  explicit BaseCxxClass(Args &&... args) {
+    assign(std::forward<Args>(args)...);
+  }
 
-        template <typename C, typename P>
-        void assign(const C &clazz, const P &ptr)
-        {
-            GlobalJClass::assign(clazz);
-            assignCxx(ptr);
-        }
+  BaseCxxClass() = default;
 
-    protected:
-        LocalRef<jobject> createDefault() const
-        {
-            return newObject(defCtorId_);
-        }
+  template <typename C, typename P>
+  void assign(const C &clazz, const P &ptr) {
+    GlobalJClass::assign(clazz);
+    assignCxx(ptr);
+  }
 
-    protected:
-        template <typename T>
-        void setPointerRaw(jobject self, T *ptr) const
-        {
-            const Context::Handle ctx = Context::getContext();
-            ctx->env()->SetLongField(self, ptrId_, ptrToJlong(ptr));
-            ctx->throwIfOccured();
-        }
+ protected:
+  LocalRef<jobject> createDefault() const { return newObject(defCtorId_); }
 
-        void setPointerRaw(jobject self, std::nullptr_t) const
-        {
-            setPointerRaw(self, static_cast<void *>(nullptr));
-        }
+ protected:
+  template <typename T>
+  void setPointerRaw(jobject self, T *const ptr) const {
+    const Context::Handle ctx = Context::getContext();
+    ctx->env()->SetLongField(self, ptrId_, ptrToJlong(ptr));
+    ctx->throwIfOccured();
+  }
 
-        template <typename T>
-        T *getPointerRaw(jobject self) const
-        {
-            BOOST_ASSERT(ptrId_);
-            const Context::Handle ctx = Context::getContext();
-            jlong ptrLong = ctx->env()->GetLongField(self, ptrId_);
-            ctx->throwIfOccured();
-            return jlongToPtr<T>(ptrLong);
-        }
+  void setPointerRaw(jobject self, std::nullptr_t) const {
+    setPointerRaw(self, static_cast<void *>(nullptr));
+  }
 
-    private:
-        template <typename T>
-        static T *jlongToPtr(jlong ptrLong)
-        {
-            static_assert(
-                sizeof(ptrLong) >= sizeof(T *),
-                "Insufficient integer size."
-            );
-            return reinterpret_cast<T *>(ptrLong);
-        }
+  template <typename T>
+  T *getPointerRaw(jobject self) const {
+    BOOST_ASSERT(ptrId_);
+    const Context::Handle ctx = Context::getContext();
+    jlong ptrLong = ctx->env()->GetLongField(self, ptrId_);
+    ctx->throwIfOccured();
+    return jlongToPtr<T>(ptrLong);
+  }
 
-        template <typename T>
-        static jlong ptrToJlong(T *ptr)
-        {
-            static_assert(
-                sizeof(jlong) >= sizeof(T *),
-                "Insufficient integer size."
-            );
-            return reinterpret_cast<jlong>(ptr);
-        }
+ private:
+  template <typename T>
+  static T *jlongToPtr(jlong ptrLong) {
+    static_assert(sizeof(ptrLong) >= sizeof(T *), "Insufficient integer size.");
+    return reinterpret_cast<T *>(ptrLong);
+  }
 
-    private:
-        void assignCxx(const char *const ptrName);
+  template <typename T>
+  static jlong ptrToJlong(T *ptr) {
+    static_assert(sizeof(jlong) >= sizeof(T *), "Insufficient integer size.");
+    return reinterpret_cast<jlong>(ptr);
+  }
 
-    private:
-        jmethodID defCtorId_;
-        jfieldID ptrId_;
-    };
+ private:
+  void assignCxx(const char *const ptrName);
 
-    template <typename T>
-    class CxxClass: public BaseCxxClass
-    {
-    public:
-        using Type = T;
+ private:
+  jmethodID defCtorId_;
+  jfieldID ptrId_;
+};
 
-    public:
-        using BaseCxxClass::BaseCxxClass;
+template <typename T>
+class CxxClass : public BaseCxxClass {
+ public:
+  using Type = T;
 
-        CxxClass()=default;
+ public:
+  using BaseCxxClass::BaseCxxClass;
 
-        void setPointer(jobject self, std::unique_ptr<T> &&ptr) const
-        {
-            setPointerRaw(self, ptr.get());
-            ptr.release();
-        }
+  CxxClass() = default;
 
-        T *getPointer(jobject self) const
-        {
-            return getPointerRaw<T>(self);
-        }
+  void setPointer(jobject self, std::unique_ptr<T> &&ptr) const {
+    setPointerRaw(self, ptr.get());
+    ptr.release();
+  }
 
-        std::unique_ptr<T> releasePointer(jobject self) const
-        {
-            std::unique_ptr<T> ptr(getPointerRaw<T>(self));
-            setPointer(self, std::unique_ptr<T>());
-            return ptr;
-        }
+  T *getPointer(jobject self) const { return getPointerRaw<T>(self); }
 
-        void setReference(jobject self, T &obj) const
-        {
-            setPointerRaw(self, &obj);
-        }
+  std::unique_ptr<T> releasePointer(jobject self) const {
+    std::unique_ptr<T> ptr(getPointerRaw<T>(self));
+    setPointer(self, std::unique_ptr<T>());
+    return ptr;
+  }
 
-        T &getReference(jobject self) const
-        {
-            T *const ptr = getPointerRaw<T>(self);
-            BOOST_ASSERT(ptr);
-            return *ptr;
-        }
+  void setReference(jobject self, T &obj) const { setPointerRaw(self, &obj); }
 
-        void clearReference(jobject self) const
-        {
-            setPointerRaw(self, nullptr);
-        }
+  T &getReference(jobject self) const {
+    T *const ptr = getPointerRaw<T>(self);
+    BOOST_ASSERT(ptr);
+    return *ptr;
+  }
 
-        LocalRef<jobject> setReferenceCreate(T &obj) const
-        {
-            LocalRef<jobject> ref(createDefault());
-            setReference(ref.get(), obj);
-            return ref;
-        }
+  void clearReference(jobject self) const { setPointerRaw(self, nullptr); }
 
-        void finalize(jobject self) const
-        {
-            releasePointer(self);
-        }
+  LocalRef<jobject> setReferenceCreate(T &obj) const {
+    LocalRef<jobject> ref(createDefault());
+    setReference(ref.get(), obj);
+    return ref;
+  }
 
-        void copyToPointer(jobject self, const T &obj) const
-        {
-            std::unique_ptr<T> ptr(new T(obj));
-            setPointer(self, std::move(ptr));
-        }
+  void finalize(jobject self) const { releasePointer(self); }
 
-        LocalRef<jobject> setPointerCreate(const T &obj) const
-        {
-            LocalRef<jobject> ref(createDefault());
-            copyToPointer(ref.get(), obj);
-            return ref;
-        }
-    };
-}}}}}
+  void copyToPointer(jobject self, const T &obj) const {
+    std::unique_ptr<T> ptr(new T(obj));
+    setPointer(self, std::move(ptr));
+  }
+
+  LocalRef<jobject> setPointerCreate(const T &obj) const {
+    LocalRef<jobject> ref(createDefault());
+    copyToPointer(ref.get(), obj);
+    return ref;
+  }
+};
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

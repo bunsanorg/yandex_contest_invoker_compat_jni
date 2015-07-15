@@ -4,29 +4,35 @@
 
 #include <memory>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    namespace local_ref_detail
-    {
-        struct DeleteLocalRef
-        {
-            void operator()(jobject obj) const noexcept
-            {
-                Context::getContext()->envNoExcept()->DeleteLocalRef(obj);
-            }
-        };
-    }
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-    template <typename Ptr>
-    class LocalRef;
+namespace local_ref_detail {
+struct DeleteLocalRef {
+  void operator()(jobject obj) const noexcept {
+    Context::getContext()->envNoExcept()->DeleteLocalRef(obj);
+  }
+};
+}  // namespace local_ref_detail
 
-    template <typename T>
-    class LocalRef<T *>: public std::unique_ptr<T, local_ref_detail::DeleteLocalRef>
-    {
-    private:
-        using Base = std::unique_ptr<T, local_ref_detail::DeleteLocalRef>;
+template <typename Ptr>
+class LocalRef;
 
-    public:
-        using Base::Base;
-    };
-}}}}}
+template <typename T>
+class LocalRef<T *>
+    : public std::unique_ptr<T, local_ref_detail::DeleteLocalRef> {
+ private:
+  using Base = std::unique_ptr<T, local_ref_detail::DeleteLocalRef>;
+
+ public:
+  using Base::Base;
+};
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

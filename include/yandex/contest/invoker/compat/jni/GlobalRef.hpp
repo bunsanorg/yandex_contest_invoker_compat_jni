@@ -6,77 +6,68 @@
 
 #include <utility>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    template <typename Ptr>
-    class GlobalRef;
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-    template <typename T>
-    class GlobalRef<T *>
-    {
-    public:
-        GlobalRef(): ref_(nullptr) {}
+template <typename Ptr>
+class GlobalRef;
 
-        explicit GlobalRef(T *obj):
-            ref_(static_cast<T *>(
-                Context::getContext()->env()->NewGlobalRef(obj)
-            )) {}
+template <typename T>
+class GlobalRef<T *> {
+ public:
+  GlobalRef() : ref_(nullptr) {}
 
-        ~GlobalRef()
-        {
-            if (ref_)
-            {
-                const boost::optional<Context::Handle> ctx =
-                    Context::getContextOptional();
-                if (ctx)
-                    ctx.get()->envNoExcept()->DeleteGlobalRef(ref_);
-            }
-        }
+  explicit GlobalRef(T *obj)
+      : ref_(
+            static_cast<T *>(Context::getContext()->env()->NewGlobalRef(obj))) {
+  }
 
-        GlobalRef(GlobalRef<T *> &&ref) noexcept:
-            GlobalRef()
-        {
-            swap(ref);
-        }
-
-        GlobalRef<T *> &operator=(GlobalRef<T *> &&ref) noexcept
-        {
-            swap(ref);
-            ref.reset();
-        }
-
-        GlobalRef(const GlobalRef<T *> &)=delete;
-        GlobalRef<T *> &operator=(const GlobalRef<T *> &)=delete;
-
-        void reset(T *obj=nullptr)
-        {
-            GlobalRef<T *> ref(obj);
-            swap(ref);
-        }
-
-        T *get() const noexcept
-        {
-            return ref_;
-        }
-
-        explicit operator bool() const noexcept
-        {
-            return ref_;
-        }
-
-        void swap(GlobalRef<T *> &ref) noexcept
-        {
-            using boost::swap;
-            swap(ref_, ref.ref_);
-        }
-
-    private:
-        T *ref_;
-    };
-
-    template <typename Ptr>
-    inline void swap(GlobalRef<Ptr> &a, GlobalRef<Ptr> &b) noexcept
-    {
-        a.swap(b);
+  ~GlobalRef() {
+    if (ref_) {
+      const boost::optional<Context::Handle> ctx =
+          Context::getContextOptional();
+      if (ctx) ctx.get()->envNoExcept()->DeleteGlobalRef(ref_);
     }
-}}}}}
+  }
+
+  GlobalRef(GlobalRef<T *> &&ref) noexcept : GlobalRef() { swap(ref); }
+
+  GlobalRef<T *> &operator=(GlobalRef<T *> &&ref) noexcept {
+    swap(ref);
+    ref.reset();
+  }
+
+  GlobalRef(const GlobalRef<T *> &) = delete;
+  GlobalRef<T *> &operator=(const GlobalRef<T *> &) = delete;
+
+  void reset(T *obj = nullptr) {
+    GlobalRef<T *> ref(obj);
+    swap(ref);
+  }
+
+  T *get() const noexcept { return ref_; }
+
+  explicit operator bool() const noexcept { return ref_; }
+
+  void swap(GlobalRef<T *> &ref) noexcept {
+    using boost::swap;
+    swap(ref_, ref.ref_);
+  }
+
+ private:
+  T *ref_;
+};
+
+template <typename Ptr>
+inline void swap(GlobalRef<Ptr> &a, GlobalRef<Ptr> &b) noexcept {
+  a.swap(b);
+}
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

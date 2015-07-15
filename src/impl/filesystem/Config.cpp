@@ -17,104 +17,103 @@
 using namespace yandex::contest::invoker::compat::jni;
 namespace filesystem = yandex::contest::invoker::filesystem;
 
-namespace
-{
-    CxxClass<filesystem::Config> configClass_;
-}
+namespace {
+CxxClass<filesystem::Config> configClass_;
+}  // namespace
 
 void Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_classInit(
-    JNIEnv *env, jclass configClass)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    configClass_.assign(configClass, "impl");
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jclass configClass) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  configClass_.assign(configClass, "impl");
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
 void Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_finalize(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_FINALIZE(env, configClass_, self)
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_FINALIZE(env, configClass_, self)
 }
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace impl{namespace filesystem{namespace config
-{
-    LocalRef<jobject> create(const invoker::filesystem::Config &config)
-    {
-        return configClass_.setPointerCreate(config);
-    }
-}}}}}}}}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace impl {
+namespace filesystem {
+namespace config {
+LocalRef<jobject> create(const invoker::filesystem::Config &config) {
+  return configClass_.setPointerCreate(config);
+}
+}  // namespace config
+}  // namespace filesystem
+}  // namespace impl
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
 
 void Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_create(
-    JNIEnv *env, jobject self, jobject filesystemConfig)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    configClass_.copyToPointer(self, config::load<filesystem::Config>(filesystemConfig));
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jobject self, jobject filesystemConfig) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  configClass_.copyToPointer(
+      self, config::load<filesystem::Config>(filesystemConfig));
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-namespace
-{
-    // note: boost::apply_visitor does not support move semantics
-    class CreateFileVisitor: public boost::static_visitor<void>
-    {
-    public:
-        explicit CreateFileVisitor(LocalRef<jobject> &createFile):
-            createFile_(createFile) {}
+namespace {
+// note: boost::apply_visitor does not support move semantics
+class CreateFileVisitor : public boost::static_visitor<void> {
+ public:
+  explicit CreateFileVisitor(LocalRef<jobject> &createFile)
+      : createFile_(createFile) {}
 
-        void operator()(const filesystem::RegularFile &regularFile) const
-        {
-            createFile_ = impl::filesystem::regular_file::create(regularFile);
-        }
+  void operator()(const filesystem::RegularFile &regularFile) const {
+    createFile_ = impl::filesystem::regular_file::create(regularFile);
+  }
 
-        void operator()(const filesystem::Device &device) const
-        {
-            createFile_ = impl::filesystem::device::create(device);
-        }
+  void operator()(const filesystem::Device &device) const {
+    createFile_ = impl::filesystem::device::create(device);
+  }
 
-        void operator()(const filesystem::Directory &directory) const
-        {
-            createFile_ = impl::filesystem::directory::create(directory);
-        }
+  void operator()(const filesystem::Directory &directory) const {
+    createFile_ = impl::filesystem::directory::create(directory);
+  }
 
-        void operator()(const filesystem::SymLink &symLink) const
-        {
-            createFile_ = impl::filesystem::sym_link::create(symLink);
-        }
+  void operator()(const filesystem::SymLink &symLink) const {
+    createFile_ = impl::filesystem::sym_link::create(symLink);
+  }
 
-        void operator()(const filesystem::Fifo &fifo) const
-        {
-            createFile_ = impl::filesystem::fifo::create(fifo);
-        }
+  void operator()(const filesystem::Fifo &fifo) const {
+    createFile_ = impl::filesystem::fifo::create(fifo);
+  }
 
-    private:
-        LocalRef<jobject> &createFile_;
-    };
+ private:
+  LocalRef<jobject> &createFile_;
+};
 
-    struct CreateArchive
-    {
-        CreateArchive &operator&(const filesystem::CreateFile::Variant &createFileVariant)
-        {
-            boost::apply_visitor(CreateFileVisitor(createFile), createFileVariant);
-            return *this;
-        }
+struct CreateArchive {
+  CreateArchive &operator&(
+      const filesystem::CreateFile::Variant &createFileVariant) {
+    boost::apply_visitor(CreateFileVisitor(createFile), createFileVariant);
+    return *this;
+  }
 
-        LocalRef<jobject> createFile;
-    };
+  LocalRef<jobject> createFile;
+};
 
-    LocalRef<jobject> createFileCreate(const filesystem::CreateFile &createFile)
-    {
-        CreateArchive ar;
-        // FIXME boost::serialization::access should be used
-        const_cast<filesystem::CreateFile &>(createFile).serialize(ar, 0);
-        return std::move(ar.createFile);
-    }
+LocalRef<jobject> createFileCreate(const filesystem::CreateFile &createFile) {
+  CreateArchive ar;
+  // FIXME boost::serialization::access should be used
+  const_cast<filesystem::CreateFile &>(createFile).serialize(ar, 0);
+  return std::move(ar.createFile);
 }
+}  // namespace
 
-jobject Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_getCreateFiles(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
-    return newArrayList(this_->createFiles, createFileCreate).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_filesystem_FilesystemConfig_getCreateFiles(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, configClass_, self)
+  return newArrayList(this_->createFiles, createFileCreate).release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }

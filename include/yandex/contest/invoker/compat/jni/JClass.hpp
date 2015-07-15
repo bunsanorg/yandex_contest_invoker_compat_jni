@@ -8,143 +8,144 @@
 
 #include <utility>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    template <typename ClassRef>
-    class BasicJClass: private boost::noncopyable
-    {
-    public:
-        /*template <typename T>
-        class StaticField
-        {
-        public:
-            explicit StaticField(jclass clazz, jfieldID fieldId):
-                class_(clazz),
-                fieldId_(fieldId) {}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-            StaticField(const StaticField<T> &)=default;
-            StaticField<T> &operator=(const StaticField<T> &)=default;
+template <typename ClassRef>
+class BasicJClass : private boost::noncopyable {
+ public:
+  /*template <typename T>
+  class StaticField
+  {
+  public:
+      explicit StaticField(jclass clazz, jfieldID fieldId):
+          class_(clazz),
+          fieldId_(fieldId) {}
 
-        private:
-            jclass class_;
-            jfieldID fieldId_;
-        };
+      StaticField(const StaticField<T> &)=default;
+      StaticField<T> &operator=(const StaticField<T> &)=default;
 
-        template <typename T>
-        class Field
-        {
-        public:
-            explicit Field(jfieldID fieldId):
-                fieldId_(fieldId) {}
+  private:
+      jclass class_;
+      jfieldID fieldId_;
+  };
 
-            Field(const Field<T> &)=default;
-            Field<T> &operator=(const Field<T> &)=default;
+  template <typename T>
+  class Field
+  {
+  public:
+      explicit Field(jfieldID fieldId):
+          fieldId_(fieldId) {}
 
-        private:
-            jfieldID fieldId_;
-        };*/
+      Field(const Field<T> &)=default;
+      Field<T> &operator=(const Field<T> &)=default;
 
-    public:
-        template <typename ... Args>
-        explicit BasicJClass(Args &&...args)
-        {
-            assign(std::forward<Args>(args)...);
-        }
+  private:
+      jfieldID fieldId_;
+  };*/
 
-        BasicJClass()=default;
+ public:
+  template <typename... Args>
+  explicit BasicJClass(Args &&... args) {
+    assign(std::forward<Args>(args)...);
+  }
 
-        void assign(jclass clazz);
+  BasicJClass() = default;
 
-        void assign(const char *const className);
+  void assign(jclass clazz);
 
-        void assign(const std::string &className)
-        {
-            assign(className.c_str());
-        }
+  void assign(const char *const className);
 
-    public:
-        bool isInstance(jobject obj) const
-        {
-            const Context::Handle ctx = Context::getContext();
-            return ctx->env()->IsInstanceOf(obj, class_.get());
-        }
+  void assign(const std::string &className) { assign(className.c_str()); }
 
-        template <typename ... Args>
-        LocalRef<jobject> newObject(jmethodID ctorId, Args &&...args) const
-        {
-            const Context::Handle ctx = Context::getContext();
-            LocalRef<jobject> obj(ctx->env()->NewObject(
-                clazz(), ctorId, std::forward<Args>(args)...));
-            ctx->throwIfOccured();
-            return obj;
-        }
+ public:
+  bool isInstance(jobject obj) const {
+    const Context::Handle ctx = Context::getContext();
+    return ctx->env()->IsInstanceOf(obj, class_.get());
+  }
 
-        template <typename ... Args>
-        LocalRef<jobject> callStaticObjectMethod(jmethodID method, Args &&...args) const
-        {
-            const Context::Handle ctx = Context::getContext();
-            LocalRef<jobject> obj(ctx->env()->CallStaticObjectMethod(
-                clazz(), method, std::forward<Args>(args)...));
-            return obj;
-        }
+  template <typename... Args>
+  LocalRef<jobject> newObject(jmethodID ctorId, Args &&... args) const {
+    const Context::Handle ctx = Context::getContext();
+    LocalRef<jobject> obj(
+        ctx->env()->NewObject(clazz(), ctorId, std::forward<Args>(args)...));
+    ctx->throwIfOccured();
+    return obj;
+  }
 
-#define YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(RETURN, TYPE) \
-        template <typename ... Args> \
-        RETURN callStatic##TYPE##Method(jmethodID method, Args &&...args) const \
-        { \
-            const Context::Handle ctx = Context::getContext(); \
-            return ctx->env()->CallStatic##TYPE##Method( \
-                clazz(), method, std::forward<Args>(args)...); \
-        }
+  template <typename... Args>
+  LocalRef<jobject> callStaticObjectMethod(jmethodID method,
+                                           Args &&... args) const {
+    const Context::Handle ctx = Context::getContext();
+    LocalRef<jobject> obj(ctx->env()->CallStaticObjectMethod(
+        clazz(), method, std::forward<Args>(args)...));
+    return obj;
+  }
 
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jboolean, Boolean)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jbyte, Byte)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jchar, Char)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jshort, Short)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jint, Int)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jlong, Long)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jfloat, Float)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jdouble, Double)
-        YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(void, Void)
+#define YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(RETURN, TYPE)                 \
+  template <typename... Args>                                                 \
+  RETURN callStatic##TYPE##Method(jmethodID method, Args &&... args) const {  \
+    const Context::Handle ctx = Context::getContext();                        \
+    return ctx->env()->CallStatic##TYPE##Method(clazz(), method,              \
+                                                std::forward<Args>(args)...); \
+  }
 
-    public:
-        jmethodID getMethodId(const char *const name, const char *const sig);
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jboolean, Boolean)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jbyte, Byte)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jchar, Char)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jshort, Short)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jint, Int)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jlong, Long)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jfloat, Float)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(jdouble, Double)
+  YANDEX_JNI_JCLASS_STATIC_CALL_PRIMITIVE(void, Void)
 
-        jmethodID getStaticMethodId(const char *const name, const char *const sig);
+ public:
+  jmethodID getMethodId(const char *name, const char *sig);
 
-        jfieldID getFieldId(const char *const name, const char *const sig);
+  jmethodID getStaticMethodId(const char *name, const char *sig);
 
-        jfieldID getStaticFieldId(const char *const name, const char *const sig);
+  jfieldID getFieldId(const char *name, const char *sig);
 
-        /*template <typename T, typename ... Args>
-        StaticField<T> getStaticField(Args &&...args)
-        {
-            StaticField<T> field(
-                class_.get(),
-                getStaticFieldId(std::forward<Args>(args)...)
-            );
-            return field;
-        }
+  jfieldID getStaticFieldId(const char *name, const char *sig);
 
-        template <typename T, typename ... Args>
-        Field<T> getField(Args &&...args)
-        {
-            Field<T> field(
-                class_.get(),
-                getFieldId(std::forward<Args>(args)...)
-            );
-            return field;
-        }*/
+  /*template <typename T, typename ... Args>
+  StaticField<T> getStaticField(Args &&...args)
+  {
+      StaticField<T> field(
+          class_.get(),
+          getStaticFieldId(std::forward<Args>(args)...)
+      );
+      return field;
+  }
 
-    protected:
-        jclass clazz() const;
+  template <typename T, typename ... Args>
+  Field<T> getField(Args &&...args)
+  {
+      Field<T> field(
+          class_.get(),
+          getFieldId(std::forward<Args>(args)...)
+      );
+      return field;
+  }*/
 
-    private:
-        ClassRef class_;
-    };
+ protected:
+  jclass clazz() const;
 
-    using GlobalJClass = BasicJClass<GlobalRef<jclass>>;
-    using LocalJClass = BasicJClass<LocalRef<jclass>>;
-}}}}}
+ private:
+  ClassRef class_;
+};
+
+using GlobalJClass = BasicJClass<GlobalRef<jclass>>;
+using LocalJClass = BasicJClass<LocalRef<jclass>>;
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
 
 #include "JClass.tcc"

@@ -9,35 +9,44 @@
 using namespace yandex::contest::invoker::compat::jni;
 namespace filesystem = yandex::contest::invoker::filesystem;
 
-namespace
-{
-    CxxClass<filesystem::RegularFile> regularFileClass_;
-}
+namespace {
+CxxClass<filesystem::RegularFile> regularFileClass_;
+}  // namespace
 
 void Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_classInit(
-    JNIEnv *env, jclass regularFileClass)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    regularFileClass_.assign(regularFileClass, "impl");
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jclass regularFileClass) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  regularFileClass_.assign(regularFileClass, "impl");
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace impl{namespace filesystem{namespace regular_file
-{
-    LocalRef<jobject> create(const invoker::filesystem::RegularFile &regularFile)
-    {
-        return regularFileClass_.setPointerCreate(regularFile);
-    }
-}}}}}}}}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace impl {
+namespace filesystem {
+namespace regular_file {
+LocalRef<jobject> create(const invoker::filesystem::RegularFile &regularFile) {
+  return regularFileClass_.setPointerCreate(regularFile);
+}
+}  // namespace regular_file
+}  // namespace filesystem
+}  // namespace impl
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
 
 jstring Java_com_yandex_contest_invoker_impl_filesystem_RegularFile_getSource(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, regularFileClass_, self)
-    if (this_->source)
-        return newStringUTF(this_->source->string()).release();
-    else
-        return nullptr;
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, regularFileClass_, self)
+  if (this_->source) {
+    return newStringUTF(this_->source->string()).release();
+  } else {
+    return nullptr;
+  }
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }

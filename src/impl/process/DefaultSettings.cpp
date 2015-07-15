@@ -21,113 +21,113 @@ using yandex::contest::invoker::NonPipeStream;
 using yandex::contest::invoker::File;
 using yandex::contest::invoker::FdAlias;
 
-namespace
-{
-    CxxClass<Process::DefaultSettings> defaultSettingsClass_;
-}
+namespace {
+CxxClass<Process::DefaultSettings> defaultSettingsClass_;
+}  // namespace
 
 void Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_classInit(
-    JNIEnv *env, jclass defaultSettingsClass)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    defaultSettingsClass_.assign(defaultSettingsClass, "impl");
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jclass defaultSettingsClass) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  defaultSettingsClass_.assign(defaultSettingsClass, "impl");
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
 void Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_finalize(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_FINALIZE(env, defaultSettingsClass_, self)
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_FINALIZE(env, defaultSettingsClass_, self)
 }
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace impl{namespace process{namespace default_settings
-{
-    LocalRef<jobject> create(const Process::DefaultSettings &defaultSettings)
-    {
-        return defaultSettingsClass_.setPointerCreate(defaultSettings);
-    }
-}}}}}}}}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace impl {
+namespace process {
+namespace default_settings {
+LocalRef<jobject> create(const Process::DefaultSettings &defaultSettings) {
+  return defaultSettingsClass_.setPointerCreate(defaultSettings);
+}
+}  // namespace default_settings
+}  // namespace process
+}  // namespace impl
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
 
 void Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_create(
-    JNIEnv *env, jobject self, jobject defaultSettings)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    defaultSettingsClass_.copyToPointer(
-        self, config::load<Process::DefaultSettings>(defaultSettings));
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jobject self, jobject defaultSettings) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  defaultSettingsClass_.copyToPointer(
+      self, config::load<Process::DefaultSettings>(defaultSettings));
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getResourceLimits(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return impl::process::resource_limits::create(this_->resourceLimits).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getResourceLimits(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return impl::process::resource_limits::create(this_->resourceLimits)
+      .release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getEnvironment(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return newHashMap(this_->environment, newStringUTF, newStringUTF).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getEnvironment(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return newHashMap(this_->environment, newStringUTF, newStringUTF).release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jstring Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getCurrentPath(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return newStringUTF(this_->currentPath.string()).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jstring
+Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getCurrentPath(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return newStringUTF(this_->currentPath.string()).release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getOwnerId(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return impl::unistd::access::id::create(this_->ownerId).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getOwnerId(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return impl::unistd::access::id::create(this_->ownerId).release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-namespace
-{
-    LocalRef<jobject> nonPipeStreamCreate(const NonPipeStream &stream)
-    {
-        // note: boost::apply_visitor does not support move semantics
-        class NonPipeStreamCreateVisitor: public boost::static_visitor<void>
-        {
-        public:
-            explicit NonPipeStreamCreateVisitor(LocalRef<jobject> &nonPipeStream):
-                nonPipeStream_(nonPipeStream) {}
+namespace {
+LocalRef<jobject> nonPipeStreamCreate(const NonPipeStream &stream) {
+  // note: boost::apply_visitor does not support move semantics
+  class NonPipeStreamCreateVisitor : public boost::static_visitor<void> {
+   public:
+    explicit NonPipeStreamCreateVisitor(LocalRef<jobject> &nonPipeStream)
+        : nonPipeStream_(nonPipeStream) {}
 
-            void operator()(const File &file) const
-            {
-                nonPipeStream_ = impl::file::create(file);
-            }
-
-            void operator()(const FdAlias &fdAlias) const
-            {
-                nonPipeStream_ = impl::fd_alias::create(fdAlias);
-            }
-
-        private:
-            LocalRef<jobject> &nonPipeStream_;
-        };
-        LocalRef<jobject> nonPipeStream;
-        boost::apply_visitor(NonPipeStreamCreateVisitor(nonPipeStream), stream);
-        return nonPipeStream;
+    void operator()(const File &file) const {
+      nonPipeStream_ = impl::file::create(file);
     }
-}
 
-jobject Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getDescriptors(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return newHashMap(
-        this_->descriptors,
-        newPrimitiveWrapper<jint>,
-        nonPipeStreamCreate
-    ).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+    void operator()(const FdAlias &fdAlias) const {
+      nonPipeStream_ = impl::fd_alias::create(fdAlias);
+    }
+
+   private:
+    LocalRef<jobject> &nonPipeStream_;
+  };
+  LocalRef<jobject> nonPipeStream;
+  boost::apply_visitor(NonPipeStreamCreateVisitor(nonPipeStream), stream);
+  return nonPipeStream;
+}
+}  // namespace
+
+jobject
+Java_com_yandex_contest_invoker_impl_process_ProcessDefaultSettings_getDescriptors(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return newHashMap(this_->descriptors, newPrimitiveWrapper<jint>,
+                    nonPipeStreamCreate).release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }

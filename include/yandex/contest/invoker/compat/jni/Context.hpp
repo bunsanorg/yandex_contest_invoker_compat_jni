@@ -8,102 +8,103 @@
 #include <memory>
 #include <utility>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    class Context: private boost::noncopyable
-    {
-    public:
-        class Handle
-        {
-        public:
-            Handle(const Handle &);
-            Handle &operator=(const Handle &);
-            ~Handle();
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-            Context *operator->() const;
+class Context : private boost::noncopyable {
+ public:
+  class Handle {
+   public:
+    Handle(const Handle &);
+    Handle &operator=(const Handle &);
+    ~Handle();
 
-        private:
-            friend class Context;
+    Context *operator->() const;
 
-            Handle();
-            std::size_t count() const noexcept;
-            void assign(std::unique_ptr<Context> &&context) noexcept;
-        };
+   private:
+    friend class Context;
 
-    public:
-        /*!
-         * \warning Should never be called after JavaVM termination start
-         * without JNIEnv argument.
-         */
-        template <typename ... Args>
-        static Handle getContext(Args &&...args)
-        {
-            Handle handle;
-            if (handle.count() == 1)
-            {
-                std::unique_ptr<Context> ctx(
-                    new Context(std::forward<Args>(args)...)
-                );
-                handle.assign(std::move(ctx));
-            }
-            return handle;
-        }
+    Handle();
+    std::size_t count() const noexcept;
+    void assign(std::unique_ptr<Context> &&context) noexcept;
+  };
 
-        /// \note It is always safe to call it.
-        static boost::optional<Handle> getContextOptional();
+ public:
+  /*!
+   * \warning Should never be called after JavaVM termination start
+   * without JNIEnv argument.
+   */
+  template <typename... Args>
+  static Handle getContext(Args &&... args) {
+    Handle handle;
+    if (handle.count() == 1) {
+      std::unique_ptr<Context> ctx(new Context(std::forward<Args>(args)...));
+      handle.assign(std::move(ctx));
+    }
+    return handle;
+  }
 
-        /// Should be called before JavaVM termination start.
-        static void unregisterGlobalJVM() noexcept;
+  /// \note It is always safe to call it.
+  static boost::optional<Handle> getContextOptional();
 
-        static void registerGlobalJVM(JavaVM *const jvm);
+  /// Should be called before JavaVM termination start.
+  static void unregisterGlobalJVM() noexcept;
 
-        static void registerGlobalJVM(JNIEnv *const env);
+  static void registerGlobalJVM(JavaVM *jvm);
 
-    public:
-        ~Context();
+  static void registerGlobalJVM(JNIEnv *env);
 
-        JavaVM *jvm() noexcept;
+ public:
+  ~Context();
 
-        /*!
-         * \throw JavaError if Java exception has occurred.
-         */
-        JNIEnv *env();
+  JavaVM *jvm() noexcept;
 
-        JNIEnv *envNoExcept() noexcept;
+  /*!
+   * \throw JavaError if Java exception has occurred.
+   */
+  JNIEnv *env();
 
-        /// Throw JavaError if exception occurred.
-        void throwIfOccured();
+  JNIEnv *envNoExcept() noexcept;
 
-        void throwNew(const char *const className,
-                      const char *const message);
+  /// Throw JavaError if exception occurred.
+  void throwIfOccured();
 
-    public:
-        static void throwNewFromEnv(JNIEnv *env,
-                                    const char *const className,
-                                    const char *const message) noexcept;
+  void throwNew(const char *className, const char *message);
 
-    private:
-        /// Context is created from Java call.
-        explicit Context(JNIEnv *const env);
+ public:
+  static void throwNewFromEnv(JNIEnv *env, const char *className,
+                              const char *message) noexcept;
 
-        /*!
-         * \brief Context is created from C++ will be attached to current thread.
-         *
-         * \note It requires preceding call to registerGlobalJVM()
-         * or Context creation with Context(JNIEnv *const).
-         */
-        Context();
+ private:
+  /// Context is created from Java call.
+  explicit Context(JNIEnv *env);
 
-        /// Context is created from C++ using specified JavaVM
-        /// will be attached to current thread.
-        explicit Context(JavaVM *const jvm);
+  /*!
+   * \brief Context is created from C++ will be attached to current thread.
+   *
+   * \note It requires preceding call to registerGlobalJVM()
+   * or Context creation with Context(JNIEnv *).
+   */
+  Context();
 
-    private:
-        static JavaVM *getGlobalJVM();
+  /// Context is created from C++ using specified JavaVM
+  /// will be attached to current thread.
+  explicit Context(JavaVM *jvm);
 
-    private:
-        JavaVM *jvm_;
-        JNIEnv *env_;
-        bool detach_;
-    };
-}}}}}
+ private:
+  static JavaVM *getGlobalJVM();
+
+ private:
+  JavaVM *jvm_;
+  JNIEnv *env_;
+  bool detach_;
+};
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

@@ -12,55 +12,64 @@
 using namespace yandex::contest::invoker::compat::jni;
 using yandex::contest::invoker::ProcessGroup;
 
-namespace
-{
-    CxxClass<ProcessGroup::DefaultSettings> defaultSettingsClass_;
-}
+namespace {
+CxxClass<ProcessGroup::DefaultSettings> defaultSettingsClass_;
+}  // namespace
 
 void Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_classInit(
-    JNIEnv *env, jclass defaultSettingsClass)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    defaultSettingsClass_.assign(defaultSettingsClass, "impl");
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jclass defaultSettingsClass) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  defaultSettingsClass_.assign(defaultSettingsClass, "impl");
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
 void Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_finalize(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_FINALIZE(env, defaultSettingsClass_, self)
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_FINALIZE(env, defaultSettingsClass_, self)
 }
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace impl{namespace process_group{namespace default_settings
-{
-    LocalRef<jobject> create(const ProcessGroup::DefaultSettings &defaultSettings)
-    {
-        return defaultSettingsClass_.setPointerCreate(defaultSettings);
-    }
-}}}}}}}}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace impl {
+namespace process_group {
+namespace default_settings {
+LocalRef<jobject> create(const ProcessGroup::DefaultSettings &defaultSettings) {
+  return defaultSettingsClass_.setPointerCreate(defaultSettings);
+}
+}  // namespace default_settings
+}  // namespace process_group
+}  // namespace impl
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
 
 void Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_create(
-    JNIEnv *env, jobject self, jobject defaultSettings)
-{
-    YANDEX_JNI_METHOD_BEGIN(env)
-    defaultSettingsClass_.copyToPointer(
-        self, config::load<ProcessGroup::DefaultSettings>(defaultSettings));
-    YANDEX_JNI_METHOD_END_VOID(env)
+    JNIEnv *env, jobject self, jobject defaultSettings) {
+  YANDEX_JNI_METHOD_BEGIN(env)
+  defaultSettingsClass_.copyToPointer(
+      self, config::load<ProcessGroup::DefaultSettings>(defaultSettings));
+  YANDEX_JNI_METHOD_END_VOID(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_getResourceLimits(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return impl::process_group::resource_limits::create(this_->resourceLimits).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_getResourceLimits(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return impl::process_group::resource_limits::create(this_->resourceLimits)
+      .release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }
 
-jobject Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_getProcessDefaultSettings(
-    JNIEnv *env, jobject self)
-{
-    YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
-    return impl::process::default_settings::create(this_->processDefaultSettings).release();
-    YANDEX_JNI_METHOD_END_OBJECT(env)
+jobject
+Java_com_yandex_contest_invoker_impl_process_1group_ProcessGroupDefaultSettings_getProcessDefaultSettings(
+    JNIEnv *env, jobject self) {
+  YANDEX_JNI_METHOD_BEGIN_THIS(env, defaultSettingsClass_, self)
+  return impl::process::default_settings::create(this_->processDefaultSettings)
+      .release();
+  YANDEX_JNI_METHOD_END_OBJECT(env)
 }

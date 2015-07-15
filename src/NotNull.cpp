@@ -3,16 +3,24 @@
 
 #include <boost/format.hpp>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace detail
-{
-    void requireNotNull(jobject jobj, const char *const function, const long line)
-    {
-        if (!jobj)
-        {
-            const Context::Handle ctx = Context::getContext();
-            ctx->throwNew("java/lang/NullPointerException",
-                          str(boost::format("At %1%:%2%.") % function % line).c_str());
-        }
-    }
-}}}}}}
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace detail {
+
+void requireNotNull(jobject jobj, const char *const function, const long line) {
+  if (!jobj) {
+    const Context::Handle ctx = Context::getContext();
+    ctx->throwNew("java/lang/NullPointerException",
+                  str(boost::format("At %1%:%2%.") % function % line).c_str());
+  }
+}
+
+}  // namespace detail
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

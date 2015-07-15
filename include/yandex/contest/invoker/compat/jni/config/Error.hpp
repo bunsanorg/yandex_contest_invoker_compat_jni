@@ -2,14 +2,24 @@
 
 #include <yandex/contest/invoker/compat/jni/Error.hpp>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni{
-    namespace config
-{
-    struct Error: virtual jni::Error {};
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
+namespace config {
 
-    struct VariantError: virtual Error {};
+struct Error : virtual jni::Error {};
 
-    struct VariantNoTypesLeftError: virtual VariantError {};
+struct VariantError : virtual Error {};
 
-    struct VariantTypeHasNotTypeInfoError: virtual VariantError {};
-}}}}}}
+struct VariantNoTypesLeftError : virtual VariantError {};
+
+struct VariantTypeHasNotTypeInfoError : virtual VariantError {};
+
+}  // namespace config
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex

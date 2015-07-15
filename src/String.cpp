@@ -3,57 +3,52 @@
 
 #include <boost/noncopyable.hpp>
 
-namespace yandex{namespace contest{namespace invoker{namespace compat{namespace jni
-{
-    LocalRef<jstring> newStringUTF(const std::string &string)
-    {
-        const Context::Handle ctx = Context::getContext();
-        LocalRef<jstring> ret(ctx->env()->NewStringUTF(string.c_str()));
-        ctx->throwIfOccured();
-        return ret;
-    }
+namespace yandex {
+namespace contest {
+namespace invoker {
+namespace compat {
+namespace jni {
 
-    namespace
-    {
-        class ScopedUtf: private boost::noncopyable
-        {
-        public:
-            explicit ScopedUtf(jstring string):
-                ctx(Context::getContext()),
-                string_(string),
-                size_(ctx->env()->GetStringUTFLength(string_)),
-                utf_(ctx->env()->GetStringUTFChars(string_, nullptr))
-            {
-                ctx->throwIfOccured();
-            }
+LocalRef<jstring> newStringUTF(const std::string &string) {
+  const Context::Handle ctx = Context::getContext();
+  LocalRef<jstring> ret(ctx->env()->NewStringUTF(string.c_str()));
+  ctx->throwIfOccured();
+  return ret;
+}
 
-            const char *get() const
-            {
-                return utf_;
-            }
+namespace {
+class ScopedUtf : private boost::noncopyable {
+ public:
+  explicit ScopedUtf(jstring string)
+      : ctx(Context::getContext()),
+        string_(string),
+        size_(ctx->env()->GetStringUTFLength(string_)),
+        utf_(ctx->env()->GetStringUTFChars(string_, nullptr)) {
+    ctx->throwIfOccured();
+  }
 
-            jsize size() const
-            {
-                return size_;
-            }
+  const char *get() const { return utf_; }
 
-            ~ScopedUtf()
-            {
-                ctx->envNoExcept()->ReleaseStringUTFChars(string_, utf_);
-            }
+  jsize size() const { return size_; }
 
-        private:
-            const Context::Handle ctx;
-            jstring string_;
-            jsize size_;
-            const char *utf_;
-        };
-    }
+  ~ScopedUtf() { ctx->envNoExcept()->ReleaseStringUTFChars(string_, utf_); }
 
-    std::string getStringUTF(jstring string)
-    {
-        ScopedUtf utf(string);
-        std::string ret(utf.get(), utf.size());
-        return ret;
-    }
-}}}}}
+ private:
+  const Context::Handle ctx;
+  jstring string_;
+  jsize size_;
+  const char *utf_;
+};
+}  // namespace
+
+std::string getStringUTF(jstring string) {
+  ScopedUtf utf(string);
+  std::string ret(utf.get(), utf.size());
+  return ret;
+}
+
+}  // namespace jni
+}  // namespace compat
+}  // namespace invoker
+}  // namespace contest
+}  // namespace yandex
